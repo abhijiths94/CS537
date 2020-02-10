@@ -7,8 +7,8 @@
 #include <sys/wait.h>
 #include <stdbool.h>
 
-#define MAX_PAR_INST 10
-#define MAX_SEQ_INST 10
+#define MAX_PAR_INST 100
+#define MAX_SEQ_INST 100
 #define MAX_INST_SIZE 500
 
 #define MEMCHECK(ptr) if(ptr == NULL) exit(1);
@@ -41,59 +41,34 @@ char* trim_space(char *str)
     return str;
 }
 
-void parse_input(char *inp, int * parallel_cnt, char** par_inst)
+void tokenize(char *inp, int * cnt, char** inst, char * delim)
 {
-    //char * inp_str = (inp);   //duplicate string pointer
     char * pch = NULL; 
     
-    *parallel_cnt = 0;
+    *cnt = 0;
 
-    //if & --> parallel
-    pch = strsep(&inp, "&");
+    pch = strsep(&inp, delim);
     while(pch != NULL)
     {
         pch = trim_space(pch);
         if(strlen(pch))
         {
 
-            *parallel_cnt = *parallel_cnt + 1;
-            par_inst[*parallel_cnt-1] = (char *) malloc(strlen(pch));
-            MEMCHECK(par_inst[*parallel_cnt-1]); 
-            strcpy(par_inst[*parallel_cnt -1], pch);
+            *cnt = *cnt + 1;
+            inst[*cnt-1] = (char *) malloc(strlen(pch));
+            MEMCHECK(inst[*cnt-1]); 
+            strcpy(inst[*cnt -1], pch);
         }
-        pch = strsep(&inp, "&");
+        pch = strsep(&inp, delim);
 
     }
-    printf("No of parallel inst = %d\n", *parallel_cnt);
-}
-
-void parse_seq_inst(char *inp , int * seq_cnt, char ** seq_inst)
-{
-     char * pch = NULL; 
-    
-    *seq_cnt = 0;
-
-    pch = strsep(&inp, ";");
-    while(pch != NULL)
-    {
-        pch = trim_space(pch);
-        if(strlen(pch))
-        {
-            *seq_cnt += 1 ;
-            seq_inst[*seq_cnt-1] = (char *) malloc(strlen(pch));
-            MEMCHECK(seq_inst[*seq_cnt-1]); 
-            strcpy(seq_inst[*seq_cnt -1], pch);
-        }
-        pch = strsep(&inp, ";");
-
-    }
-    printf("No of seq inst = %d\n", *seq_cnt);
-
+    printf("No of parallel inst = %d\n", *cnt);
 }
 
 int execute_inst(char *inst, int len)
 {
-    
+  // tokenize(inst);
+  exit(0);
 }
 
 int execute_seq_inst(char * inst)
@@ -102,17 +77,16 @@ int execute_seq_inst(char * inst)
     int seq_cnt = 0;
     int i ;
 
-    parse_seq_inst(inst , &seq_cnt, seq_inst);
+    tokenize(inst , &seq_cnt, seq_inst, ";");
     
     for(i = 0; i < seq_cnt; i++)
     {
-       // execute_inst();
+        //execute_inst();
         printf("\tlen : %lu Executing: %s\n",strlen(seq_inst[i]), seq_inst[i]);
     }
 
 
     exit(0);
-    return 0;
 }
 
 int execute_par_inst(char **inst, int count )
@@ -129,10 +103,14 @@ int execute_par_inst(char **inst, int count )
         {
             //spawn out child and it will call execv
             printf("Process %d ..\n", i);
-
+            sleep(i);
             execute_seq_inst(inst[i]);
 
             printf("Error !!!!! Reached point for process %d\n", i);
+        }
+        else if (pid[i] < 0)
+        {
+            printf(" !!!!!!!!! Error on %d PID \n", i);
         }
     }
     
@@ -141,9 +119,11 @@ int execute_par_inst(char **inst, int count )
     //parent waits for children to finish
     for(i = 0; i < count; i++)
     {
-        waitrc += waitpid(pid[0], NULL, 0);
+        waitrc = waitpid(pid[i], NULL, 0);
+        printf("------------------------------------- main waitrc %d : %d\n ", i, waitrc);
     }
 
+    printf("All threads completed \n");
     return waitrc;
 }
 
@@ -190,7 +170,7 @@ int main(int argc, char** argv)
 
         if(strlen(inp) > 1)
         {
-            parse_input(inp, &parallel_cnt, par_inst);
+            tokenize(inp, &parallel_cnt, par_inst, "&");
             for(i = 0; i < parallel_cnt; i++)
             {
                 printf("len : %lu %s\n",strlen(par_inst[i]), par_inst[i]);
