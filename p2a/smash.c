@@ -9,12 +9,12 @@
 
 #define MAX_PAR_INST 100
 #define MAX_SEQ_INST 100
-#define MAX_INST_SIZE 500
+#define MAX_INST_SIZE 100
 
 #define MEMCHECK(ptr) if(ptr == NULL) exit(1);
 
 
-bool exit_flag = false;
+volatile bool exit_flag = false;
 
 
 
@@ -58,17 +58,22 @@ void tokenize(char *inp, int * cnt, char** inst, char * delim)
             inst[*cnt-1] = (char *) malloc(strlen(pch));
             MEMCHECK(inst[*cnt-1]); 
             strcpy(inst[*cnt -1], pch);
+
+            printf("Tokenize : %s : %s : %ld : %d  \n", delim, pch, strlen(pch), *cnt);
         }
         pch = strsep(&inp, delim);
 
     }
-    printf("No of parallel inst = %d\n", *cnt);
+    printf("No of %s inst = %d\n",delim, *cnt);
 }
 
-int execute_inst(char *inst, int len)
+int execute_inst(char *inst)
 {
-  // tokenize(inst);
-  exit(0);
+    int argc = 0;
+    char ** argv  = (char**) malloc(MAX_INST_SIZE * sizeof(char**));
+    tokenize(inst, &argc, argv, " ");
+
+   exit(0);
 }
 
 int execute_seq_inst(char * inst)
@@ -81,7 +86,7 @@ int execute_seq_inst(char * inst)
     
     for(i = 0; i < seq_cnt; i++)
     {
-        //execute_inst();
+        execute_inst(seq_inst[i]);
         printf("\tlen : %lu Executing: %s\n",strlen(seq_inst[i]), seq_inst[i]);
     }
 
@@ -127,19 +132,64 @@ int execute_par_inst(char **inst, int count )
     return waitrc;
 }
 
+bool handle_inbuilt_cmd( char * inp)
+{
+    bool ret = false;
+    int i, argc = 0;
+    char ** argv  = (char**) malloc(MAX_INST_SIZE * sizeof(char**));
+    tokenize(inp, &argc, argv, " ");
+
+    if (argc >= 1)
+    {
+        if(strcmp(argv[0], "exit") == 0)
+        {
+            exit_flag = true;
+
+        }
+        else if(strcmp(argv[0], "cd") == 0)
+        {
+        }
+        else if(strcmp(argv[0], "path") == 0)
+        {
+        }
+        else
+        {
+            printf("Returning from handle_inbuilt_cmd\n");
+            ret = true;
+        }
+
+
+        
+    }
+   
+    /* Free up memory */
+    for(i = 0; i < argc; i++)
+    {
+        free(argv[i]);
+    }
+    free(argv);
+    return ret;
+
+ 
+}
+
+
 int main(int argc, char** argv)
 {
     char * inp = NULL;
     size_t inp_len = 1024;
     int parallel_cnt = 0;
     int i = 0;
-
+    bool is_multi_cmd = false;
+    
     inp = (char *)calloc(inp_len*sizeof(char), 1);
     
     char** par_inst = (char **)malloc(MAX_PAR_INST * sizeof(char**));
-
-
-    /* Memory allocation failed */
+    char* inp_dup ;
+    
+    
+    
+        /* Memory allocation failed */
     if(inp == NULL || par_inst == NULL)
     {
         exit(1);
@@ -155,30 +205,43 @@ int main(int argc, char** argv)
         }
         printf("smash> ");
         getline(&inp, &inp_len, stdin);
-        
-        if(strncmp("exit", inp, 4)==0)
-        {
-            for(i = 0 ; i < parallel_cnt; i++)
-            {
-                free(par_inst[i]);
-            }
-            free(inp);
-            free(par_inst);
-            
-            return 0;
-        }
 
+        
+
+
+
+        
         if(strlen(inp) > 1)
         {
-            tokenize(inp, &parallel_cnt, par_inst, "&");
-            for(i = 0; i < parallel_cnt; i++)
+
+            inp_dup = strdup(inp);
+            is_multi_cmd = handle_inbuilt_cmd(inp);
+
+            if(is_multi_cmd)
             {
-                printf("len : %lu %s\n",strlen(par_inst[i]), par_inst[i]);
+                printf("--------------------------------------------------------\n\n");
+                tokenize(inp_dup, &parallel_cnt, par_inst, "&");
+                
+                printf("Multicommand detected : %d\n", parallel_cnt);
+                printf(" Inp : %s \n ", inp_dup);
+
+                for(i = 0; i < parallel_cnt; i++)
+                {
+                    printf("len : %lu %s\n",strlen(par_inst[i]), par_inst[i]);
+                }
+                execute_par_inst(par_inst, parallel_cnt);
             }
-            execute_par_inst(par_inst, parallel_cnt);
+
+            free(inp_dup);
         }
     }
 
+    /* Free memory allocation */
+    
+    for(i = 0 ; i < parallel_cnt; i++)
+    {
+        free(par_inst[i]);
+    }
     free(inp);
     free(par_inst);
     return 0;
