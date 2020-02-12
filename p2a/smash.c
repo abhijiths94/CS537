@@ -11,7 +11,7 @@
 #define MAX_SEQ_INST 100
 #define MAX_INST_SIZE 100
 #define MAX_PATH_CNT 100
-#define MAX_PATH_LEN 200
+#define MAX_PATH_LEN 300
 
 #define MEMCHECK(ptr) if(ptr == NULL) exit(1);
 
@@ -67,6 +67,41 @@ void tokenize(char *inp, int * cnt, char** inst, char * delim)
 
     }
     printf("No of %s inst = %d\n",delim, *cnt);
+}
+
+int check_system_cmd(int argc, char ** argv)
+{
+    // return values :
+    // 0 : success
+    // 1 : invalid 
+    //
+    
+    int i, access_ret = -1;
+    char * path_str;
+
+    path_str = (char*)calloc(MAX_PATH_LEN * sizeof(char) , 1);
+    MEMCHECK(path_str);
+
+    for(i = path_cnt - 1; i >= 0; i--)
+    {
+        strcpy(path_str, PATH[i]);
+        strcat(path_str, "/");
+        strcat(path_str, argv[0]);
+
+        printf("Searching in %s \n", path_str);
+        access_ret  = access(path_str, X_OK);
+        if(access_ret == 0)
+        {
+            printf("Found !\n");
+
+            break;
+        }
+    }
+
+    free(path_str);
+
+    return access_ret;
+
 }
 
 int execute_inst(char *inst)
@@ -134,7 +169,7 @@ int execute_par_inst(char **inst, int count )
     return waitrc;
 }
 
-int handle_inbuilt_cmd( char * inp)
+int check_cmd( char * inp)
 {
     // return values
     // -1 : error
@@ -145,113 +180,104 @@ int handle_inbuilt_cmd( char * inp)
     int i, argc = 0;
     char ** argv  = NULL;
     int delete_indx = -1;
-    if(
-            strchr(inp, '&') != NULL||
-            strchr(inp, ';') != NULL
-      )
+
+    argv = (char**) malloc(MAX_INST_SIZE * sizeof(char**));
+    tokenize(inp, &argc, argv, " ");
+
+    if (argc >= 1)
     {
-        /* This is a possible multiline command */
-        ret = 1;
-    }
-    else
-    {
-        argv = (char**) malloc(MAX_INST_SIZE * sizeof(char**));
-        tokenize(inp, &argc, argv, " ");
-        if (argc >= 1)
+        if(strcmp(argv[0], "exit") == 0)
         {
-            if(strcmp(argv[0], "exit") == 0)
+            if(argc != 1)
             {
-                if(argc != 1)
-                {
-                    ret = -1;
-                }
-                else
-                {
-                    exit_flag = true;
-                }
-            }
-            else if(strcmp(argv[0], "cd") == 0)
-            {
-                if(argc != 2)
-                {
-                    ret = -1;
-                }
-                else
-                {
-                    ret = chdir(argv[1]);
-                }
-            }
-            else if(strcmp(argv[0], "path") == 0)
-            {
-                if(argc < 2)
-                {
-                    ret = -1;
-                }
-                else
-                {
-                    if(strcmp(argv[1], "add") == 0)
-                    {
-                        if(argc != 3)
-                            ret = -1;
-                        else
-                        {
-                            PATH[path_cnt] = (char*) malloc(strlen(argv[2]));
-                            MEMCHECK(PATH[path_cnt]);
-                            strcpy(PATH[path_cnt], argv[2]);
-                            path_cnt ++;
-                        }
-                    }
-                    else if(strcmp(argv[1], "remove") == 0)
-                    {
-                        if(argc != 3)
-                            ret = -1;
-                        else
-                        {
-                            delete_indx = -1;
-
-                            for(i = path_cnt -1 ; i >= 0; i--)
-                            {
-                                if(strcmp(PATH[i], argv[2]) == 0)
-                                {
-                                    delete_indx = i;
-                                }
-
-                                if( delete_indx >= 0)
-                                {
-                                    /* Remove entry at delete_indx and shift elements */
-                                    free(PATH[delete_indx]);
-                                    PATH[delete_indx] = NULL;
-                                    for(i = delete_indx; i < path_cnt-1; i++)
-                                    {
-                                        PATH[i] = PATH[i+1];
-                                    }
-                                    path_cnt --;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    else if(strcmp(argv[1], "clear") == 0)
-                    {
-                        if(argc != 2)
-                            ret = -1;
-                        else
-                        {
-                            for(i = 0; i < path_cnt; i++)
-                                free(PATH[i]);
-                            path_cnt = 0;
-                        }
-                    }
-                    else
-                    {
-                        ret = -1;
-                    }
-                }
+                ret = -1;
             }
             else
             {
-                ret = 1;
+                exit_flag = true;
             }
+        }
+        else if(strcmp(argv[0], "cd") == 0)
+        {
+            if(argc != 2)
+            {
+                ret = -1;
+            }
+            else
+            {
+                ret = chdir(argv[1]);
+            }
+        }
+        else if(strcmp(argv[0], "path") == 0)
+        {
+            if(argc < 2)
+            {
+                ret = -1;
+            }
+            else
+            {
+                if(strcmp(argv[1], "add") == 0)
+                {
+                    if(argc != 3)
+                        ret = -1;
+                    else
+                    {
+                        PATH[path_cnt] = (char*) malloc(strlen(argv[2]));
+                        MEMCHECK(PATH[path_cnt]);
+                        strcpy(PATH[path_cnt], argv[2]);
+                        path_cnt ++;
+                    }
+                }
+                else if(strcmp(argv[1], "remove") == 0)
+                {
+                    if(argc != 3)
+                        ret = -1;
+                    else
+                    {
+                        delete_indx = -1;
+
+                        for(i = path_cnt -1 ; i >= 0; i--)
+                        {
+                            if(strcmp(PATH[i], argv[2]) == 0)
+                            {
+                                delete_indx = i;
+                            }
+
+                            if( delete_indx >= 0)
+                            {
+                                /* Remove entry at delete_indx and shift elements */
+                                free(PATH[delete_indx]);
+                                PATH[delete_indx] = NULL;
+                                for(i = delete_indx; i < path_cnt-1; i++)
+                                {
+                                    PATH[i] = PATH[i+1];
+                                }
+                                path_cnt --;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else if(strcmp(argv[1], "clear") == 0)
+                {
+                    if(argc != 2)
+                        ret = -1;
+                    else
+                    {
+                        for(i = 0; i < path_cnt; i++)
+                            free(PATH[i]);
+                        path_cnt = 0;
+                    }
+                }
+                else
+                {
+                    ret = -1;
+                }
+            }
+        }
+        else
+        {
+            ret = check_system_cmd(argc, argv); // call access function to check since it is not an inbuilt command
         }
         /* Free up memory */
         for(i = 0; i < argc; i++)
@@ -263,6 +289,12 @@ int handle_inbuilt_cmd( char * inp)
     return ret;
 }
 
+int execute_cmd(char * inp)
+{
+    printf("Input is : %s\n", inp);
+    return 0;
+}
+
 
 int main(int argc, char** argv)
 {
@@ -270,7 +302,9 @@ int main(int argc, char** argv)
     size_t inp_len = 1024;
     int parallel_cnt = 0;
     int i = 0;
-    int is_multi_cmd = 0;
+    int check_cmd_ret = 0;
+    int is_multiline = 0;
+    int execute_ret = 0;
     
     inp = (char *)calloc(inp_len*sizeof(char), 1);
     
@@ -293,7 +327,6 @@ int main(int argc, char** argv)
     
     while(1)
     {
-
         if(exit_flag)
         {
             break;
@@ -301,15 +334,23 @@ int main(int argc, char** argv)
         printf("smash> ");
         getline(&inp, &inp_len, stdin);
 
-        
         if(strlen(inp) > 1)
         {
-
             inp_dup = strdup(inp);
-            is_multi_cmd = handle_inbuilt_cmd(inp);
-
-            if(is_multi_cmd== 1)
+            is_multiline = 0; 
+            if(strchr(inp, '&') != NULL || strchr(inp, ';') != NULL)
             {
+                /* This is a possible multiline command */
+                is_multiline = 1;
+            }
+            
+            if(!is_multiline)
+            {
+                check_cmd_ret = check_cmd(inp_dup);
+            }
+            else
+            {
+                /* Handle Multiline commands */
                 printf("--------------------------------------------------------\n\n");
                 tokenize(inp_dup, &parallel_cnt, par_inst, "&");
                 
@@ -322,18 +363,18 @@ int main(int argc, char** argv)
                 }
                 execute_par_inst(par_inst, parallel_cnt);
             }
-            else if(is_multi_cmd == -1)
+
+            /* Execute if syntax is correct */
+            if(check_cmd_ret == -1)
             {
                 //Invalid command throw error
                 throw_err();
             }
-            else if(is_multi_cmd == 0)
+            else if(check_cmd_ret == 0)
             {
                 printf("Command success... Path count : %d\n", path_cnt);
-                for(i = 0; i < path_cnt; i++)
-                {
-                    printf("%s\n", PATH[i]);
-                }
+                execute_ret = execute_cmd(inp);
+                (void) execute_ret;
             }
 
             free(inp_dup);
