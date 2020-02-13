@@ -6,12 +6,16 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdbool.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #define MAX_PAR_INST 100
 #define MAX_SEQ_INST 100
 #define MAX_INST_SIZE 100
 #define MAX_PATH_CNT 100
 #define MAX_PATH_LEN 300
+#define MAX_FILE_LEN 300
+
 
 #define MEMCHECK(ptr) if(ptr == NULL) exit(1);
 
@@ -69,7 +73,7 @@ void tokenize(char *inp, int * cnt, char** inst, char * delim)
     printf("No of %s inst = %d\n",delim, *cnt);
 }
 
-int check_system_cmd(int argc, char ** argv)
+int check_system_cmd(int argc, char ** argv, char * path_str)
 {
     // return values :
     // 0 : success
@@ -77,10 +81,6 @@ int check_system_cmd(int argc, char ** argv)
     //
     
     int i, access_ret = -1;
-    char * path_str;
-
-    path_str = (char*)calloc(MAX_PATH_LEN * sizeof(char) , 1);
-    MEMCHECK(path_str);
 
     for(i = path_cnt - 1; i >= 0; i--)
     {
@@ -93,15 +93,10 @@ int check_system_cmd(int argc, char ** argv)
         if(access_ret == 0)
         {
             printf("Found !\n");
-
             break;
         }
     }
-
-    free(path_str);
-
     return access_ret;
-
 }
 
 int execute_inst(char *inst)
@@ -169,7 +164,7 @@ int execute_par_inst(char **inst, int count )
     return waitrc;
 }
 
-int check_cmd( char * inp)
+int check_cmd( char * inp, char ** argv, int * argc_p, char * path_str, char * redirect_file, int* redirect)
 {
     // return values
     // -1 : error
@@ -177,123 +172,215 @@ int check_cmd( char * inp)
     //  1 : multiline command
 
     int ret = 0;
-    int i, argc = 0;
-    char ** argv  = NULL;
-    int delete_indx = -1;
+    int argc;
+    *redirect = 0;
+    char* pos = strchr(inp, '>');
+    char * inp_cmd, *inp_file, *inp_file_trm ;
 
-    argv = (char**) malloc(MAX_INST_SIZE * sizeof(char**));
-    tokenize(inp, &argc, argv, " ");
 
-    if (argc >= 1)
+    /* check redirection syntax */
+    if(pos != NULL)
     {
-        if(strcmp(argv[0], "exit") == 0)
+        printf("Found redirect !!! \n");
+        if(strchr(pos + 1 , '>') != NULL)
         {
-            if(argc != 1)
-            {
-                ret = -1;
-            }
-            else
-            {
-                exit_flag = true;
-            }
+            // 2 redirection in a single command
+            return -1;
         }
-        else if(strcmp(argv[0], "cd") == 0)
-        {
-            if(argc != 2)
-            {
-                ret = -1;
-            }
-            else
-            {
-                ret = chdir(argv[1]);
-            }
-        }
-        else if(strcmp(argv[0], "path") == 0)
-        {
-            if(argc < 2)
-            {
-                ret = -1;
-            }
-            else
-            {
-                if(strcmp(argv[1], "add") == 0)
-                {
-                    if(argc != 3)
-                        ret = -1;
-                    else
-                    {
-                        PATH[path_cnt] = (char*) malloc(strlen(argv[2]));
-                        MEMCHECK(PATH[path_cnt]);
-                        strcpy(PATH[path_cnt], argv[2]);
-                        path_cnt ++;
-                    }
-                }
-                else if(strcmp(argv[1], "remove") == 0)
-                {
-                    if(argc != 3)
-                        ret = -1;
-                    else
-                    {
-                        delete_indx = -1;
+        
+        *redirect = 1;
+        
+        inp_cmd = (char *)malloc(strlen(inp));
+        inp_file = (char *)malloc(strlen(inp));
+        MEMCHECK(inp_cmd);
+        MEMCHECK(inp_file);
 
-                        for(i = path_cnt -1 ; i >= 0; i--)
-                        {
-                            if(strcmp(PATH[i], argv[2]) == 0)
-                            {
-                                delete_indx = i;
-                            }
+        strncpy(inp_cmd, inp, (pos-inp));
+        strcpy(inp_file, pos+1);
 
-                            if( delete_indx >= 0)
-                            {
-                                /* Remove entry at delete_indx and shift elements */
-                                free(PATH[delete_indx]);
-                                PATH[delete_indx] = NULL;
-                                for(i = delete_indx; i < path_cnt-1; i++)
-                                {
-                                    PATH[i] = PATH[i+1];
-                                }
-                                path_cnt --;
-                                break;
-                            }
-                        }
-                    }
-                }
-                else if(strcmp(argv[1], "clear") == 0)
-                {
-                    if(argc != 2)
-                        ret = -1;
-                    else
-                    {
-                        for(i = 0; i < path_cnt; i++)
-                            free(PATH[i]);
-                        path_cnt = 0;
-                    }
-                }
-                else
+        printf(" CMD : %s\n FILE : %s\n", inp_cmd, inp_file);
+    }
+
+    if(*redirect)
+    {
+        /* redirect specific syntax check */
+        tokenize(inp_cmd, argc_p, argv, " ");
+        argc = *argc_p;
+        ret = check_system_cmd(argc, argv, path_str); // call access function to check since it is not an inbuilt command
+        printf("Path_str after check_system_cmd : %s\n", path_str);
+       
+        inp_file_trm = trim_space(inp_file);
+        strcpy(redirect_file, inp_file_trm);
+        
+        free(inp_cmd);
+        free(inp_file);
+        return ret;
+    }
+    else
+    {
+        tokenize(inp, argc_p, argv, " ");
+        argc = *argc_p;
+    
+        /* No redirection */
+        if (argc >= 1)
+        {
+            if(strcmp(argv[0], "exit") == 0)
+            {
+                if(argc != 1)
                 {
                     ret = -1;
                 }
             }
+            else if(strcmp(argv[0], "cd") == 0)
+            {
+                if(argc != 2)
+                {
+                    ret = -1;
+                }
+            }
+            else if(strcmp(argv[0], "path") == 0)
+            {
+                if(argc < 2)
+                {
+                    ret = -1;
+                }
+                else
+                {
+                    if(strcmp(argv[1], "add") == 0)
+                    {
+                        if(argc != 3)
+                            ret = -1;
+                    }
+                    else if(strcmp(argv[1], "remove") == 0)
+                    {
+                        if(argc != 3)
+                            ret = -1;
+                    }
+                    else if(strcmp(argv[1], "clear") == 0)
+                    {
+                        if(argc != 2)
+                            ret = -1;
+                    }
+                    else
+                    {
+                        ret = -1;
+                    }
+                }
+            }
+            else
+            {
+                ret = check_system_cmd(argc, argv, path_str); // call access function to check since it is not an inbuilt command
+                printf("Path_str after check_system_cmd : %s\n", path_str);
+            }
         }
-        else
-        {
-            ret = check_system_cmd(argc, argv); // call access function to check since it is not an inbuilt command
-        }
-        /* Free up memory */
-        for(i = 0; i < argc; i++)
-        {
-            free(argv[i]);
-        }
-        free(argv);
     }
     return ret;
 }
 
-int execute_cmd(char * inp)
+
+int execute_cmd(char ** argv, int argc, char * path_str, char * redirect_file, int redirect)
 {
-    printf("Input is : %s\n", inp);
+    for(int i = 0; i < argc; i++)
+        printf("Arg %d : %s\n", i, argv[i]);
+
+    printf("path str : %s\n", path_str);
+
+    int fork_ret, ret, i;
+    int delete_indx = -1;
+    int fd_out; 
+
+
+    /* Check for inbuilt commands and then system cmnds */
+
+    if(strcmp(argv[0], "exit") == 0)
+    {
+        exit_flag = true;
+    }
+    else if(strcmp(argv[0], "cd") == 0)
+    {
+        ret = chdir(argv[1]);
+    }
+    else if(strcmp(argv[0], "path") == 0)
+    {
+            if(strcmp(argv[1], "add") == 0)
+            {
+                    PATH[path_cnt] = (char*) malloc(strlen(argv[2]));
+                    MEMCHECK(PATH[path_cnt]);
+                    strcpy(PATH[path_cnt], argv[2]);
+                    path_cnt ++;
+            }
+            else if(strcmp(argv[1], "remove") == 0)
+            {
+                delete_indx = -1;
+
+                for(i = path_cnt -1 ; i >= 0; i--)
+                {
+                    if(strcmp(PATH[i], argv[2]) == 0)
+                    {
+                        delete_indx = i;
+                    }
+
+                    if( delete_indx >= 0)
+                    {
+                        /* Remove entry at delete_indx and shift elements */
+                        free(PATH[delete_indx]);
+                        PATH[delete_indx] = NULL;
+                        for(i = delete_indx; i < path_cnt-1; i++)
+                        {
+                            PATH[i] = PATH[i+1];
+                        }
+                        path_cnt --;
+                        break;
+                    }
+                }
+            }
+            else if(strcmp(argv[1], "clear") == 0)
+            {
+                for(i = 0; i < path_cnt; i++)
+                    free(PATH[i]);
+                path_cnt = 0;
+            }
+    }
+    else
+    {  
+        /* This is a system cmd */
+        fork_ret = fork();
+        
+        argv[argc] = '\0';
+
+
+        if(fork_ret == 0) // child process
+        {
+            if(redirect)
+            {
+                printf("Printing in file ...\n");
+                fd_out = open(redirect_file, O_CREAT|O_WRONLY|O_TRUNC, S_IRWXU);
+                if(fd_out>0)
+                {
+                    dup2(fd_out, STDOUT_FILENO);
+                }
+                else
+                {
+                    throw_err();
+                }
+            }
+
+            ret = execv(path_str, argv );
+            printf("!!!!!!!!! Execv ret : %d\n", ret);
+            exit(0);
+            (void) ret;
+        }
+        else
+        {
+           // parent waits till finished executing
+           printf("**** Waiting for child to finish \n");
+           waitpid(fork_ret, NULL, 0);
+           printf("child completed!!!! \n");
+        }
+    }
     return 0;
 }
+
 
 
 int main(int argc, char** argv)
@@ -305,15 +392,24 @@ int main(int argc, char** argv)
     int check_cmd_ret = 0;
     int is_multiline = 0;
     int execute_ret = 0;
+    char ** args;
+    int args_count;
+    char *redirect_file;
+    int redirect = 0;
     
     inp = (char *)calloc(inp_len*sizeof(char), 1);
     
     char** par_inst = (char **)malloc(MAX_PAR_INST * sizeof(char**));
     char* inp_dup ;
-    
-    PATH = (char**)malloc(MAX_PATH_CNT * sizeof(char**)); 
-    
-        /* Memory allocation failed */
+    char * path_str = NULL;
+
+    PATH = (char**)malloc(MAX_PATH_CNT * sizeof(char**));  
+    args = (char**) malloc(MAX_INST_SIZE * sizeof(char**));
+
+    path_str = (char*)calloc(MAX_PATH_LEN * sizeof(char) , 1);
+    MEMCHECK(path_str);
+
+    /* Memory allocation failed */
     if(inp == NULL || par_inst == NULL || PATH == NULL)
     {
         exit(1);
@@ -324,6 +420,9 @@ int main(int argc, char** argv)
     PATH[path_cnt] = strdup("/bin");
     MEMCHECK(PATH[path_cnt]);
     path_cnt ++;
+
+    /* Redirect file */
+    redirect_file = (char*)malloc(MAX_FILE_LEN);
     
     while(1)
     {
@@ -333,6 +432,8 @@ int main(int argc, char** argv)
         }
         printf("smash> ");
         getline(&inp, &inp_len, stdin);
+
+        memset(path_str, 0, strlen(path_str));
 
         if(strlen(inp) > 1)
         {
@@ -346,7 +447,7 @@ int main(int argc, char** argv)
             
             if(!is_multiline)
             {
-                check_cmd_ret = check_cmd(inp_dup);
+                check_cmd_ret = check_cmd(inp_dup, args, &args_count, path_str, redirect_file, &redirect);
             }
             else
             {
@@ -373,7 +474,8 @@ int main(int argc, char** argv)
             else if(check_cmd_ret == 0)
             {
                 printf("Command success... Path count : %d\n", path_cnt);
-                execute_ret = execute_cmd(inp);
+
+                                execute_ret = execute_cmd(args, args_count, path_str, redirect_file, redirect);
                 (void) execute_ret;
             }
 
@@ -381,8 +483,17 @@ int main(int argc, char** argv)
         }
     }
 
+    free(redirect_file);
+
     /* Free memory allocation */
-    
+    free(path_str);
+
+    for(i = 0; i < args_count; i++)
+    {
+        free(args[i]);
+    }
+    free(args);
+
     for(i = 0 ; i < path_cnt; i++)
     {
         free(PATH[i]);
