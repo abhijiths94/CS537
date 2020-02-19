@@ -658,6 +658,7 @@ int main(int argc, char** argv)
         if(fp == NULL)
         {
             throw_err();
+            exit(1);
         }
         shell(fp, 0);
     }

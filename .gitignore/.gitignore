@@ -56,4 +56,8 @@ dkms.conf
 
 *.tar
 *.txt
-*.in
+*.ini
+
+
+#ignore tag files
+tags
