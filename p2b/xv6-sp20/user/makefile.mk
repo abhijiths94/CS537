@@ -2,6 +2,7 @@
 # user programs
 USER_PROGS := \
 	cat\
+	spin_test\
 	echo\
 	forktest\
 	grep\
