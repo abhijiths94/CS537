@@ -5,6 +5,7 @@
 #include "mmu.h"
 #include "proc.h"
 #include "sysfunc.h"
+#include "pstat.h"
 
 int
 sys_fork(void)
@@ -87,4 +88,24 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+int sys_getprocinfo(void)
+{
+
+    struct pstat *pstat_ptr;
+
+    if(argptr(0, (void*)&pstat_ptr, sizeof(*pstat_ptr)) < 0)
+    {
+        cprintf("Error in sys_getprocinfo\n");
+        return -1;
+    }
+
+    copy_pstat(pstat_ptr);
+    return 0;
+}
+
+int sys_boostproc(void)
+{
+    return 0;
 }

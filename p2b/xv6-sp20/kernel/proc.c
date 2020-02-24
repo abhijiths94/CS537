@@ -5,6 +5,7 @@
 #include "x86.h"
 #include "proc.h"
 #include "spinlock.h"
+#include "pstat.h"
 
 struct {
   struct spinlock lock;
@@ -17,6 +18,28 @@ struct proc* q2[NPROC];
 struct proc* q1[NPROC];
 struct proc* q0[NPROC];
 
+void copy_pstat(struct pstat* pstat_ptr)
+{
+    int i;
+    for(i = 0; i< NPROC; i++)
+    {
+        pstat_ptr->inuse[i] = ptable.proc[i].inuse;
+        pstat_ptr->pid[i] = ptable.proc[i].pid;
+        pstat_ptr->priority[i] = ptable.proc[i].priority;
+        pstat_ptr->state[i] = ptable.proc[i].state;
+        pstat_ptr->ticks[i][0] = ptable.proc[i].ticks_accum[0];
+        pstat_ptr->ticks[i][1] = ptable.proc[i].ticks_accum[1];
+        pstat_ptr->ticks[i][2] = ptable.proc[i].ticks_accum[2];
+        pstat_ptr->ticks[i][3] = ptable.proc[i].ticks_accum[3];
+
+        pstat_ptr->wait_ticks[i][0] = ptable.proc[i].wait_ticks[0];
+        pstat_ptr->wait_ticks[i][1] = ptable.proc[i].wait_ticks[1];
+        pstat_ptr->wait_ticks[i][2] = ptable.proc[i].wait_ticks[2];
+        pstat_ptr->wait_ticks[i][3] = ptable.proc[i].wait_ticks[3];
+    }
+}
+
+
 /* Num of processes in each level */
 int q3_size = 0, q2_size = 0, q1_size = 0, q0_size = 0;
 
@@ -25,7 +48,7 @@ int find_index(struct proc **q, int q_size, struct proc *ele)
     int i;
     for(i = 0; i < q_size; i++)
     {
-        //cprintf("Searching for %x in %x...\n", ele, q[i]);
+        ////cprintf("Searching for %x in %x...\n", ele, q[i]);
         if(q[i] == ele)
         {
             return i;
@@ -38,12 +61,17 @@ int find_index(struct proc **q, int q_size, struct proc *ele)
 int delete_entry(struct proc **q, int *q_size, int pos)
 {
     int i;
-    if(pos != *q_size -1)
+    if(pos == 0 || *q_size == 1)
+    {
+        q[pos] = 0;
+    }
+    else if(pos != *q_size -1)
     {
         for(i = pos; i< *q_size; i++)
             q[i] = q[i+1];
     }
-    
+   
+    q[*q_size] = 0;
     *q_size = *q_size - 1;
 
     return 0;
@@ -61,7 +89,7 @@ void accum_wait_ticks(struct proc *p)
     struct proc* tp = ptable.proc;
     for(tp = ptable.proc; tp < &ptable.proc[NPROC]; tp++)
     {
-        if((tp != p) && (tp->inuse))
+        if((tp != p) && (tp->inuse) && (tp->state == RUNNABLE))
         {
             tp->wait_ticks[tp->priority] ++;
         }
@@ -120,10 +148,10 @@ found:
   p->ticks_accum[1] = 0;
   p->ticks_accum[2] = 0;
   p->ticks_accum[3] = 0;
+  p->rr_time = 0;
 
 
-
-  cprintf("Allocproc called .. %x \n", p);
+ // cprintf("Allocproc called .. %x \n", p);
 
   // Allocate kernel stack if possible.
   if((p->kstack = kalloc()) == 0){
@@ -211,12 +239,12 @@ fork(void)
   int i, pid;
   struct proc *np;
 
-  cprintf("Fork called by %d .....\n", proc->pid);
+  //cprintf("Fork called by %d .....\n", proc->pid);
   // Allocate process.
   if((np = allocproc()) == 0)
     return -1;
 
-  cprintf("Fork created %d .....\n", np->pid);
+  //cprintf("Fork created %d .....\n", np->pid);
   
   // Copy process state from p.
   if((np->pgdir = copyuvm(proc->pgdir, proc->sz)) == 0){
@@ -277,7 +305,7 @@ exit(void)
   // Parent might be sleeping in wait().
   wakeup1(proc->parent);
 
-  cprintf("Called exit for %s... pid : %d in %x \n",proc->name, proc->pid, proc);
+  //cprintf("Called exit for %s... pid : %d in %x \n",proc->name, proc->pid, proc);
 
   int ind;
 
@@ -384,11 +412,11 @@ wait(void)
 void
 scheduler(void)
 {
-  struct proc *p,*tp;
+  struct proc *p;
 
 
   int index;
-  int count = 0;
+  int count;
   for(;;)
   {
     // Enable interrupts on this processor.
@@ -397,20 +425,80 @@ scheduler(void)
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
 
-    count = 0;
+    /*
     for(tp = ptable.proc; tp < &ptable.proc[NPROC]; tp++)
     {
         if(tp->state == RUNNABLE)
             count++;
-    }
+    }*/
 
-    if(q3_size > 0)
+    if(1) //q3_size > 0)
     {
-        for(index = 0; index < q3_size; index ++)
+        count = 0;
+        for(index = 0; index < NPROC; index ++)
         {
             p = q3[index]; 
-            if(p->state != RUNNABLE)
+            if(p == 0 || p == NULL)
+            {
+                count ++;
                 continue;
+            }
+            if(p->state != RUNNABLE)
+            {
+                count ++;
+                continue;
+            }
+
+            p->rr_time = 0;
+            while(p->rr_time < 1)
+            {
+                // Switch to chosen process.  It is the process's job
+                // to release ptable.lock and then reacquire it
+                // before jumping back to us.
+                proc = p;
+                switchuvm(p);
+                p->state = RUNNING;
+                //cprintf("q3 : Starting to run pid %s : %d out of %d process : %d %d \n",p->name, p->pid, count, proc->ticks_accum[proc->priority], proc->wait_ticks[proc->priority]);
+                
+                swtch(&cpu->scheduler, proc->context);
+                switchkvm();
+
+                // Process is done running for now.
+                // It should have changed its p->state before coming back.
+                //
+                proc->ticks_accum[proc->priority] += 1; 
+                accum_wait_ticks(proc);
+                proc->rr_time += 1;
+            }
+            //Check accum ticks and demote
+            if(proc->ticks_accum[3] == 8)
+            {
+                add_entry(q2, &q2_size, proc);
+                delete_entry(q3, &q3_size, index);
+                proc->priority = 2;
+                //cprintf("Deleting entry at %d  and adding to q2 : q3_size = %d\n",index, q3_size);
+            }
+            
+            goto endloop;
+
+        }
+    }
+    if(count == NPROC) //q3 has no runnable process
+    {
+        count = 0;
+        for(index = 0; index < NPROC; index ++)
+        {
+            p = q2[index]; 
+            if(p == 0 || p == NULL)
+            {
+                count ++;
+                continue;
+            }
+            if(p->state != RUNNABLE)
+            {
+                count ++;
+                continue;
+            }
 
             // Switch to chosen process.  It is the process's job
             // to release ptable.lock and then reacquire it
@@ -418,7 +506,7 @@ scheduler(void)
             proc = p;
             switchuvm(p);
             p->state = RUNNING;
-            cprintf("q3 : Starting to run pid %s : %d out of %d process : %d %d \n",p->name, p->pid, count, proc->ticks_accum[proc->priority], proc->wait_ticks[proc->priority]);
+            //cprintf("q2 : Starting to run pid %s : %d out of %d process : %d %d \n",p->name, p->pid, count, proc->ticks_accum[proc->priority], proc->wait_ticks[proc->priority]);
             
             swtch(&cpu->scheduler, proc->context);
             switchkvm();
@@ -430,23 +518,34 @@ scheduler(void)
             accum_wait_ticks(proc);
 
             //Check accum ticks and demote
-            if(1 && proc->ticks_accum[3] == 8)
+            if(proc->ticks_accum[2] == 16)
             {
-                add_entry(q2, &q2_size, proc);
-                delete_entry(q3, &q3_size, index);
-                proc->priority = 2;
-                cprintf("Deleting entry and adding to q2 : q3_size = %d\n", q3_size);
+                add_entry(q1, &q1_size, proc);
+                delete_entry(q2, &q2_size, index);
+                proc->priority = 1;
+                //cprintf("Deleting entry and adding to q1 : q2_size = %d\n", q2_size);
             }
+            
+            goto endloop;
 
         }
     }
-    else
+    if(count == NPROC) //q2 is empty 
     {
-        for(index = 0; index < q2_size; index ++)
+        count = 0;
+        for(index = 0; index < NPROC; index ++)
         {
-            p = q2[index]; 
-            if(p->state != RUNNABLE)
+            p = q1[index]; 
+            if(p == 0 || p == NULL)
+            {
+                count ++;
                 continue;
+            }
+            if(p->state != RUNNABLE)
+            {
+                count ++;
+                continue;
+            }
 
             // Switch to chosen process.  It is the process's job
             // to release ptable.lock and then reacquire it
@@ -454,7 +553,52 @@ scheduler(void)
             proc = p;
             switchuvm(p);
             p->state = RUNNING;
-            cprintf("q2 : Starting to run pid %s : %d out of %d process : %d %d \n",p->name, p->pid, count, proc->ticks_accum[proc->priority], proc->wait_ticks[proc->priority]);
+            //cprintf("q1 : Starting to run pid %s : %d out of %d process : %d %d \n",p->name, p->pid, count, proc->ticks_accum[proc->priority], proc->wait_ticks[proc->priority]);
+            
+            swtch(&cpu->scheduler, proc->context);
+            switchkvm();
+
+            // Process is done running for now.
+            // It should have changed its p->state before coming back.
+            //
+            proc->ticks_accum[proc->priority] += 1; 
+            accum_wait_ticks(proc);
+
+            //Check accum ticks and demote
+            if(proc->ticks_accum[1] == 32)
+            {
+                add_entry(q0, &q0_size, proc);
+                delete_entry(q1, &q1_size, index);
+                proc->priority = 0;
+                //cprintf("Deleting entry and adding to q0 : q1_size = %d\n", q1_size);
+            }
+            
+            goto endloop;
+
+        }
+    }
+    if(count == 64) //q1 was empty 
+    {
+        count = 0;
+        for(index = 0; index < NPROC ; index ++)
+        {
+            p = q0[index]; 
+            if(p == NULL || p == 0)
+            {
+                continue;
+            }
+            if(p->state != RUNNABLE)
+            {
+                continue;
+            }
+
+            // Switch to chosen process.  It is the process's job
+            // to release ptable.lock and then reacquire it
+            // before jumping back to us.
+            proc = p;
+            switchuvm(p);
+            p->state = RUNNING;
+            //cprintf("q0 : Starting to run pid %s : %d out of %d process : %d %d \n",p->name, p->pid, count, proc->ticks_accum[proc->priority], proc->wait_ticks[proc->priority]);
             
             swtch(&cpu->scheduler, proc->context);
             switchkvm();
@@ -468,20 +612,7 @@ scheduler(void)
         }
 
     }
-
-    
-   /*
-   cprintf("Proc table summary\n---------------------\n");
-   for(tp = ptable.proc; tp < &ptable.proc[NPROC]; tp++)
-   {
-        int pr = tp->priority;
-        if(tp->inuse)
-        {
-            cprintf("%x\t%s\t%d\t,%d\t%d\n",tp, tp->name, tp->pid, tp->wait_ticks[pr], tp->ticks_accum[pr]);
-        }
-
-   }
-*/
+endloop:
     release(&ptable.lock);
 
   }
@@ -533,6 +664,7 @@ forkret(void)
 void
 sleep(void *chan, struct spinlock *lk)
 {
+
   if(proc == 0)
     panic("sleep");
 
@@ -552,9 +684,32 @@ sleep(void *chan, struct spinlock *lk)
 
   // Go to sleep.
 
-  cprintf("pid %d going to sleep ...\n", proc->pid);
-  
-
+  //cprintf("pid %d going to sleep ...\n", proc->pid);
+/* 
+  //delete entry from queue
+  if(proc->priority == 3)
+  {
+      ind = find_index(q3, q3_size, proc);
+      delete_entry(q3, &q3_size, ind);
+  }
+  else if(proc->priority == 2)
+  {
+      cprintf("---- Deleting from q \n");
+      ind = find_index(q2, q2_size, proc);
+      delete_entry(q2, &q2_size, ind);
+      cprintf("size = %d", q2_size);
+  }
+  else if(proc->priority == 1)
+  {
+      ind = find_index(q1, q1_size, proc);
+      delete_entry(q1, &q1_size, ind);
+  }
+  else // (proc->priority == 0)
+  {
+      ind = find_index(q0, q0_size, proc);
+      delete_entry(q0, &q0_size, ind);
+  }
+*/
   proc->chan = chan;
   proc->state = SLEEPING;
   sched();
@@ -579,8 +734,28 @@ wakeup1(void *chan)
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++)
     if(p->state == SLEEPING && p->chan == chan)
     {
-      cprintf("Wakeup called ...\n");
-      p->state = RUNNABLE;
+      //cprintf("Wakeup called ...\n");
+      p->state = RUNNABLE;  
+  
+/*
+      //add entry into queue
+      if(proc->priority == 3)
+      {
+          add_entry(q3, &q3_size, p);
+      }
+      else if(proc->priority == 2)
+      {
+          add_entry(q2, &q2_size, p);
+      }
+      else if(proc->priority == 1)
+      {
+          add_entry(q1, &q1_size, p);
+      }
+      else // (proc->priority == 0)
+      {
+          add_entry(q0, &q0_size, p);
+      }
+      */
     }
 }
 

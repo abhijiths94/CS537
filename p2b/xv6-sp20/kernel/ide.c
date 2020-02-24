@@ -110,6 +110,7 @@ ideintr(void)
   b->flags &= ~B_DIRTY;
   wakeup(b);
   
+
   // Start disk on next buf in queue.
   if(idequeue != 0)
     idestart(idequeue);

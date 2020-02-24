@@ -1,5 +1,7 @@
 #ifndef _PROC_H_
 #define _PROC_H_
+
+
 // Segments in proc->gdt.
 // Also known to bootasm.S and trapasm.S
 #define SEG_KCODE 1  // kernel code
@@ -80,8 +82,11 @@ struct proc {
   int priority;                 // current priority level of each process (0-3)
   int ticks_accum[4];           // number of ticks each process has accumulated at each of 4 priorities
   int wait_ticks[4];            // number of ticks each process has waited before being scheduled
-
+  int rr_time;
 };
+
+struct pstat;
+void copy_pstat(struct pstat* pstat_ptr);
 
 // Process memory is laid out contiguously, low addresses first:
 //   text
