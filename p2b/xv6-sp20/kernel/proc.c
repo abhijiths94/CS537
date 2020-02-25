@@ -456,6 +456,11 @@ scheduler(void)
                 // to release ptable.lock and then reacquire it
                 // before jumping back to us.
                 proc = p;
+                proc->wait_ticks[0] = 0;   // clear wait ticks 
+                proc->wait_ticks[1] = 0;   // clear wait ticks 
+                proc->wait_ticks[2] = 0;   // clear wait ticks 
+                proc->wait_ticks[3] = 0;   // clear wait ticks 
+
                 switchuvm(p);
                 p->state = RUNNING;
                 //cprintf("q3 : Starting to run pid %s : %d out of %d process : %d %d \n",p->name, p->pid, count, proc->ticks_accum[proc->priority], proc->wait_ticks[proc->priority]);
@@ -466,7 +471,7 @@ scheduler(void)
                 // Process is done running for now.
                 // It should have changed its p->state before coming back.
                 //
-                proc->ticks_accum[proc->priority] += 1; 
+                proc->ticks_accum[proc->priority] += 1;
                 accum_wait_ticks(proc);
                 proc->rr_time += 1;
             }
