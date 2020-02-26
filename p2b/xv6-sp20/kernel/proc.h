@@ -87,6 +87,7 @@ struct proc {
 
 struct pstat;
 void copy_pstat(struct pstat* pstat_ptr);
+void boost_proc_cmd(struct proc* proc);
 
 // Process memory is laid out contiguously, low addresses first:
 //   text

@@ -107,5 +107,6 @@ int sys_getprocinfo(void)
 
 int sys_boostproc(void)
 {
+    boost_proc_cmd(proc);
     return 0;
 }

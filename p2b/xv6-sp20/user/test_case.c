@@ -2,14 +2,25 @@
 #include "stat.h"
 #include "user.h"
 #include "pstat.h"
+
 #define check(exp, msg) if(exp) {} else {\
   printf(1, "%s:%d check (" #exp ") failed: %s\n", __FILE__, __LINE__, msg);\
   exit();}
 
-int long_workload(int n) {
+#define DDEBUG 1
+
+#ifdef DDEBUG
+# define DEBUG_PRINT(x) printf x
+#else
+# define DEBUG_PRINT(x) do {} while (0)
+#endif
+
+
+int workload(int n) {
   int i, j = 0;
-  for(i = 0; i < n; i++)
+  for (i = 0; i < n; i++) {
     j += i * j + 1;
+  }
   return j;
 }
 
@@ -17,45 +28,65 @@ int
 main(int argc, char *argv[])
 {
   struct pstat st;
-
-  sleep(10);
-
-  int i = long_workload(80000000), j;
+  int time_slices[] = {0, 32, 16, 8};
   check(getprocinfo(&st) == 0, "getprocinfo");
 
-  int pid = getpid(); 
-  for(i = 0; i < NPROC; i++) {
-    if (st.inuse[i]) {
-      printf(1, "pid: %d\n", st.pid[i]);
-      if (pid == st.pid[i]) {
-        for (j = 3; j >= 0; j--) {
-          printf(1, "\t level %d ticks used %d\n", j, st.ticks[i][j]); 
-	  printf(1, "\t level %d ticks waited for  %d\n", j, st.wait_ticks[i][j]); 
-        }
+  // Push this thread to the bottom
+  workload(80000000);
 
-        check(st.ticks[i][3] == 8,
-            "current process should run for 8 ticks in level 3");
-        check(st.wait_ticks[i][3] == 0,
-	    "current process should not have waited in level 3");
-        check(st.ticks[i][2] == 16,
-            "current process should run for 16 ticks in level 2");
-        check(st.wait_ticks[i][2] == 0,
-            "current process should not have waited in level 2");
-        check(st.ticks[i][1] == 32,
-            "current process should run for 32 ticks in level 1");
-	check(st.wait_ticks[i][1] == 0,
-            "current process should not have waited in level 1");
-        check(st.ticks[i][0] > 0,
-            "current process should run for at least 1 tick in the lowest level");
-        check(st.priority[i] == 0, "current process should have the lowest priority");
-      } else {
-        for (j = 3; j >= 0; j--) {
-          printf(1, "\t level %d ticks used %d\n", j, st.ticks[i][j]);  
-        }
-      }
+  int i, j, k;
+
+  // Launch the 4 processes
+  for (i = 0; i < 4; i++) {
+    int c_pid = fork();
+    // Child
+    if (c_pid == 0) {
+      workload(80000000);
+      printf(1,"Exiting ..\n");
+      exit();
+    }
+    else
+    {
+        printf(1,"Created child with pid %d\n", c_pid);
     }
   }
 
-  printf(1, "TEST PASSED");
+  (void)k;
+  (void)j;
+  (void)st;
+ (void) time_slices;
+
   exit();
 }
+
+/*
+  // Checking every 4 time-slice for 4 times
+  for (i = 0; i < 4; i++) { 
+    sleep(100);
+    check(getprocinfo(&st) == 0, "getprocinfo");
+
+    for (j = 0; j < NPROC; j++) {
+      if (st.inuse[j] && st.pid[j] > 3) {
+  
+        DEBUG_PRINT((1, "pid: %d\n", st.pid[j]));
+        for (k = 3; k >= 0; k--) {
+          DEBUG_PRINT((1, "\t level %d ticks used %d\n", k, st.ticks[j][k]));
+	        DEBUG_PRINT((1, "\t level %d waited for ticks %d\n", k, st.wait_ticks[j][k]));
+          if (k > 0) {
+            check(st.ticks[j][k] % time_slices[k] == 0, "All processes have used up the timer ticks in level 3, 2 and 1");
+          }
+        }
+      } 
+    }
+
+    printf(1,"------------------------------------------------------------------------\n");
+  }
+
+  for (i = 0; i < 4; i++) {
+    wait();
+  }
+
+  printf(1, "TEST PASSED");
+
+  exit();
+}*/
