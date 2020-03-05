@@ -115,22 +115,14 @@ kalloc(void)
       r = r->next;
   }
 
-  if(prev == NULL)
-  {
-      //first element has been allocated
-      kmem.freelist = r->next;
-  }
-  else
-  {
-    prev->next = r->next;
-  }
+  prev->next = r->next;
 
   if(r){
     num_freeList --;
     alloc_pages[num_alloc++] =(int*)r;
   }
   release(&kmem.lock);
-  //cprintf("Allocated page %x : free %d\n", r, num_freeList);
+  cprintf("Allocated page %x ", r);
   return (char*)r;
 
 }
