@@ -1,0 +1,1069 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ALT	xv6-sp20/kernel/kbd.h	13;"	d
+AS	xv6-sp20/Makefile	/^AS := gcc$/;"	m
+ASSERT	xv6-sp20/kernel/lapic.c	22;"	d	file:
+Align	xv6-sp20/user/umalloc.c	/^typedef long Align;$/;"	t	file:
+BACK	xv6-sp20/user/sh.c	12;"	d	file:
+BACKSPACE	xv6-sp20/kernel/console.c	119;"	d	file:
+BBLOCK	xv6-sp20/include/fs.h	45;"	d
+BCAST	xv6-sp20/kernel/lapic.c	25;"	d	file:
+BLOCK_SIZE	xv6-sp20/tools/mkfs.c	20;"	d	file:
+BPB	xv6-sp20/include/fs.h	42;"	d
+BSIZE	xv6-sp20/include/fs.h	12;"	d
+BUSY	xv6-sp20/kernel/lapic.c	26;"	d	file:
+B_BUSY	xv6-sp20/kernel/buf.h	13;"	d
+B_DIRTY	xv6-sp20/kernel/buf.h	15;"	d
+B_VALID	xv6-sp20/kernel/buf.h	14;"	d
+C	xv6-sp20/kernel/console.c	179;"	d	file:
+C	xv6-sp20/kernel/kbd.h	34;"	d
+CAPSLOCK	xv6-sp20/kernel/kbd.h	15;"	d
+CC	xv6-sp20/Makefile	/^CC = gcc$/;"	m
+CLEAN	xv6-sp20/Makefile	/^CLEAN := $(KERNEL_CLEAN) $(USER_CLEAN) $(TOOLS_CLEAN) \\$/;"	m
+COM1	xv6-sp20/kernel/uart.c	14;"	d	file:
+CONSOLE	xv6-sp20/kernel/file.h	43;"	d
+CPP	xv6-sp20/Makefile	/^CPP := cpp$/;"	m
+CPUS	xv6-sp20/Makefile	/^CPUS := 1$/;"	m
+CR0_AM	xv6-sp20/kernel/mmu.h	37;"	d
+CR0_CD	xv6-sp20/kernel/mmu.h	39;"	d
+CR0_EM	xv6-sp20/kernel/mmu.h	32;"	d
+CR0_ET	xv6-sp20/kernel/mmu.h	34;"	d
+CR0_MP	xv6-sp20/kernel/mmu.h	31;"	d
+CR0_NE	xv6-sp20/kernel/mmu.h	35;"	d
+CR0_NW	xv6-sp20/kernel/mmu.h	38;"	d
+CR0_PE	xv6-sp20/kernel/bootasm.S	/^#define CR0_PE    1  \/\/ protected mode enable bit$/;"	d
+CR0_PE	xv6-sp20/kernel/bootother.S	/^#define CR0_PE    1$/;"	d
+CR0_PE	xv6-sp20/kernel/mmu.h	30;"	d
+CR0_PG	xv6-sp20/kernel/mmu.h	40;"	d
+CR0_TS	xv6-sp20/kernel/mmu.h	33;"	d
+CR0_WP	xv6-sp20/kernel/mmu.h	36;"	d
+CRTPORT	xv6-sp20/kernel/console.c	120;"	d	file:
+CTL	xv6-sp20/kernel/kbd.h	12;"	d
+DEASSERT	xv6-sp20/kernel/lapic.c	23;"	d	file:
+DELIVS	xv6-sp20/kernel/lapic.c	21;"	d	file:
+DEPS	xv6-sp20/Makefile	/^DEPS := $(KERNEL_DEPS) $(USER_DEPS) $(TOOLS_DEPS)$/;"	m
+DIRSIZ	xv6-sp20/include/fs.h	48;"	d
+DPL_USER	xv6-sp20/kernel/mmu.h	69;"	d
+E0ESC	xv6-sp20/kernel/kbd.h	19;"	d
+ELF_MAGIC	xv6-sp20/kernel/elf.h	5;"	d
+ELF_PROG_FLAG_EXEC	xv6-sp20/kernel/elf.h	42;"	d
+ELF_PROG_FLAG_READ	xv6-sp20/kernel/elf.h	44;"	d
+ELF_PROG_FLAG_WRITE	xv6-sp20/kernel/elf.h	43;"	d
+ELF_PROG_LOAD	xv6-sp20/kernel/elf.h	39;"	d
+EMBRYO	xv6-sp20/kernel/proc.h	/^enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	e	enum:procstate
+ENABLE	xv6-sp20/kernel/lapic.c	16;"	d	file:
+EOI	xv6-sp20/kernel/lapic.c	14;"	d	file:
+ERROR	xv6-sp20/kernel/lapic.c	35;"	d	file:
+ESR	xv6-sp20/kernel/lapic.c	17;"	d	file:
+EXEC	xv6-sp20/user/sh.c	8;"	d	file:
+FD_INODE	xv6-sp20/kernel/file.h	/^  enum { FD_NONE, FD_PIPE, FD_INODE } type;$/;"	e	enum:file::__anon5
+FD_NONE	xv6-sp20/kernel/file.h	/^  enum { FD_NONE, FD_PIPE, FD_INODE } type;$/;"	e	enum:file::__anon5
+FD_PIPE	xv6-sp20/kernel/file.h	/^  enum { FD_NONE, FD_PIPE, FD_INODE } type;$/;"	e	enum:file::__anon5
+FIXED	xv6-sp20/kernel/lapic.c	27;"	d	file:
+FL_AC	xv6-sp20/kernel/mmu.h	24;"	d
+FL_AF	xv6-sp20/kernel/mmu.h	9;"	d
+FL_CF	xv6-sp20/kernel/mmu.h	7;"	d
+FL_DF	xv6-sp20/kernel/mmu.h	14;"	d
+FL_ID	xv6-sp20/kernel/mmu.h	27;"	d
+FL_IF	xv6-sp20/kernel/mmu.h	13;"	d
+FL_IOPL_0	xv6-sp20/kernel/mmu.h	17;"	d
+FL_IOPL_1	xv6-sp20/kernel/mmu.h	18;"	d
+FL_IOPL_2	xv6-sp20/kernel/mmu.h	19;"	d
+FL_IOPL_3	xv6-sp20/kernel/mmu.h	20;"	d
+FL_IOPL_MASK	xv6-sp20/kernel/mmu.h	16;"	d
+FL_NT	xv6-sp20/kernel/mmu.h	21;"	d
+FL_OF	xv6-sp20/kernel/mmu.h	15;"	d
+FL_PF	xv6-sp20/kernel/mmu.h	8;"	d
+FL_RF	xv6-sp20/kernel/mmu.h	22;"	d
+FL_SF	xv6-sp20/kernel/mmu.h	11;"	d
+FL_TF	xv6-sp20/kernel/mmu.h	12;"	d
+FL_VIF	xv6-sp20/kernel/mmu.h	25;"	d
+FL_VIP	xv6-sp20/kernel/mmu.h	26;"	d
+FL_VM	xv6-sp20/kernel/mmu.h	23;"	d
+FL_ZF	xv6-sp20/kernel/mmu.h	10;"	d
+GDBPORT	xv6-sp20/Makefile	/^GDBPORT := $(shell expr `id -u` % 5000 + 25000)$/;"	m
+Header	xv6-sp20/user/umalloc.c	/^typedef union header Header;$/;"	t	typeref:union:header	file:
+IBLOCK	xv6-sp20/include/fs.h	39;"	d
+ICRHI	xv6-sp20/kernel/lapic.c	28;"	d	file:
+ICRLO	xv6-sp20/kernel/lapic.c	18;"	d	file:
+ID	xv6-sp20/kernel/lapic.c	11;"	d	file:
+IDE_BSY	xv6-sp20/kernel/ide.c	13;"	d	file:
+IDE_CMD_READ	xv6-sp20/kernel/ide.c	18;"	d	file:
+IDE_CMD_WRITE	xv6-sp20/kernel/ide.c	19;"	d	file:
+IDE_DF	xv6-sp20/kernel/ide.c	15;"	d	file:
+IDE_DRDY	xv6-sp20/kernel/ide.c	14;"	d	file:
+IDE_ERR	xv6-sp20/kernel/ide.c	16;"	d	file:
+INIT	xv6-sp20/kernel/lapic.c	19;"	d	file:
+INPUT_BUF	xv6-sp20/kernel/console.c	170;"	d	file:
+INT_ACTIVELOW	xv6-sp20/kernel/ioapic.c	22;"	d	file:
+INT_DISABLED	xv6-sp20/kernel/ioapic.c	20;"	d	file:
+INT_LEVEL	xv6-sp20/kernel/ioapic.c	21;"	d	file:
+INT_LOGICAL	xv6-sp20/kernel/ioapic.c	23;"	d	file:
+IOAPIC	xv6-sp20/kernel/ioapic.c	9;"	d	file:
+IO_PIC1	xv6-sp20/kernel/picirq.c	8;"	d	file:
+IO_PIC2	xv6-sp20/kernel/picirq.c	9;"	d	file:
+IO_RTC	xv6-sp20/kernel/lapic.c	132;"	d	file:
+IO_TIMER1	xv6-sp20/kernel/timer.c	10;"	d	file:
+IPB	xv6-sp20/include/fs.h	36;"	d
+IRQ_COM1	xv6-sp20/include/traps.h	37;"	d
+IRQ_ERROR	xv6-sp20/include/traps.h	39;"	d
+IRQ_IDE	xv6-sp20/include/traps.h	38;"	d
+IRQ_KBD	xv6-sp20/include/traps.h	36;"	d
+IRQ_SLAVE	xv6-sp20/kernel/picirq.c	11;"	d	file:
+IRQ_SPURIOUS	xv6-sp20/include/traps.h	40;"	d
+IRQ_TIMER	xv6-sp20/include/traps.h	35;"	d
+I_BUSY	xv6-sp20/kernel/file.h	30;"	d
+I_VALID	xv6-sp20/kernel/file.h	31;"	d
+KBDATAP	xv6-sp20/kernel/kbd.h	7;"	d
+KBSTATP	xv6-sp20/kernel/kbd.h	5;"	d
+KBS_DIB	xv6-sp20/kernel/kbd.h	6;"	d
+KERNEL_CLEAN	xv6-sp20/kernel/makefile.mk	/^KERNEL_CLEAN := \\$/;"	m
+KERNEL_DEPS	xv6-sp20/kernel/makefile.mk	/^KERNEL_DEPS := \\$/;"	m
+KERNEL_OBJECTS	xv6-sp20/kernel/makefile.mk	/^KERNEL_OBJECTS := $(addprefix kernel\/, $(KERNEL_OBJECTS))$/;"	m
+KERNEL_OBJECTS	xv6-sp20/kernel/makefile.mk	/^KERNEL_OBJECTS := \\$/;"	m
+KERNEL_SPECIAL_OBJECTS	xv6-sp20/kernel/makefile.mk	/^KERNEL_SPECIAL_OBJECTS := $(addprefix kernel\/, $(KERNEL_SPECIAL_OBJECTS))$/;"	m
+KERNEL_SPECIAL_OBJECTS	xv6-sp20/kernel/makefile.mk	/^KERNEL_SPECIAL_OBJECTS := \\$/;"	m
+KEY_DEL	xv6-sp20/kernel/kbd.h	31;"	d
+KEY_DN	xv6-sp20/kernel/kbd.h	25;"	d
+KEY_END	xv6-sp20/kernel/kbd.h	23;"	d
+KEY_HOME	xv6-sp20/kernel/kbd.h	22;"	d
+KEY_INS	xv6-sp20/kernel/kbd.h	30;"	d
+KEY_LF	xv6-sp20/kernel/kbd.h	26;"	d
+KEY_PGDN	xv6-sp20/kernel/kbd.h	29;"	d
+KEY_PGUP	xv6-sp20/kernel/kbd.h	28;"	d
+KEY_RT	xv6-sp20/kernel/kbd.h	27;"	d
+KEY_UP	xv6-sp20/kernel/kbd.h	24;"	d
+KSTACKSIZE	xv6-sp20/include/param.h	7;"	d
+LD	xv6-sp20/Makefile	/^LD := ld$/;"	m
+LEVEL	xv6-sp20/kernel/lapic.c	24;"	d	file:
+LINT0	xv6-sp20/kernel/lapic.c	33;"	d	file:
+LINT1	xv6-sp20/kernel/lapic.c	34;"	d	file:
+LIST	xv6-sp20/user/sh.c	11;"	d	file:
+MASKED	xv6-sp20/kernel/lapic.c	36;"	d	file:
+MAXARG	xv6-sp20/include/param.h	17;"	d
+MAXARGS	xv6-sp20/user/sh.c	14;"	d	file:
+MAXFILE	xv6-sp20/include/fs.h	23;"	d
+MAX_PROC_MEM	xv6-sp20/user/usertests.c	10;"	d	file:
+MPBOOT	xv6-sp20/kernel/mp.h	36;"	d
+MPBUS	xv6-sp20/kernel/mp.h	52;"	d
+MPIOAPIC	xv6-sp20/kernel/mp.h	53;"	d
+MPIOINTR	xv6-sp20/kernel/mp.h	54;"	d
+MPLINTR	xv6-sp20/kernel/mp.h	55;"	d
+MPPROC	xv6-sp20/kernel/mp.h	51;"	d
+N	xv6-sp20/user/forktest.c	8;"	d	file:
+NBUF	xv6-sp20/include/param.h	11;"	d
+NCPU	xv6-sp20/include/param.h	8;"	d
+NDEV	xv6-sp20/include/param.h	13;"	d
+NDIRECT	xv6-sp20/include/fs.h	21;"	d
+NELEM	xv6-sp20/kernel/defs.h	174;"	d
+NFILE	xv6-sp20/include/param.h	10;"	d
+NINDIRECT	xv6-sp20/include/fs.h	22;"	d
+NINODE	xv6-sp20/include/param.h	12;"	d
+NO	xv6-sp20/kernel/kbd.h	9;"	d
+NOFILE	xv6-sp20/include/param.h	9;"	d
+NPDENTRIES	xv6-sp20/kernel/mmu.h	116;"	d
+NPROC	xv6-sp20/include/param.h	6;"	d
+NPTENTRIES	xv6-sp20/kernel/mmu.h	117;"	d
+NSEGS	xv6-sp20/kernel/proc.h	11;"	d
+NULL	xv6-sp20/include/types.h	11;"	d
+NUMLOCK	xv6-sp20/kernel/kbd.h	16;"	d
+OBJCOPY	xv6-sp20/Makefile	/^OBJCOPY := objcopy$/;"	m
+OBJDUMP	xv6-sp20/Makefile	/^OBJDUMP := objdump$/;"	m
+O_CREATE	xv6-sp20/include/fcntl.h	9;"	d
+O_RDONLY	xv6-sp20/include/fcntl.h	6;"	d
+O_RDWR	xv6-sp20/include/fcntl.h	8;"	d
+O_WRONLY	xv6-sp20/include/fcntl.h	7;"	d
+PADDR	xv6-sp20/kernel/mmu.h	113;"	d
+PAGE	xv6-sp20/user/usertests.c	9;"	d	file:
+PCINT	xv6-sp20/kernel/lapic.c	32;"	d	file:
+PDX	xv6-sp20/kernel/mmu.h	102;"	d
+PDXSHIFT	xv6-sp20/kernel/mmu.h	123;"	d
+PERIODIC	xv6-sp20/kernel/lapic.c	31;"	d	file:
+PGADDR	xv6-sp20/kernel/mmu.h	108;"	d
+PGROUNDDOWN	xv6-sp20/kernel/mmu.h	126;"	d
+PGROUNDUP	xv6-sp20/kernel/mmu.h	125;"	d
+PGSHIFT	xv6-sp20/kernel/mmu.h	120;"	d
+PGSIZE	xv6-sp20/kernel/mmu.h	119;"	d
+PGSIZE	xv6-sp20/user/test_case.c	7;"	d	file:
+PHYSTOP	xv6-sp20/include/param.h	16;"	d
+PIPE	xv6-sp20/user/sh.c	10;"	d	file:
+PIPESIZE	xv6-sp20/kernel/pipe.c	10;"	d	file:
+PTE_A	xv6-sp20/kernel/mmu.h	134;"	d
+PTE_ADDR	xv6-sp20/kernel/mmu.h	140;"	d
+PTE_D	xv6-sp20/kernel/mmu.h	135;"	d
+PTE_MBZ	xv6-sp20/kernel/mmu.h	137;"	d
+PTE_P	xv6-sp20/kernel/mmu.h	129;"	d
+PTE_PCD	xv6-sp20/kernel/mmu.h	133;"	d
+PTE_PS	xv6-sp20/kernel/mmu.h	136;"	d
+PTE_PWT	xv6-sp20/kernel/mmu.h	132;"	d
+PTE_U	xv6-sp20/kernel/mmu.h	131;"	d
+PTE_W	xv6-sp20/kernel/mmu.h	130;"	d
+PTX	xv6-sp20/kernel/mmu.h	105;"	d
+PTXSHIFT	xv6-sp20/kernel/mmu.h	122;"	d
+QEMU	xv6-sp20/Makefile	/^QEMU := $(shell if which qemu 1> \/dev\/null 2> \/dev\/null; \\$/;"	m
+QEMUGDB	xv6-sp20/Makefile	/^QEMUGDB := $(shell if $(QEMU) -help | grep -q '^-gdb'; \\$/;"	m
+QEMUOPTS	xv6-sp20/Makefile	/^QEMUOPTS := -hdb fs.img xv6.img -smp $(CPUS)$/;"	m
+REDIR	xv6-sp20/user/sh.c	9;"	d	file:
+REG_ID	xv6-sp20/kernel/ioapic.c	11;"	d	file:
+REG_TABLE	xv6-sp20/kernel/ioapic.c	13;"	d	file:
+REG_VER	xv6-sp20/kernel/ioapic.c	12;"	d	file:
+ROOTDEV	xv6-sp20/include/param.h	14;"	d
+ROOTINO	xv6-sp20/include/fs.h	11;"	d
+RUNNABLE	xv6-sp20/kernel/proc.h	/^enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	e	enum:procstate
+RUNNING	xv6-sp20/kernel/proc.h	/^enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	e	enum:procstate
+SCROLLLOCK	xv6-sp20/kernel/kbd.h	17;"	d
+SECTSIZE	xv6-sp20/kernel/bootmain.c	12;"	d	file:
+SEG	xv6-sp20/kernel/mmu.h	60;"	d
+SEG16	xv6-sp20/kernel/mmu.h	64;"	d
+SEG_ASM	xv6-sp20/kernel/asm.h	11;"	d
+SEG_KCODE	xv6-sp20/kernel/bootasm.S	/^#define SEG_KCODE 1  \/\/ kernel code$/;"	d
+SEG_KCODE	xv6-sp20/kernel/bootother.S	/^#define SEG_KCODE 1$/;"	d
+SEG_KCODE	xv6-sp20/kernel/multiboot.S	/^#define SEG_KCODE 1  \/\/ kernel code$/;"	d
+SEG_KCODE	xv6-sp20/kernel/proc.h	5;"	d
+SEG_KCODE	xv6-sp20/kernel/trapasm.S	/^#define SEG_KCODE 1  \/\/ kernel code$/;"	d
+SEG_KCPU	xv6-sp20/kernel/proc.h	7;"	d
+SEG_KCPU	xv6-sp20/kernel/trapasm.S	/^#define SEG_KCPU  3  \/\/ kernel per-cpu data$/;"	d
+SEG_KDATA	xv6-sp20/kernel/bootasm.S	/^#define SEG_KDATA 2  \/\/ kernel data+stack$/;"	d
+SEG_KDATA	xv6-sp20/kernel/bootother.S	/^#define SEG_KDATA 2$/;"	d
+SEG_KDATA	xv6-sp20/kernel/multiboot.S	/^#define SEG_KDATA 2  \/\/ kernel data+stack$/;"	d
+SEG_KDATA	xv6-sp20/kernel/proc.h	6;"	d
+SEG_KDATA	xv6-sp20/kernel/trapasm.S	/^#define SEG_KDATA 2  \/\/ kernel data+stack$/;"	d
+SEG_NULLASM	xv6-sp20/kernel/asm.h	5;"	d
+SEG_TSS	xv6-sp20/kernel/proc.h	10;"	d
+SEG_UCODE	xv6-sp20/kernel/proc.h	8;"	d
+SEG_UDATA	xv6-sp20/kernel/proc.h	9;"	d
+SETGATE	xv6-sp20/kernel/mmu.h	206;"	d
+SHIFT	xv6-sp20/kernel/kbd.h	11;"	d
+SLEEPING	xv6-sp20/kernel/proc.h	/^enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	e	enum:procstate
+STACK	xv6-sp20/kernel/multiboot.S	/^#define STACK 4096$/;"	d
+STARTUP	xv6-sp20/kernel/lapic.c	20;"	d	file:
+STA_A	xv6-sp20/kernel/asm.h	21;"	d
+STA_A	xv6-sp20/kernel/mmu.h	77;"	d
+STA_C	xv6-sp20/kernel/asm.h	18;"	d
+STA_C	xv6-sp20/kernel/mmu.h	74;"	d
+STA_E	xv6-sp20/kernel/asm.h	17;"	d
+STA_E	xv6-sp20/kernel/mmu.h	73;"	d
+STA_R	xv6-sp20/kernel/asm.h	20;"	d
+STA_R	xv6-sp20/kernel/mmu.h	76;"	d
+STA_W	xv6-sp20/kernel/asm.h	19;"	d
+STA_W	xv6-sp20/kernel/mmu.h	75;"	d
+STA_X	xv6-sp20/kernel/asm.h	16;"	d
+STA_X	xv6-sp20/kernel/mmu.h	72;"	d
+STS_CG16	xv6-sp20/kernel/mmu.h	83;"	d
+STS_CG32	xv6-sp20/kernel/mmu.h	89;"	d
+STS_IG16	xv6-sp20/kernel/mmu.h	85;"	d
+STS_IG32	xv6-sp20/kernel/mmu.h	90;"	d
+STS_LDT	xv6-sp20/kernel/mmu.h	81;"	d
+STS_T16A	xv6-sp20/kernel/mmu.h	80;"	d
+STS_T16B	xv6-sp20/kernel/mmu.h	82;"	d
+STS_T32A	xv6-sp20/kernel/mmu.h	87;"	d
+STS_T32B	xv6-sp20/kernel/mmu.h	88;"	d
+STS_TG	xv6-sp20/kernel/mmu.h	84;"	d
+STS_TG16	xv6-sp20/kernel/mmu.h	86;"	d
+STS_TG32	xv6-sp20/kernel/mmu.h	91;"	d
+SVR	xv6-sp20/kernel/lapic.c	15;"	d	file:
+SYSCALL	xv6-sp20/user/usys.S	/^#define SYSCALL(name) \\$/;"	d
+SYS_chdir	xv6-sp20/include/syscall.h	20;"	d
+SYS_close	xv6-sp20/include/syscall.h	11;"	d
+SYS_dump_allocated	xv6-sp20/include/syscall.h	28;"	d
+SYS_dup	xv6-sp20/include/syscall.h	21;"	d
+SYS_exec	xv6-sp20/include/syscall.h	13;"	d
+SYS_exit	xv6-sp20/include/syscall.h	6;"	d
+SYS_fork	xv6-sp20/include/syscall.h	5;"	d
+SYS_fstat	xv6-sp20/include/syscall.h	17;"	d
+SYS_getpid	xv6-sp20/include/syscall.h	22;"	d
+SYS_kill	xv6-sp20/include/syscall.h	12;"	d
+SYS_link	xv6-sp20/include/syscall.h	18;"	d
+SYS_mkdir	xv6-sp20/include/syscall.h	19;"	d
+SYS_mknod	xv6-sp20/include/syscall.h	15;"	d
+SYS_mprotect	xv6-sp20/include/syscall.h	26;"	d
+SYS_munprotect	xv6-sp20/include/syscall.h	27;"	d
+SYS_open	xv6-sp20/include/syscall.h	14;"	d
+SYS_pipe	xv6-sp20/include/syscall.h	8;"	d
+SYS_read	xv6-sp20/include/syscall.h	10;"	d
+SYS_sbrk	xv6-sp20/include/syscall.h	23;"	d
+SYS_sleep	xv6-sp20/include/syscall.h	24;"	d
+SYS_unlink	xv6-sp20/include/syscall.h	16;"	d
+SYS_uptime	xv6-sp20/include/syscall.h	25;"	d
+SYS_wait	xv6-sp20/include/syscall.h	7;"	d
+SYS_write	xv6-sp20/include/syscall.h	9;"	d
+TCCR	xv6-sp20/kernel/lapic.c	38;"	d	file:
+TDCR	xv6-sp20/kernel/lapic.c	39;"	d	file:
+TICR	xv6-sp20/kernel/lapic.c	37;"	d	file:
+TIMER	xv6-sp20/kernel/lapic.c	29;"	d	file:
+TIMER_16BIT	xv6-sp20/kernel/timer.c	22;"	d	file:
+TIMER_DIV	xv6-sp20/kernel/timer.c	17;"	d	file:
+TIMER_FREQ	xv6-sp20/kernel/timer.c	16;"	d	file:
+TIMER_MODE	xv6-sp20/kernel/timer.c	19;"	d	file:
+TIMER_RATEGEN	xv6-sp20/kernel/timer.c	21;"	d	file:
+TIMER_SEL0	xv6-sp20/kernel/timer.c	20;"	d	file:
+TOOLS_CLEAN	xv6-sp20/tools/makefile.mk	/^TOOLS_CLEAN := tools\/mkfs tools\/mkfs.o $(TOOLS_DEPS)$/;"	m
+TOOLS_CPPFLAGS	xv6-sp20/tools/makefile.mk	/^TOOLS_CPPFLAGS := -iquote include$/;"	m
+TOOLS_DEPS	xv6-sp20/tools/makefile.mk	/^TOOLS_DEPS := tools\/mkfs.d$/;"	m
+TPR	xv6-sp20/kernel/lapic.c	13;"	d	file:
+T_ALIGN	xv6-sp20/include/traps.h	24;"	d
+T_BOUND	xv6-sp20/include/traps.h	12;"	d
+T_BRKPT	xv6-sp20/include/traps.h	10;"	d
+T_DBLFLT	xv6-sp20/include/traps.h	15;"	d
+T_DEBUG	xv6-sp20/include/traps.h	8;"	d
+T_DEFAULT	xv6-sp20/include/traps.h	31;"	d
+T_DEV	xv6-sp20/include/stat.h	8;"	d
+T_DEVICE	xv6-sp20/include/traps.h	14;"	d
+T_DIR	xv6-sp20/include/stat.h	6;"	d
+T_DIVIDE	xv6-sp20/include/traps.h	7;"	d
+T_FILE	xv6-sp20/include/stat.h	7;"	d
+T_FPERR	xv6-sp20/include/traps.h	23;"	d
+T_GPFLT	xv6-sp20/include/traps.h	20;"	d
+T_ILLOP	xv6-sp20/include/traps.h	13;"	d
+T_IRQ0	xv6-sp20/include/traps.h	33;"	d
+T_MCHK	xv6-sp20/include/traps.h	25;"	d
+T_NMI	xv6-sp20/include/traps.h	9;"	d
+T_OFLOW	xv6-sp20/include/traps.h	11;"	d
+T_PGFLT	xv6-sp20/include/traps.h	21;"	d
+T_SEGNP	xv6-sp20/include/traps.h	18;"	d
+T_SIMDERR	xv6-sp20/include/traps.h	26;"	d
+T_STACK	xv6-sp20/include/traps.h	19;"	d
+T_SYSCALL	xv6-sp20/include/traps.h	30;"	d
+T_TSS	xv6-sp20/include/traps.h	17;"	d
+UNUSED	xv6-sp20/kernel/proc.h	/^enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	e	enum:procstate
+USERTOP	xv6-sp20/include/param.h	15;"	d
+USER_ASFLAGS	xv6-sp20/user/makefile.mk	/^USER_ASFLAGS := $(USER_CFLAGS)$/;"	m
+USER_BINS	xv6-sp20/Makefile	/^USER_BINS := $(notdir $(USER_PROGS))$/;"	m
+USER_CLEAN	xv6-sp20/user/makefile.mk	/^USER_CLEAN := user\/bin $(USER_PROGS) $(USER_OBJECTS) $(USER_DEPS)$/;"	m
+USER_DEPS	xv6-sp20/user/makefile.mk	/^USER_DEPS := $(USER_OBJECTS:.o=.d)$/;"	m
+USER_LIBS	xv6-sp20/user/makefile.mk	/^USER_LIBS := $(addprefix user\/, $(USER_LIBS))$/;"	m
+USER_LIBS	xv6-sp20/user/makefile.mk	/^USER_LIBS := \\$/;"	m
+USER_OBJECTS	xv6-sp20/user/makefile.mk	/^USER_OBJECTS = $(USER_PROGS:%=%.o) $(USER_LIBS)$/;"	m
+USER_PROGS	xv6-sp20/user/makefile.mk	/^USER_PROGS := $(addprefix user\/, $(USER_PROGS))$/;"	m
+USER_PROGS	xv6-sp20/user/makefile.mk	/^USER_PROGS := \\$/;"	m
+VER	xv6-sp20/kernel/lapic.c	12;"	d	file:
+X1	xv6-sp20/kernel/lapic.c	30;"	d	file:
+ZOMBIE	xv6-sp20/kernel/proc.h	/^enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	e	enum:procstate
+_ASM_H_	xv6-sp20/kernel/asm.h	2;"	d
+_BUF_H_	xv6-sp20/kernel/buf.h	2;"	d
+_DEFS_H_	xv6-sp20/kernel/defs.h	2;"	d
+_ELF_H_	xv6-sp20/kernel/elf.h	2;"	d
+_FCNTL_H_	xv6-sp20/include/fcntl.h	2;"	d
+_FILE_H_	xv6-sp20/kernel/file.h	2;"	d
+_FS_H_	xv6-sp20/include/fs.h	2;"	d
+_KBD_H_	xv6-sp20/kernel/kbd.h	2;"	d
+_MMU_H_	xv6-sp20/kernel/mmu.h	2;"	d
+_MP_H_	xv6-sp20/kernel/mp.h	2;"	d
+_PARAM_H_	xv6-sp20/include/param.h	2;"	d
+_PROC_H_	xv6-sp20/kernel/proc.h	2;"	d
+_SPINLOCK_H_	xv6-sp20/kernel/spinlock.h	2;"	d
+_STAT_H_	xv6-sp20/include/stat.h	2;"	d
+_SYSCALL_H_	xv6-sp20/include/syscall.h	2;"	d
+_SYSFUNC_H_	xv6-sp20/kernel/sysfunc.h	2;"	d
+_TRAPS_H_	xv6-sp20/include/traps.h	2;"	d
+_TYPES_H_	xv6-sp20/include/types.h	2;"	d
+_USER_H_	xv6-sp20/user/user.h	2;"	d
+_X86_H_	xv6-sp20/include/x86.h	2;"	d
+acquire	xv6-sp20/kernel/spinlock.c	/^acquire(struct spinlock *lk)$/;"	f
+add_dir	xv6-sp20/tools/mkfs.c	/^add_dir(DIR *cur_dir, int cur_inode, int parent_inode) {$/;"	f
+addr	xv6-sp20/kernel/mp.h	/^  uint *addr;                  \/\/ I\/O APIC address$/;"	m	struct:mpioapic
+addrs	xv6-sp20/include/fs.h	/^  uint addrs[NDIRECT+1];   \/\/ Data block addresses$/;"	m	struct:dinode
+addrs	xv6-sp20/kernel/file.h	/^  uint addrs[NDIRECT+1];$/;"	m	struct:inode
+align	xv6-sp20/kernel/elf.h	/^  uint align;$/;"	m	struct:proghdr
+alloc_pages	xv6-sp20/kernel/kalloc.c	/^int * alloc_pages[512] = {0} ; \/\/array to store allocated pages$/;"	v
+allocproc	xv6-sp20/kernel/proc.c	/^allocproc(void)$/;"	f	file:
+allocuvm	xv6-sp20/kernel/vm.c	/^allocuvm(pde_t *pgdir, uint oldsz, uint newsz)$/;"	f
+alltraps	xv6-sp20/kernel/trapasm.S	/^alltraps:$/;"	l
+apicid	xv6-sp20/kernel/mp.h	/^  uchar apicid;                 \/\/ local APIC id$/;"	m	struct:mpproc
+apicno	xv6-sp20/kernel/mp.h	/^  uchar apicno;                 \/\/ I\/O APIC id$/;"	m	struct:mpioapic
+argfd	xv6-sp20/kernel/sysfile.c	/^argfd(int n, int *pfd, struct file **pf)$/;"	f	file:
+argint	xv6-sp20/kernel/syscall.c	/^argint(int n, int *ip)$/;"	f
+argptr	xv6-sp20/kernel/syscall.c	/^argptr(int n, char **pp, int size)$/;"	f
+args	xv6-sp20/kernel/mmu.h	/^  uint args : 5;        \/\/ # args, 0 for interrupt\/trap gates$/;"	m	struct:gatedesc
+argstr	xv6-sp20/kernel/syscall.c	/^argstr(int n, char **pp)$/;"	f
+argv	xv6-sp20/kernel/initcode.S	/^argv:$/;"	l
+argv	xv6-sp20/user/init.c	/^char *argv[] = { "sh", 0 };$/;"	v
+argv	xv6-sp20/user/sh.c	/^  char *argv[MAXARGS];$/;"	m	struct:execcmd	file:
+atoi	xv6-sp20/user/ulib.c	/^atoi(const char *s)$/;"	f
+avl	xv6-sp20/kernel/mmu.h	/^  uint avl : 1;        \/\/ Unused (available for software use)$/;"	m	struct:segdesc
+backcmd	xv6-sp20/user/sh.c	/^backcmd(struct cmd *subcmd)$/;"	f
+backcmd	xv6-sp20/user/sh.c	/^struct backcmd {$/;"	s	file:
+balloc	xv6-sp20/kernel/fs.c	/^balloc(uint dev)$/;"	f	file:
+balloc	xv6-sp20/tools/mkfs.c	/^balloc(int used)$/;"	f
+base	xv6-sp20/user/umalloc.c	/^static Header base;$/;"	v	file:
+base_15_0	xv6-sp20/kernel/mmu.h	/^  uint base_15_0 : 16; \/\/ Low bits of segment base address$/;"	m	struct:segdesc
+base_23_16	xv6-sp20/kernel/mmu.h	/^  uint base_23_16 : 8; \/\/ Middle bits of segment base address$/;"	m	struct:segdesc
+base_31_24	xv6-sp20/kernel/mmu.h	/^  uint base_31_24 : 8; \/\/ High bits of segment base address$/;"	m	struct:segdesc
+bcache	xv6-sp20/kernel/bio.c	/^} bcache;$/;"	v	typeref:struct:__anon1
+bcpu	xv6-sp20/kernel/mp.c	/^static struct cpu *bcpu;$/;"	v	typeref:struct:cpu	file:
+bfree	xv6-sp20/kernel/fs.c	/^bfree(int dev, uint b)$/;"	f	file:
+bget	xv6-sp20/kernel/bio.c	/^bget(uint dev, uint sector)$/;"	f	file:
+bigargtest	xv6-sp20/user/usertests.c	/^bigargtest(void)$/;"	f
+bigdir	xv6-sp20/user/usertests.c	/^bigdir(void)$/;"	f
+bigfile	xv6-sp20/user/usertests.c	/^bigfile(void)$/;"	f
+binit	xv6-sp20/kernel/bio.c	/^binit(void)$/;"	f
+bitblocks	xv6-sp20/tools/mkfs.c	/^uint bitblocks;$/;"	v
+bmap	xv6-sp20/kernel/fs.c	/^bmap(struct inode *ip, uint bn)$/;"	f	file:
+booted	xv6-sp20/kernel/proc.h	/^  volatile uint booted;        \/\/ Has the CPU started?$/;"	m	struct:cpu
+bootmain	xv6-sp20/kernel/bootmain.c	/^bootmain(void)$/;"	f
+bootothers	xv6-sp20/kernel/main.c	/^bootothers(void)$/;"	f	file:
+bread	xv6-sp20/kernel/bio.c	/^bread(uint dev, uint sector)$/;"	f
+brelse	xv6-sp20/kernel/bio.c	/^brelse(struct buf *b)$/;"	f
+bsstest	xv6-sp20/user/usertests.c	/^bsstest(void)$/;"	f
+buf	xv6-sp20/kernel/bio.c	/^  struct buf buf[NBUF];$/;"	m	struct:__anon1	typeref:struct:__anon1::buf	file:
+buf	xv6-sp20/kernel/buf.h	/^struct buf {$/;"	s
+buf	xv6-sp20/kernel/console.c	/^  char buf[INPUT_BUF];$/;"	m	struct:__anon3	file:
+buf	xv6-sp20/user/cat.c	/^char buf[512];$/;"	v
+buf	xv6-sp20/user/grep.c	/^char buf[1024];$/;"	v
+buf	xv6-sp20/user/usertests.c	/^char buf[2048];$/;"	v
+buf	xv6-sp20/user/wc.c	/^char buf[512];$/;"	v
+bwrite	xv6-sp20/kernel/bio.c	/^bwrite(struct buf *b)$/;"	f
+bzero	xv6-sp20/kernel/fs.c	/^bzero(int dev, int bno)$/;"	f	file:
+cat	xv6-sp20/user/cat.c	/^cat(int fd)$/;"	f
+cgaputc	xv6-sp20/kernel/console.c	/^cgaputc(int c)$/;"	f	file:
+chan	xv6-sp20/kernel/proc.h	/^  void *chan;                  \/\/ If non-zero, sleeping on chan$/;"	m	struct:proc
+checksum	xv6-sp20/kernel/mp.h	/^  uchar checksum;               \/\/ all bytes must add up to 0$/;"	m	struct:mp
+checksum	xv6-sp20/kernel/mp.h	/^  uchar checksum;               \/\/ all bytes must add up to 0$/;"	m	struct:mpconf
+cinit	xv6-sp20/kernel/main.c	/^cinit(void) {$/;"	f	file:
+cli	xv6-sp20/include/x86.h	/^cli(void)$/;"	f
+cmd	xv6-sp20/user/sh.c	/^  struct cmd *cmd;$/;"	m	struct:backcmd	typeref:struct:backcmd::cmd	file:
+cmd	xv6-sp20/user/sh.c	/^  struct cmd *cmd;$/;"	m	struct:redircmd	typeref:struct:redircmd::cmd	file:
+cmd	xv6-sp20/user/sh.c	/^struct cmd {$/;"	s	file:
+concreate	xv6-sp20/user/usertests.c	/^concreate(void)$/;"	f
+cons	xv6-sp20/kernel/console.c	/^} cons;$/;"	v	typeref:struct:__anon2	file:
+consoleinit	xv6-sp20/kernel/console.c	/^consoleinit(void)$/;"	f
+consoleintr	xv6-sp20/kernel/console.c	/^consoleintr(int (*getc)(void))$/;"	f
+consoleread	xv6-sp20/kernel/console.c	/^consoleread(struct inode *ip, char *dst, int n)$/;"	f
+consolewrite	xv6-sp20/kernel/console.c	/^consolewrite(struct inode *ip, char *buf, int n)$/;"	f
+consputc	xv6-sp20/kernel/console.c	/^consputc(int c)$/;"	f
+context	xv6-sp20/kernel/proc.h	/^  struct context *context;     \/\/ swtch() here to run process$/;"	m	struct:proc	typeref:struct:proc::context
+context	xv6-sp20/kernel/proc.h	/^struct context {$/;"	s
+copyout	xv6-sp20/kernel/vm.c	/^copyout(pde_t *pgdir, uint va, void *p, uint len)$/;"	f
+copyuvm	xv6-sp20/kernel/vm.c	/^copyuvm(pde_t *pgdir, uint sz)$/;"	f
+cprintf	xv6-sp20/kernel/console.c	/^cprintf(char *fmt, ...)$/;"	f
+cpu	xv6-sp20/kernel/proc.h	/^  struct cpu *cpu;$/;"	m	struct:cpu	typeref:struct:cpu::cpu
+cpu	xv6-sp20/kernel/proc.h	/^struct cpu {$/;"	s
+cpu	xv6-sp20/kernel/spinlock.h	/^  struct cpu *cpu;   \/\/ The cpu holding the lock.$/;"	m	struct:spinlock	typeref:struct:spinlock::cpu
+cpunum	xv6-sp20/kernel/lapic.c	/^cpunum(void)$/;"	f
+cpus	xv6-sp20/kernel/mp.c	/^struct cpu cpus[NCPU];$/;"	v	typeref:struct:cpu
+cr3	xv6-sp20/kernel/mmu.h	/^  void *cr3;         \/\/ Page directory base$/;"	m	struct:taskstate
+create	xv6-sp20/kernel/sysfile.c	/^create(char *path, short type, short major, short minor)$/;"	f	file:
+createdelete	xv6-sp20/user/usertests.c	/^createdelete(void)$/;"	f
+createtest	xv6-sp20/user/usertests.c	/^createtest(void)$/;"	f
+crt	xv6-sp20/kernel/console.c	/^static ushort *crt = (ushort*)0xb8000;  \/\/ CGA memory$/;"	v	file:
+cs	xv6-sp20/include/x86.h	/^  ushort cs;$/;"	m	struct:trapframe
+cs	xv6-sp20/kernel/mmu.h	/^  uint cs : 16;         \/\/ code segment selector$/;"	m	struct:gatedesc
+cs	xv6-sp20/kernel/mmu.h	/^  ushort cs;$/;"	m	struct:taskstate
+ctlmap	xv6-sp20/kernel/kbd.h	/^static uchar ctlmap[256] =$/;"	v
+cwd	xv6-sp20/kernel/proc.h	/^  struct inode *cwd;           \/\/ Current directory$/;"	m	struct:proc	typeref:struct:proc::inode
+data	xv6-sp20/kernel/buf.h	/^  uchar data[512];$/;"	m	struct:buf
+data	xv6-sp20/kernel/data.S	/^data:$/;"	l
+data	xv6-sp20/kernel/ioapic.c	/^  uint data;$/;"	m	struct:ioapic	file:
+data	xv6-sp20/kernel/pipe.c	/^  char data[PIPESIZE];$/;"	m	struct:pipe	file:
+db	xv6-sp20/kernel/mmu.h	/^  uint db : 1;         \/\/ 0 = 16-bit segment, 1 = 32-bit segment$/;"	m	struct:segdesc
+deallocuvm	xv6-sp20/kernel/vm.c	/^deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)$/;"	f
+dev	xv6-sp20/include/stat.h	/^  int dev;     \/\/ Device number$/;"	m	struct:stat
+dev	xv6-sp20/kernel/buf.h	/^  uint dev;$/;"	m	struct:buf
+dev	xv6-sp20/kernel/file.h	/^  uint dev;           \/\/ Device number$/;"	m	struct:inode
+devsw	xv6-sp20/kernel/file.c	/^struct devsw devsw[NDEV];$/;"	v	typeref:struct:devsw
+devsw	xv6-sp20/kernel/file.h	/^struct devsw {$/;"	s
+dinode	xv6-sp20/include/fs.h	/^struct dinode {$/;"	s
+dirent	xv6-sp20/include/fs.h	/^struct dirent {$/;"	s
+dirent	xv6-sp20/tools/mkfs.c	13;"	d	file:
+dirent	xv6-sp20/tools/mkfs.c	18;"	d	file:
+dirfile	xv6-sp20/user/usertests.c	/^dirfile(void)$/;"	f
+dirlink	xv6-sp20/kernel/fs.c	/^dirlink(struct inode *dp, char *name, uint inum)$/;"	f
+dirlookup	xv6-sp20/kernel/fs.c	/^dirlookup(struct inode *dp, char *name, uint *poff)$/;"	f
+dirtest	xv6-sp20/user/usertests.c	/^void dirtest(void)$/;"	f
+dpl	xv6-sp20/kernel/mmu.h	/^  uint dpl : 2;         \/\/ descriptor(meaning new) privilege level$/;"	m	struct:gatedesc
+dpl	xv6-sp20/kernel/mmu.h	/^  uint dpl : 2;        \/\/ Descriptor Privilege Level$/;"	m	struct:segdesc
+ds	xv6-sp20/include/x86.h	/^  ushort ds;$/;"	m	struct:trapframe
+ds	xv6-sp20/kernel/mmu.h	/^  ushort ds;$/;"	m	struct:taskstate
+e	xv6-sp20/kernel/console.c	/^  uint e;  \/\/ Edit index$/;"	m	struct:__anon3	file:
+e	xv6-sp20/kernel/vm.c	/^  void *e;$/;"	m	struct:kmap	file:
+eargv	xv6-sp20/user/sh.c	/^  char *eargv[MAXARGS];$/;"	m	struct:execcmd	file:
+eax	xv6-sp20/include/x86.h	/^  uint eax;$/;"	m	struct:trapframe
+eax	xv6-sp20/kernel/mmu.h	/^  uint eax;          \/\/ More saved state (registers)$/;"	m	struct:taskstate
+ebp	xv6-sp20/include/x86.h	/^  uint ebp;$/;"	m	struct:trapframe
+ebp	xv6-sp20/kernel/mmu.h	/^  uint *ebp;$/;"	m	struct:taskstate
+ebp	xv6-sp20/kernel/proc.h	/^  uint ebp;$/;"	m	struct:context
+ebx	xv6-sp20/include/x86.h	/^  uint ebx;$/;"	m	struct:trapframe
+ebx	xv6-sp20/kernel/mmu.h	/^  uint ebx;$/;"	m	struct:taskstate
+ebx	xv6-sp20/kernel/proc.h	/^  uint ebx;$/;"	m	struct:context
+echoargv	xv6-sp20/user/usertests.c	/^char *echoargv[] = { "echo", "ALL", "TESTS", "PASSED", 0 };$/;"	v
+ecx	xv6-sp20/include/x86.h	/^  uint ecx;$/;"	m	struct:trapframe
+ecx	xv6-sp20/kernel/mmu.h	/^  uint ecx;$/;"	m	struct:taskstate
+edi	xv6-sp20/include/x86.h	/^  uint edi;$/;"	m	struct:trapframe
+edi	xv6-sp20/kernel/mmu.h	/^  uint edi;$/;"	m	struct:taskstate
+edi	xv6-sp20/kernel/proc.h	/^  uint edi;$/;"	m	struct:context
+edx	xv6-sp20/include/x86.h	/^  uint edx;$/;"	m	struct:trapframe
+edx	xv6-sp20/kernel/mmu.h	/^  uint edx;$/;"	m	struct:taskstate
+efile	xv6-sp20/user/sh.c	/^  char *efile;$/;"	m	struct:redircmd	file:
+eflags	xv6-sp20/include/x86.h	/^  uint eflags;$/;"	m	struct:trapframe
+eflags	xv6-sp20/kernel/mmu.h	/^  uint eflags;$/;"	m	struct:taskstate
+ehsize	xv6-sp20/kernel/elf.h	/^  ushort ehsize;$/;"	m	struct:elfhdr
+eip	xv6-sp20/include/x86.h	/^  uint eip;$/;"	m	struct:trapframe
+eip	xv6-sp20/kernel/mmu.h	/^  uint *eip;         \/\/ Saved state from last task switch$/;"	m	struct:taskstate
+eip	xv6-sp20/kernel/proc.h	/^  uint eip;$/;"	m	struct:context
+elf	xv6-sp20/kernel/elf.h	/^  uchar elf[12];$/;"	m	struct:elfhdr
+elfhdr	xv6-sp20/kernel/elf.h	/^struct elfhdr {$/;"	s
+entry	xv6-sp20/kernel/elf.h	/^  uint entry;$/;"	m	struct:elfhdr
+entry	xv6-sp20/kernel/mp.h	/^  ushort entry;                 \/\/ entry count$/;"	m	struct:mpconf
+err	xv6-sp20/include/x86.h	/^  uint err;$/;"	m	struct:trapframe
+es	xv6-sp20/include/x86.h	/^  ushort es;$/;"	m	struct:trapframe
+es	xv6-sp20/kernel/mmu.h	/^  ushort es;         \/\/ Even more saved state (segment selectors)$/;"	m	struct:taskstate
+esi	xv6-sp20/include/x86.h	/^  uint esi;$/;"	m	struct:trapframe
+esi	xv6-sp20/kernel/mmu.h	/^  uint esi;$/;"	m	struct:taskstate
+esi	xv6-sp20/kernel/proc.h	/^  uint esi;$/;"	m	struct:context
+esp	xv6-sp20/include/x86.h	/^  uint esp;$/;"	m	struct:trapframe
+esp	xv6-sp20/kernel/mmu.h	/^  uint *esp;$/;"	m	struct:taskstate
+esp0	xv6-sp20/kernel/mmu.h	/^  uint esp0;         \/\/ Stack pointers and segment selectors$/;"	m	struct:taskstate
+esp1	xv6-sp20/kernel/mmu.h	/^  uint *esp1;$/;"	m	struct:taskstate
+esp2	xv6-sp20/kernel/mmu.h	/^  uint *esp2;$/;"	m	struct:taskstate
+exec	xv6-sp20/kernel/exec.c	/^exec(char *path, char **argv)$/;"	f
+execcmd	xv6-sp20/user/sh.c	/^execcmd(void)$/;"	f
+execcmd	xv6-sp20/user/sh.c	/^struct execcmd {$/;"	s	file:
+exectest	xv6-sp20/user/usertests.c	/^exectest(void)$/;"	f
+exit	xv6-sp20/kernel/initcode.S	/^exit:$/;"	l
+exit	xv6-sp20/kernel/proc.c	/^exit(void)$/;"	f
+exitwait	xv6-sp20/user/usertests.c	/^exitwait(void)$/;"	f
+f	xv6-sp20/kernel/makefile.mk	/^	dd if=\/dev\/zero of=xv6.img count=10000$/;"	m
+f	xv6-sp20/kernel/makefile.mk	/^	dd if=kernel\/bootblock of=xv6.img conv=notrunc$/;"	m
+f	xv6-sp20/kernel/makefile.mk	/^	dd if=kernel\/kernel of=xv6.img seek=1 conv=notrunc$/;"	m
+fd	xv6-sp20/user/sh.c	/^  int fd;$/;"	m	struct:redircmd	file:
+fdalloc	xv6-sp20/kernel/sysfile.c	/^fdalloc(struct file *f)$/;"	f	file:
+feature	xv6-sp20/kernel/mp.h	/^  uint feature;                 \/\/ feature flags from CPUID instruction$/;"	m	struct:mpproc
+fetchint	xv6-sp20/kernel/syscall.c	/^fetchint(struct proc *p, uint addr, int *ip)$/;"	f
+fetchstr	xv6-sp20/kernel/syscall.c	/^fetchstr(struct proc *p, uint addr, char **pp)$/;"	f
+file	xv6-sp20/kernel/file.c	/^  struct file file[NFILE];$/;"	m	struct:__anon4	typeref:struct:__anon4::file	file:
+file	xv6-sp20/kernel/file.h	/^struct file {$/;"	s
+file	xv6-sp20/user/sh.c	/^  char *file;$/;"	m	struct:redircmd	file:
+filealloc	xv6-sp20/kernel/file.c	/^filealloc(void)$/;"	f
+fileclose	xv6-sp20/kernel/file.c	/^fileclose(struct file *f)$/;"	f
+filedup	xv6-sp20/kernel/file.c	/^filedup(struct file *f)$/;"	f
+fileinit	xv6-sp20/kernel/file.c	/^fileinit(void)$/;"	f
+fileread	xv6-sp20/kernel/file.c	/^fileread(struct file *f, char *addr, int n)$/;"	f
+filestat	xv6-sp20/kernel/file.c	/^filestat(struct file *f, struct stat *st)$/;"	f
+filesz	xv6-sp20/kernel/elf.h	/^  uint filesz;$/;"	m	struct:proghdr
+filewrite	xv6-sp20/kernel/file.c	/^filewrite(struct file *f, char *addr, int n)$/;"	f
+flags	xv6-sp20/kernel/buf.h	/^  int flags;$/;"	m	struct:buf
+flags	xv6-sp20/kernel/elf.h	/^  uint flags;$/;"	m	struct:elfhdr
+flags	xv6-sp20/kernel/elf.h	/^  uint flags;$/;"	m	struct:proghdr
+flags	xv6-sp20/kernel/file.h	/^  int flags;          \/\/ I_BUSY, I_VALID$/;"	m	struct:inode
+flags	xv6-sp20/kernel/mp.h	/^  uchar flags;                  \/\/ CPU flags$/;"	m	struct:mpproc
+flags	xv6-sp20/kernel/mp.h	/^  uchar flags;                  \/\/ I\/O APIC flags$/;"	m	struct:mpioapic
+fmtname	xv6-sp20/user/ls.c	/^fmtname(char *path)$/;"	f
+fork	xv6-sp20/kernel/proc.c	/^fork(void)$/;"	f
+fork1	xv6-sp20/user/sh.c	/^fork1(void)$/;"	f
+forkret	xv6-sp20/kernel/proc.c	/^forkret(void)$/;"	f
+forktest	xv6-sp20/user/forktest.c	/^forktest(void)$/;"	f
+forktest	xv6-sp20/user/usertests.c	/^forktest(void)$/;"	f
+fourteen	xv6-sp20/user/usertests.c	/^fourteen(void)$/;"	f
+free	xv6-sp20/user/umalloc.c	/^free(void *ap)$/;"	f
+freeblock	xv6-sp20/tools/mkfs.c	/^uint freeblock;$/;"	v
+freeinode	xv6-sp20/tools/mkfs.c	/^uint freeinode = 1;$/;"	v
+freelist	xv6-sp20/kernel/kalloc.c	/^  struct run *freelist;$/;"	m	struct:__anon8	typeref:struct:__anon8::run	file:
+freep	xv6-sp20/user/umalloc.c	/^static Header *freep;$/;"	v	file:
+freevm	xv6-sp20/kernel/vm.c	/^freevm(pde_t *pgdir)$/;"	f
+fs	xv6-sp20/include/x86.h	/^  ushort fs;$/;"	m	struct:trapframe
+fs	xv6-sp20/kernel/mmu.h	/^  ushort fs;$/;"	m	struct:taskstate
+fsfd	xv6-sp20/tools/mkfs.c	/^int fsfd;$/;"	v
+ftable	xv6-sp20/kernel/file.c	/^} ftable;$/;"	v	typeref:struct:__anon4
+g	xv6-sp20/kernel/mmu.h	/^  uint g : 1;          \/\/ Granularity: limit scaled by 4K when set$/;"	m	struct:segdesc
+gatedesc	xv6-sp20/kernel/mmu.h	/^struct gatedesc {$/;"	s
+gdt	xv6-sp20/kernel/bootasm.S	/^gdt:$/;"	l
+gdt	xv6-sp20/kernel/bootother.S	/^gdt:$/;"	l
+gdt	xv6-sp20/kernel/multiboot.S	/^gdt:$/;"	l
+gdt	xv6-sp20/kernel/proc.h	/^  struct segdesc gdt[NSEGS];   \/\/ x86 global descriptor table$/;"	m	struct:cpu	typeref:struct:cpu::segdesc
+gdtdesc	xv6-sp20/kernel/bootasm.S	/^gdtdesc:$/;"	l
+gdtdesc	xv6-sp20/kernel/bootother.S	/^gdtdesc:$/;"	l
+gdtdesc	xv6-sp20/kernel/multiboot.S	/^gdtdesc:$/;"	l
+getcallerpcs	xv6-sp20/kernel/spinlock.c	/^getcallerpcs(void *v, uint pcs[])$/;"	f
+getcmd	xv6-sp20/user/sh.c	/^getcmd(char *buf, int nbuf)$/;"	f
+gets	xv6-sp20/user/ulib.c	/^gets(char *buf, int max)$/;"	f
+gettoken	xv6-sp20/user/sh.c	/^gettoken(char **ps, char *es, char **q, char **eq)$/;"	f
+grep	xv6-sp20/user/grep.c	/^grep(char *pattern, int fd)$/;"	f
+growproc	xv6-sp20/kernel/proc.c	/^growproc(int n)$/;"	f
+gs	xv6-sp20/include/x86.h	/^  ushort gs;$/;"	m	struct:trapframe
+gs	xv6-sp20/kernel/mmu.h	/^  ushort gs;$/;"	m	struct:taskstate
+havedisk1	xv6-sp20/kernel/ide.c	/^static int havedisk1;$/;"	v	file:
+head	xv6-sp20/kernel/bio.c	/^  struct buf head;$/;"	m	struct:__anon1	typeref:struct:__anon1::buf	file:
+header	xv6-sp20/user/umalloc.c	/^union header {$/;"	u	file:
+holding	xv6-sp20/kernel/spinlock.c	/^holding(struct spinlock *lock)$/;"	f
+i2b	xv6-sp20/tools/mkfs.c	/^i2b(uint inum)$/;"	f
+ialloc	xv6-sp20/kernel/fs.c	/^ialloc(uint dev, short type)$/;"	f
+ialloc	xv6-sp20/tools/mkfs.c	/^ialloc(ushort type)$/;"	f
+iappend	xv6-sp20/tools/mkfs.c	/^iappend(uint inum, void *xp, int n)$/;"	f
+icache	xv6-sp20/kernel/fs.c	/^} icache;$/;"	v	typeref:struct:__anon6
+id	xv6-sp20/kernel/proc.h	/^  uchar id;                    \/\/ Local APIC ID; index into cpus[] below$/;"	m	struct:cpu
+ideinit	xv6-sp20/kernel/ide.c	/^ideinit(void)$/;"	f
+ideintr	xv6-sp20/kernel/ide.c	/^ideintr(void)$/;"	f
+idelock	xv6-sp20/kernel/ide.c	/^static struct spinlock idelock;$/;"	v	typeref:struct:spinlock	file:
+idequeue	xv6-sp20/kernel/ide.c	/^static struct buf *idequeue;$/;"	v	typeref:struct:buf	file:
+iderw	xv6-sp20/kernel/ide.c	/^iderw(struct buf *b)$/;"	f
+idestart	xv6-sp20/kernel/ide.c	/^idestart(struct buf *b)$/;"	f	file:
+idewait	xv6-sp20/kernel/ide.c	/^idewait(int checkerr)$/;"	f	file:
+idt	xv6-sp20/kernel/trap.c	/^struct gatedesc idt[256];$/;"	v	typeref:struct:gatedesc
+idtinit	xv6-sp20/kernel/trap.c	/^idtinit(void)$/;"	f
+idup	xv6-sp20/kernel/fs.c	/^idup(struct inode *ip)$/;"	f
+iget	xv6-sp20/kernel/fs.c	/^iget(uint dev, uint inum)$/;"	f	file:
+iinit	xv6-sp20/kernel/fs.c	/^iinit(void)$/;"	f
+ilock	xv6-sp20/kernel/fs.c	/^ilock(struct inode *ip)$/;"	f
+imcrp	xv6-sp20/kernel/mp.h	/^  uchar imcrp;$/;"	m	struct:mp
+inb	xv6-sp20/include/x86.h	/^inb(ushort port)$/;"	f
+init	xv6-sp20/kernel/initcode.S	/^init:$/;"	l
+initlock	xv6-sp20/kernel/spinlock.c	/^initlock(struct spinlock *lk, char *name)$/;"	f
+initproc	xv6-sp20/kernel/proc.c	/^static struct proc *initproc;$/;"	v	typeref:struct:proc	file:
+inituvm	xv6-sp20/kernel/vm.c	/^inituvm(pde_t *pgdir, char *init, uint sz)$/;"	f
+ino	xv6-sp20/include/stat.h	/^  uint ino;    \/\/ Inode number on device$/;"	m	struct:stat
+inode	xv6-sp20/kernel/file.h	/^struct inode {$/;"	s
+inode	xv6-sp20/kernel/fs.c	/^  struct inode inode[NINODE];$/;"	m	struct:__anon6	typeref:struct:__anon6::inode	file:
+input	xv6-sp20/kernel/console.c	/^} input;$/;"	v	typeref:struct:__anon3
+insl	xv6-sp20/include/x86.h	/^insl(int port, void *addr, int cnt)$/;"	f
+intena	xv6-sp20/kernel/proc.h	/^  int intena;                  \/\/ Were interrupts enabled before pushcli?$/;"	m	struct:cpu
+inum	xv6-sp20/include/fs.h	/^  ushort inum;$/;"	m	struct:dirent
+inum	xv6-sp20/kernel/file.h	/^  uint inum;          \/\/ Inode number$/;"	m	struct:inode
+ioapic	xv6-sp20/kernel/ioapic.c	/^struct ioapic {$/;"	s	file:
+ioapic	xv6-sp20/kernel/ioapic.c	/^volatile struct ioapic *ioapic;$/;"	v	typeref:struct:ioapic
+ioapicenable	xv6-sp20/kernel/ioapic.c	/^ioapicenable(int irq, int cpunum)$/;"	f
+ioapicid	xv6-sp20/kernel/mp.c	/^uchar ioapicid;$/;"	v
+ioapicinit	xv6-sp20/kernel/ioapic.c	/^ioapicinit(void)$/;"	f
+ioapicread	xv6-sp20/kernel/ioapic.c	/^ioapicread(int reg)$/;"	f	file:
+ioapicwrite	xv6-sp20/kernel/ioapic.c	/^ioapicwrite(int reg, uint data)$/;"	f	file:
+iomb	xv6-sp20/kernel/mmu.h	/^  ushort iomb;       \/\/ I\/O map base address$/;"	m	struct:taskstate
+ip	xv6-sp20/kernel/file.h	/^  struct inode *ip;$/;"	m	struct:file	typeref:struct:file::inode
+iput	xv6-sp20/kernel/fs.c	/^iput(struct inode *ip)$/;"	f
+iref	xv6-sp20/user/usertests.c	/^iref(void)$/;"	f
+irqmask	xv6-sp20/kernel/picirq.c	/^static ushort irqmask = 0xFFFF & ~(1<<IRQ_SLAVE);$/;"	v	file:
+isdirempty	xv6-sp20/kernel/sysfile.c	/^isdirempty(struct inode *dp)$/;"	f	file:
+ismp	xv6-sp20/kernel/mp.c	/^int ismp;$/;"	v
+itrunc	xv6-sp20/kernel/fs.c	/^itrunc(struct inode *ip)$/;"	f	file:
+iunlock	xv6-sp20/kernel/fs.c	/^iunlock(struct inode *ip)$/;"	f
+iunlockput	xv6-sp20/kernel/fs.c	/^iunlockput(struct inode *ip)$/;"	f
+iupdate	xv6-sp20/kernel/fs.c	/^iupdate(struct inode *ip)$/;"	f
+jmpkstack	xv6-sp20/kernel/main.c	/^jmpkstack(void)$/;"	f
+kalloc	xv6-sp20/kernel/kalloc.c	/^kalloc(void)$/;"	f
+kalloc_dump_allocated	xv6-sp20/kernel/kalloc.c	/^int kalloc_dump_allocated(int * frames, int numframes)$/;"	f
+kbdgetc	xv6-sp20/kernel/kbd.c	/^kbdgetc(void)$/;"	f
+kbdintr	xv6-sp20/kernel/kbd.c	/^kbdintr(void)$/;"	f
+kfree	xv6-sp20/kernel/kalloc.c	/^kfree(char *v)$/;"	f
+kill	xv6-sp20/kernel/proc.c	/^kill(int pid)$/;"	f
+killed	xv6-sp20/kernel/proc.h	/^  int killed;                  \/\/ If non-zero, have been killed$/;"	m	struct:proc
+kinit	xv6-sp20/kernel/kalloc.c	/^kinit(void)$/;"	f
+kmap	xv6-sp20/kernel/vm.c	/^static struct kmap {$/;"	s	file:
+kmap	xv6-sp20/kernel/vm.c	/^} kmap[] = {$/;"	v	typeref:struct:kmap	file:
+kmem	xv6-sp20/kernel/kalloc.c	/^} kmem;$/;"	v	typeref:struct:__anon8
+kpgdir	xv6-sp20/kernel/vm.c	/^static pde_t *kpgdir;  \/\/ for use in scheduler()$/;"	v	file:
+kstack	xv6-sp20/kernel/proc.h	/^  char *kstack;                \/\/ Bottom of kernel stack for this process$/;"	m	struct:proc
+kvmalloc	xv6-sp20/kernel/vm.c	/^kvmalloc(void)$/;"	f
+lapic	xv6-sp20/kernel/lapic.c	/^volatile uint *lapic;  \/\/ Initialized in mp.c$/;"	v
+lapicaddr	xv6-sp20/kernel/mp.h	/^  uint *lapicaddr;              \/\/ address of local APIC$/;"	m	struct:mpconf
+lapiceoi	xv6-sp20/kernel/lapic.c	/^lapiceoi(void)$/;"	f
+lapicinit	xv6-sp20/kernel/lapic.c	/^lapicinit(int c)$/;"	f
+lapicstartap	xv6-sp20/kernel/lapic.c	/^lapicstartap(uchar apicid, uint addr)$/;"	f
+lapicw	xv6-sp20/kernel/lapic.c	/^lapicw(int index, int value)$/;"	f	file:
+lcr0	xv6-sp20/include/x86.h	/^lcr0(uint val)$/;"	f
+lcr3	xv6-sp20/include/x86.h	/^lcr3(uint val)$/;"	f
+ldt	xv6-sp20/kernel/mmu.h	/^  ushort ldt;$/;"	m	struct:taskstate
+left	xv6-sp20/user/sh.c	/^  struct cmd *left;$/;"	m	struct:listcmd	typeref:struct:listcmd::cmd	file:
+left	xv6-sp20/user/sh.c	/^  struct cmd *left;$/;"	m	struct:pipecmd	typeref:struct:pipecmd::cmd	file:
+length	xv6-sp20/kernel/mp.h	/^  uchar length;                 \/\/ 1$/;"	m	struct:mp
+length	xv6-sp20/kernel/mp.h	/^  ushort length;                \/\/ total table length$/;"	m	struct:mpconf
+lgdt	xv6-sp20/include/x86.h	/^lgdt(struct segdesc *p, int size)$/;"	f
+lidt	xv6-sp20/include/x86.h	/^lidt(struct gatedesc *p, int size)$/;"	f
+lim_15_0	xv6-sp20/kernel/mmu.h	/^  uint lim_15_0 : 16;  \/\/ Low bits of segment limit$/;"	m	struct:segdesc
+lim_19_16	xv6-sp20/kernel/mmu.h	/^  uint lim_19_16 : 4;  \/\/ High bits of segment limit$/;"	m	struct:segdesc
+link	xv6-sp20/kernel/mmu.h	/^  uint link;         \/\/ Old ts selector$/;"	m	struct:taskstate
+linktest	xv6-sp20/user/usertests.c	/^linktest(void)$/;"	f
+listcmd	xv6-sp20/user/sh.c	/^listcmd(struct cmd *left, struct cmd *right)$/;"	f
+listcmd	xv6-sp20/user/sh.c	/^struct listcmd {$/;"	s	file:
+loadgs	xv6-sp20/include/x86.h	/^loadgs(ushort v)$/;"	f
+loaduvm	xv6-sp20/kernel/vm.c	/^loaduvm(pde_t *pgdir, char *addr, struct inode *ip, uint offset, uint sz)$/;"	f
+lock	xv6-sp20/kernel/bio.c	/^  struct spinlock lock;$/;"	m	struct:__anon1	typeref:struct:__anon1::spinlock	file:
+lock	xv6-sp20/kernel/console.c	/^  struct spinlock lock;$/;"	m	struct:__anon2	typeref:struct:__anon2::spinlock	file:
+lock	xv6-sp20/kernel/console.c	/^  struct spinlock lock;$/;"	m	struct:__anon3	typeref:struct:__anon3::spinlock	file:
+lock	xv6-sp20/kernel/file.c	/^  struct spinlock lock;$/;"	m	struct:__anon4	typeref:struct:__anon4::spinlock	file:
+lock	xv6-sp20/kernel/fs.c	/^  struct spinlock lock;$/;"	m	struct:__anon6	typeref:struct:__anon6::spinlock	file:
+lock	xv6-sp20/kernel/kalloc.c	/^  struct spinlock lock;$/;"	m	struct:__anon8	typeref:struct:__anon8::spinlock	file:
+lock	xv6-sp20/kernel/pipe.c	/^  struct spinlock lock;$/;"	m	struct:pipe	typeref:struct:pipe::spinlock	file:
+lock	xv6-sp20/kernel/proc.c	/^  struct spinlock lock;$/;"	m	struct:__anon7	typeref:struct:__anon7::spinlock	file:
+locked	xv6-sp20/kernel/spinlock.h	/^  uint locked;       \/\/ Is the lock held?$/;"	m	struct:spinlock
+locking	xv6-sp20/kernel/console.c	/^  int locking;$/;"	m	struct:__anon2	file:
+ls	xv6-sp20/user/ls.c	/^ls(char *path)$/;"	f
+ltr	xv6-sp20/include/x86.h	/^ltr(ushort sel)$/;"	f
+machine	xv6-sp20/kernel/elf.h	/^  ushort machine;$/;"	m	struct:elfhdr
+magic	xv6-sp20/kernel/elf.h	/^  uint magic;  \/\/ must equal ELF_MAGIC$/;"	m	struct:elfhdr
+main	xv6-sp20/kernel/main.c	/^main(void)$/;"	f
+main	xv6-sp20/tools/mkfs.c	/^main(int argc, char *argv[])$/;"	f
+main	xv6-sp20/user/cat.c	/^main(int argc, char *argv[])$/;"	f
+main	xv6-sp20/user/echo.c	/^main(int argc, char *argv[])$/;"	f
+main	xv6-sp20/user/forktest.c	/^main(void)$/;"	f
+main	xv6-sp20/user/grep.c	/^main(int argc, char *argv[])$/;"	f
+main	xv6-sp20/user/init.c	/^main(void)$/;"	f
+main	xv6-sp20/user/kill.c	/^main(int argc, char **argv)$/;"	f
+main	xv6-sp20/user/ln.c	/^main(int argc, char *argv[])$/;"	f
+main	xv6-sp20/user/ls.c	/^main(int argc, char *argv[])$/;"	f
+main	xv6-sp20/user/mkdir.c	/^main(int argc, char *argv[])$/;"	f
+main	xv6-sp20/user/rm.c	/^main(int argc, char *argv[])$/;"	f
+main	xv6-sp20/user/sh.c	/^main(void)$/;"	f
+main	xv6-sp20/user/stressfs.c	/^main(int argc, char *argv[])$/;"	f
+main	xv6-sp20/user/test_case.c	/^int main() {$/;"	f
+main	xv6-sp20/user/tester.c	/^main(int argc, char *argv[])$/;"	f
+main	xv6-sp20/user/usertests.c	/^main(int argc, char *argv[])$/;"	f
+main	xv6-sp20/user/wc.c	/^main(int argc, char *argv[])$/;"	f
+main	xv6-sp20/user/zombie.c	/^main(void)$/;"	f
+mainc	xv6-sp20/kernel/main.c	/^mainc(void)$/;"	f
+major	xv6-sp20/include/fs.h	/^  short major;          \/\/ Major device number (T_DEV only)$/;"	m	struct:dinode
+major	xv6-sp20/kernel/file.h	/^  short major;$/;"	m	struct:inode
+malloc	xv6-sp20/user/umalloc.c	/^malloc(uint nbytes)$/;"	f
+mappages	xv6-sp20/kernel/vm.c	/^mappages(pde_t *pgdir, void *la, uint size, uint pa, int perm)$/;"	f	file:
+match	xv6-sp20/user/grep.c	/^match(char *re, char *text)$/;"	f
+matchhere	xv6-sp20/user/grep.c	/^int matchhere(char *re, char *text)$/;"	f
+matchstar	xv6-sp20/user/grep.c	/^int matchstar(int c, char *re, char *text)$/;"	f
+mbstart32	xv6-sp20/kernel/multiboot.S	/^mbstart32:$/;"	l
+mem	xv6-sp20/user/usertests.c	/^mem(void)$/;"	f
+memcmp	xv6-sp20/kernel/string.c	/^memcmp(const void *v1, const void *v2, uint n)$/;"	f
+memcpy	xv6-sp20/kernel/string.c	/^memcpy(void *dst, const void *src, uint n)$/;"	f
+memmove	xv6-sp20/kernel/string.c	/^memmove(void *dst, const void *src, uint n)$/;"	f
+memmove	xv6-sp20/user/ulib.c	/^memmove(void *vdst, void *vsrc, int n)$/;"	f
+memset	xv6-sp20/kernel/string.c	/^memset(void *dst, int c, uint n)$/;"	f
+memset	xv6-sp20/user/ulib.c	/^memset(void *dst, int c, uint n)$/;"	f
+memsz	xv6-sp20/kernel/elf.h	/^  uint memsz;$/;"	m	struct:proghdr
+microdelay	xv6-sp20/kernel/lapic.c	/^microdelay(int us)$/;"	f
+min	xv6-sp20/kernel/fs.c	24;"	d	file:
+min	xv6-sp20/tools/mkfs.c	321;"	d	file:
+minor	xv6-sp20/include/fs.h	/^  short minor;          \/\/ Minor device number (T_DEV only)$/;"	m	struct:dinode
+minor	xv6-sp20/kernel/file.h	/^  short minor;$/;"	m	struct:inode
+mkfs	xv6-sp20/tools/mkfs.c	/^mkfs(int nblocks, int ninodes, int size) {$/;"	f
+mode	xv6-sp20/user/sh.c	/^  int mode;$/;"	m	struct:redircmd	file:
+morecore	xv6-sp20/user/umalloc.c	/^morecore(uint nu)$/;"	f	file:
+mp	xv6-sp20/kernel/mp.h	/^struct mp {             \/\/ floating pointer$/;"	s
+mpbcpu	xv6-sp20/kernel/mp.c	/^mpbcpu(void)$/;"	f
+mpconf	xv6-sp20/kernel/mp.h	/^struct mpconf {         \/\/ configuration table header$/;"	s
+mpconfig	xv6-sp20/kernel/mp.c	/^mpconfig(struct mp **pmp)$/;"	f	file:
+mpinit	xv6-sp20/kernel/mp.c	/^mpinit(void)$/;"	f
+mpioapic	xv6-sp20/kernel/mp.h	/^struct mpioapic {       \/\/ I\/O APIC table entry$/;"	s
+mpmain	xv6-sp20/kernel/main.c	/^mpmain(void)$/;"	f	file:
+mpproc	xv6-sp20/kernel/mp.h	/^struct mpproc {         \/\/ processor table entry$/;"	s
+mpsearch	xv6-sp20/kernel/mp.c	/^mpsearch(void)$/;"	f	file:
+mpsearch1	xv6-sp20/kernel/mp.c	/^mpsearch1(uchar *addr, int len)$/;"	f	file:
+multiboot_entry	xv6-sp20/kernel/multiboot.S	/^multiboot_entry:$/;"	l
+multiboot_header	xv6-sp20/kernel/multiboot.S	/^multiboot_header:$/;"	l
+name	xv6-sp20/include/fs.h	/^  char name[DIRSIZ];$/;"	m	struct:dirent
+name	xv6-sp20/kernel/proc.h	/^  char name[16];               \/\/ Process name (debugging)$/;"	m	struct:proc
+name	xv6-sp20/kernel/spinlock.h	/^  char *name;        \/\/ Name of lock.$/;"	m	struct:spinlock
+name	xv6-sp20/user/usertests.c	/^char name[3];$/;"	v
+name	xv6-sp20/user/usys.S	/^  name: \\$/;"	l
+namecmp	xv6-sp20/kernel/fs.c	/^namecmp(const char *s, const char *t)$/;"	f
+namei	xv6-sp20/kernel/fs.c	/^namei(char *path)$/;"	f
+nameiparent	xv6-sp20/kernel/fs.c	/^nameiparent(char *path, char *name)$/;"	f
+namex	xv6-sp20/kernel/fs.c	/^namex(char *path, int nameiparent, char *name)$/;"	f	file:
+nblocks	xv6-sp20/include/fs.h	/^  uint nblocks;      \/\/ Number of data blocks$/;"	m	struct:superblock
+nblocks	xv6-sp20/tools/mkfs.c	/^int nblocks = 995;$/;"	v
+ncli	xv6-sp20/kernel/proc.h	/^  int ncli;                    \/\/ Depth of pushcli nesting.$/;"	m	struct:cpu
+ncpu	xv6-sp20/kernel/mp.c	/^int ncpu;$/;"	v
+next	xv6-sp20/kernel/buf.h	/^  struct buf *next;$/;"	m	struct:buf	typeref:struct:buf::buf
+next	xv6-sp20/kernel/kalloc.c	/^  struct run *next;$/;"	m	struct:run	typeref:struct:run::run	file:
+nextpid	xv6-sp20/kernel/proc.c	/^int nextpid = 1;$/;"	v
+ninodes	xv6-sp20/include/fs.h	/^  uint ninodes;      \/\/ Number of inodes.$/;"	m	struct:superblock
+ninodes	xv6-sp20/tools/mkfs.c	/^int ninodes = 200;$/;"	v
+nlink	xv6-sp20/include/fs.h	/^  short nlink;          \/\/ Number of links to inode in file system$/;"	m	struct:dinode
+nlink	xv6-sp20/include/stat.h	/^  short nlink; \/\/ Number of links to file$/;"	m	struct:stat
+nlink	xv6-sp20/kernel/file.h	/^  short nlink;$/;"	m	struct:inode
+normalmap	xv6-sp20/kernel/kbd.h	/^static uchar normalmap[256] =$/;"	v
+nread	xv6-sp20/kernel/pipe.c	/^  uint nread;     \/\/ number of bytes read$/;"	m	struct:pipe	file:
+nulterminate	xv6-sp20/user/sh.c	/^nulterminate(struct cmd *cmd)$/;"	f
+num_alloc	xv6-sp20/kernel/kalloc.c	/^int num_alloc = 0;$/;"	v
+nwrite	xv6-sp20/kernel/pipe.c	/^  uint nwrite;    \/\/ number of bytes written$/;"	m	struct:pipe	file:
+oemlength	xv6-sp20/kernel/mp.h	/^  ushort oemlength;             \/\/ OEM table length$/;"	m	struct:mpconf
+oemtable	xv6-sp20/kernel/mp.h	/^  uint *oemtable;               \/\/ OEM table pointer$/;"	m	struct:mpconf
+oesp	xv6-sp20/include/x86.h	/^  uint oesp;      \/\/ useless & ignored$/;"	m	struct:trapframe
+off	xv6-sp20/kernel/file.h	/^  uint off;$/;"	m	struct:file
+off_15_0	xv6-sp20/kernel/mmu.h	/^  uint off_15_0 : 16;   \/\/ low 16 bits of offset in segment$/;"	m	struct:gatedesc
+off_31_16	xv6-sp20/kernel/mmu.h	/^  uint off_31_16 : 16;  \/\/ high bits of offset in segment$/;"	m	struct:gatedesc
+offset	xv6-sp20/kernel/elf.h	/^  uint offset;$/;"	m	struct:proghdr
+ofile	xv6-sp20/kernel/proc.h	/^  struct file *ofile[NOFILE];  \/\/ Open files$/;"	m	struct:proc	typeref:struct:proc::file
+opentest	xv6-sp20/user/usertests.c	/^opentest(void)$/;"	f
+outb	xv6-sp20/include/x86.h	/^outb(ushort port, uchar data)$/;"	f
+outsl	xv6-sp20/include/x86.h	/^outsl(int port, const void *addr, int cnt)$/;"	f
+outw	xv6-sp20/include/x86.h	/^outw(ushort port, ushort data)$/;"	f
+p	xv6-sp20/kernel/mmu.h	/^  uint p : 1;           \/\/ Present$/;"	m	struct:gatedesc
+p	xv6-sp20/kernel/mmu.h	/^  uint p : 1;          \/\/ Present$/;"	m	struct:segdesc
+p	xv6-sp20/kernel/vm.c	/^  void *p;$/;"	m	struct:kmap	file:
+pa	xv6-sp20/kernel/elf.h	/^  uint pa;$/;"	m	struct:proghdr
+pad	xv6-sp20/kernel/ioapic.c	/^  uint pad[3];$/;"	m	struct:ioapic	file:
+padding1	xv6-sp20/include/x86.h	/^  ushort padding1;$/;"	m	struct:trapframe
+padding1	xv6-sp20/kernel/mmu.h	/^  ushort padding1;$/;"	m	struct:taskstate
+padding10	xv6-sp20/kernel/mmu.h	/^  ushort padding10;$/;"	m	struct:taskstate
+padding2	xv6-sp20/include/x86.h	/^  ushort padding2;$/;"	m	struct:trapframe
+padding2	xv6-sp20/kernel/mmu.h	/^  ushort padding2;$/;"	m	struct:taskstate
+padding3	xv6-sp20/include/x86.h	/^  ushort padding3;$/;"	m	struct:trapframe
+padding3	xv6-sp20/kernel/mmu.h	/^  ushort padding3;$/;"	m	struct:taskstate
+padding4	xv6-sp20/include/x86.h	/^  ushort padding4;$/;"	m	struct:trapframe
+padding4	xv6-sp20/kernel/mmu.h	/^  ushort padding4;$/;"	m	struct:taskstate
+padding5	xv6-sp20/include/x86.h	/^  ushort padding5;$/;"	m	struct:trapframe
+padding5	xv6-sp20/kernel/mmu.h	/^  ushort padding5;$/;"	m	struct:taskstate
+padding6	xv6-sp20/include/x86.h	/^  ushort padding6;$/;"	m	struct:trapframe
+padding6	xv6-sp20/kernel/mmu.h	/^  ushort padding6;$/;"	m	struct:taskstate
+padding7	xv6-sp20/kernel/mmu.h	/^  ushort padding7;$/;"	m	struct:taskstate
+padding8	xv6-sp20/kernel/mmu.h	/^  ushort padding8;$/;"	m	struct:taskstate
+padding9	xv6-sp20/kernel/mmu.h	/^  ushort padding9;$/;"	m	struct:taskstate
+panic	xv6-sp20/kernel/console.c	/^panic(char *s)$/;"	f
+panic	xv6-sp20/user/sh.c	/^panic(char *s)$/;"	f
+panicked	xv6-sp20/kernel/console.c	/^static int panicked = 0;$/;"	v	file:
+parent	xv6-sp20/kernel/proc.h	/^  struct proc *parent;         \/\/ Parent process$/;"	m	struct:proc	typeref:struct:proc::proc
+parseblock	xv6-sp20/user/sh.c	/^parseblock(char **ps, char *es)$/;"	f
+parsecmd	xv6-sp20/user/sh.c	/^parsecmd(char *s)$/;"	f
+parseexec	xv6-sp20/user/sh.c	/^parseexec(char **ps, char *es)$/;"	f
+parseline	xv6-sp20/user/sh.c	/^parseline(char **ps, char *es)$/;"	f
+parsepipe	xv6-sp20/user/sh.c	/^parsepipe(char **ps, char *es)$/;"	f
+parseredirs	xv6-sp20/user/sh.c	/^parseredirs(struct cmd *cmd, char **ps, char *es)$/;"	f
+pcs	xv6-sp20/kernel/spinlock.h	/^  uint pcs[10];      \/\/ The call stack (an array of program counters)$/;"	m	struct:spinlock
+pde_t	xv6-sp20/include/types.h	/^typedef uint pde_t;$/;"	t
+peek	xv6-sp20/user/sh.c	/^peek(char **ps, char *es, char *toks)$/;"	f
+perm	xv6-sp20/kernel/vm.c	/^  int perm;$/;"	m	struct:kmap	file:
+pgdir	xv6-sp20/kernel/proc.h	/^  pde_t* pgdir;                \/\/ Page table$/;"	m	struct:proc
+phentsize	xv6-sp20/kernel/elf.h	/^  ushort phentsize;$/;"	m	struct:elfhdr
+phnum	xv6-sp20/kernel/elf.h	/^  ushort phnum;$/;"	m	struct:elfhdr
+phoff	xv6-sp20/kernel/elf.h	/^  uint phoff;$/;"	m	struct:elfhdr
+physaddr	xv6-sp20/kernel/mp.h	/^  void *physaddr;               \/\/ phys addr of MP config table$/;"	m	struct:mp
+picenable	xv6-sp20/kernel/picirq.c	/^picenable(int irq)$/;"	f
+picinit	xv6-sp20/kernel/picirq.c	/^picinit(void)$/;"	f
+picsetmask	xv6-sp20/kernel/picirq.c	/^picsetmask(ushort mask)$/;"	f	file:
+pid	xv6-sp20/kernel/proc.h	/^  volatile int pid;            \/\/ Process ID$/;"	m	struct:proc
+pinit	xv6-sp20/kernel/proc.c	/^pinit(void)$/;"	f
+pipe	xv6-sp20/kernel/file.h	/^  struct pipe *pipe;$/;"	m	struct:file	typeref:struct:file::pipe
+pipe	xv6-sp20/kernel/pipe.c	/^struct pipe {$/;"	s	file:
+pipe1	xv6-sp20/user/usertests.c	/^pipe1(void)$/;"	f
+pipealloc	xv6-sp20/kernel/pipe.c	/^pipealloc(struct file **f0, struct file **f1)$/;"	f
+pipeclose	xv6-sp20/kernel/pipe.c	/^pipeclose(struct pipe *p, int writable)$/;"	f
+pipecmd	xv6-sp20/user/sh.c	/^pipecmd(struct cmd *left, struct cmd *right)$/;"	f
+pipecmd	xv6-sp20/user/sh.c	/^struct pipecmd {$/;"	s	file:
+piperead	xv6-sp20/kernel/pipe.c	/^piperead(struct pipe *p, char *addr, int n)$/;"	f
+pipewrite	xv6-sp20/kernel/pipe.c	/^pipewrite(struct pipe *p, char *addr, int n)$/;"	f
+popcli	xv6-sp20/kernel/spinlock.c	/^popcli(void)$/;"	f
+preempt	xv6-sp20/user/usertests.c	/^preempt(void)$/;"	f
+prev	xv6-sp20/kernel/buf.h	/^  struct buf *prev; \/\/ LRU cache list$/;"	m	struct:buf	typeref:struct:buf::buf
+printf	xv6-sp20/user/forktest.c	/^printf(int fd, char *s, ...)$/;"	f
+printf	xv6-sp20/user/printf.c	/^printf(int fd, char *fmt, ...)$/;"	f
+printint	xv6-sp20/kernel/console.c	/^printint(int xx, int base, int sign)$/;"	f	file:
+printint	xv6-sp20/user/printf.c	/^printint(int fd, int xx, int base, int sgn)$/;"	f	file:
+proc	xv6-sp20/kernel/proc.c	/^  struct proc proc[NPROC];$/;"	m	struct:__anon7	typeref:struct:__anon7::proc	file:
+proc	xv6-sp20/kernel/proc.h	/^  struct proc *proc;           \/\/ The currently-running process.$/;"	m	struct:cpu	typeref:struct:cpu::proc
+proc	xv6-sp20/kernel/proc.h	/^struct proc {$/;"	s
+procdump	xv6-sp20/kernel/proc.c	/^procdump(void)$/;"	f
+procstate	xv6-sp20/kernel/proc.h	/^enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	g
+product	xv6-sp20/kernel/mp.h	/^  uchar product[20];            \/\/ product id$/;"	m	struct:mpconf
+proghdr	xv6-sp20/kernel/elf.h	/^struct proghdr {$/;"	s
+ptable	xv6-sp20/kernel/proc.c	/^} ptable;$/;"	v	typeref:struct:__anon7
+pte_t	xv6-sp20/kernel/mmu.h	/^typedef uint pte_t;$/;"	t
+ptr	xv6-sp20/user/umalloc.c	/^    union header *ptr;$/;"	m	struct:header::__anon9	typeref:union:header::__anon9::header	file:
+pushcli	xv6-sp20/kernel/spinlock.c	/^pushcli(void)$/;"	f
+putc	xv6-sp20/user/printf.c	/^putc(int fd, char c)$/;"	f	file:
+qnext	xv6-sp20/kernel/buf.h	/^  struct buf *qnext; \/\/ disk queue$/;"	m	struct:buf	typeref:struct:buf::buf
+r	xv6-sp20/kernel/console.c	/^  uint r;  \/\/ Read index$/;"	m	struct:__anon3	file:
+rcr0	xv6-sp20/include/x86.h	/^rcr0(void)$/;"	f
+rcr2	xv6-sp20/include/x86.h	/^rcr2(void)$/;"	f
+rcr3	xv6-sp20/include/x86.h	/^rcr3(void)$/;"	f
+read	xv6-sp20/kernel/file.h	/^  int (*read)(struct inode*, char*, int);$/;"	m	struct:devsw
+readable	xv6-sp20/kernel/file.h	/^  char readable;$/;"	m	struct:file
+readeflags	xv6-sp20/include/x86.h	/^readeflags(void)$/;"	f
+readi	xv6-sp20/kernel/fs.c	/^readi(struct inode *ip, char *dst, uint off, uint n)$/;"	f
+readopen	xv6-sp20/kernel/pipe.c	/^  int readopen;   \/\/ read fd is still open$/;"	m	struct:pipe	file:
+readsb	xv6-sp20/kernel/fs.c	/^readsb(int dev, struct superblock *sb)$/;"	f	file:
+readsect	xv6-sp20/kernel/bootmain.c	/^readsect(void *dst, uint offset)$/;"	f
+readseg	xv6-sp20/kernel/bootmain.c	/^readseg(uchar* va, uint count, uint offset)$/;"	f
+rebp	xv6-sp20/include/x86.h	/^rebp(void)$/;"	f
+redircmd	xv6-sp20/user/sh.c	/^redircmd(struct cmd *subcmd, char *file, char *efile, int mode, int fd)$/;"	f
+redircmd	xv6-sp20/user/sh.c	/^struct redircmd {$/;"	s	file:
+ref	xv6-sp20/kernel/file.h	/^  int ref;            \/\/ Reference count$/;"	m	struct:inode
+ref	xv6-sp20/kernel/file.h	/^  int ref; \/\/ reference count$/;"	m	struct:file
+reg	xv6-sp20/kernel/ioapic.c	/^  uint reg;$/;"	m	struct:ioapic	file:
+release	xv6-sp20/kernel/spinlock.c	/^release(struct spinlock *lk)$/;"	f
+remove_alloc_page	xv6-sp20/kernel/kalloc.c	/^void remove_alloc_page(int * page)$/;"	f
+reserved	xv6-sp20/kernel/mp.h	/^  uchar reserved;$/;"	m	struct:mpconf
+reserved	xv6-sp20/kernel/mp.h	/^  uchar reserved[3];$/;"	m	struct:mp
+reserved	xv6-sp20/kernel/mp.h	/^  uchar reserved[8];$/;"	m	struct:mpproc
+resp	xv6-sp20/include/x86.h	/^resp(void)$/;"	f
+right	xv6-sp20/user/sh.c	/^  struct cmd *right;$/;"	m	struct:listcmd	typeref:struct:listcmd::cmd	file:
+right	xv6-sp20/user/sh.c	/^  struct cmd *right;$/;"	m	struct:pipecmd	typeref:struct:pipecmd::cmd	file:
+rinode	xv6-sp20/tools/mkfs.c	/^rinode(uint inum, struct dinode *ip)$/;"	f
+rmdot	xv6-sp20/user/usertests.c	/^rmdot(void)$/;"	f
+root_inode	xv6-sp20/tools/mkfs.c	/^uint root_inode;$/;"	v
+rsect	xv6-sp20/tools/mkfs.c	/^rsect(uint sec, void *buf)$/;"	f
+rsv1	xv6-sp20/kernel/mmu.h	/^  uint rsv1 : 1;       \/\/ Reserved$/;"	m	struct:segdesc
+rsv1	xv6-sp20/kernel/mmu.h	/^  uint rsv1 : 3;        \/\/ reserved(should be zero I guess)$/;"	m	struct:gatedesc
+run	xv6-sp20/kernel/kalloc.c	/^struct run {$/;"	s	file:
+runcmd	xv6-sp20/user/sh.c	/^runcmd(struct cmd *cmd)$/;"	f
+s	xv6-sp20/kernel/mmu.h	/^  uint s : 1;           \/\/ must be 0 (system)$/;"	m	struct:gatedesc
+s	xv6-sp20/kernel/mmu.h	/^  uint s : 1;          \/\/ 0 = system, 1 = application$/;"	m	struct:segdesc
+s	xv6-sp20/user/umalloc.c	/^  } s;$/;"	m	union:header	typeref:struct:header::__anon9	file:
+safestrcpy	xv6-sp20/kernel/string.c	/^safestrcpy(char *s, const char *t, int n)$/;"	f
+sb	xv6-sp20/tools/mkfs.c	/^struct superblock sb;$/;"	v	typeref:struct:superblock
+sbrktest	xv6-sp20/user/usertests.c	/^sbrktest(void)$/;"	f
+sched	xv6-sp20/kernel/proc.c	/^sched(void)$/;"	f
+scheduler	xv6-sp20/kernel/proc.c	/^scheduler(void)$/;"	f
+scheduler	xv6-sp20/kernel/proc.h	/^  struct context *scheduler;   \/\/ swtch() here to enter scheduler$/;"	m	struct:cpu	typeref:struct:cpu::context
+sector	xv6-sp20/kernel/buf.h	/^  uint sector;$/;"	m	struct:buf
+segdesc	xv6-sp20/kernel/mmu.h	/^struct segdesc {$/;"	s
+seginit	xv6-sp20/kernel/vm.c	/^seginit(void)$/;"	f
+setupkvm	xv6-sp20/kernel/vm.c	/^setupkvm(void)$/;"	f
+sharedfd	xv6-sp20/user/usertests.c	/^sharedfd(void)$/;"	f
+shentsize	xv6-sp20/kernel/elf.h	/^  ushort shentsize;$/;"	m	struct:elfhdr
+shiftcode	xv6-sp20/kernel/kbd.h	/^static uchar shiftcode[256] =$/;"	v
+shiftmap	xv6-sp20/kernel/kbd.h	/^static uchar shiftmap[256] =$/;"	v
+shnum	xv6-sp20/kernel/elf.h	/^  ushort shnum;$/;"	m	struct:elfhdr
+shoff	xv6-sp20/kernel/elf.h	/^  uint shoff;$/;"	m	struct:elfhdr
+shstrndx	xv6-sp20/kernel/elf.h	/^  ushort shstrndx;$/;"	m	struct:elfhdr
+signature	xv6-sp20/kernel/mp.h	/^  uchar signature[4];           \/\/ "PCMP"$/;"	m	struct:mpconf
+signature	xv6-sp20/kernel/mp.h	/^  uchar signature[4];           \/\/ "_MP_"$/;"	m	struct:mp
+signature	xv6-sp20/kernel/mp.h	/^  uchar signature[4];           \/\/ CPU signature$/;"	m	struct:mpproc
+size	xv6-sp20/include/fs.h	/^  uint size;            \/\/ Size of file (bytes)$/;"	m	struct:dinode
+size	xv6-sp20/include/fs.h	/^  uint size;         \/\/ Size of file system image (blocks)$/;"	m	struct:superblock
+size	xv6-sp20/include/stat.h	/^  uint size;   \/\/ Size of file in bytes$/;"	m	struct:stat
+size	xv6-sp20/kernel/file.h	/^  uint size;$/;"	m	struct:inode
+size	xv6-sp20/tools/mkfs.c	/^int size = 1024;$/;"	v
+size	xv6-sp20/user/umalloc.c	/^    uint size;$/;"	m	struct:header::__anon9	file:
+skipelem	xv6-sp20/kernel/fs.c	/^skipelem(char *path, char *name)$/;"	f	file:
+sleep	xv6-sp20/kernel/proc.c	/^sleep(void *chan, struct spinlock *lk)$/;"	f
+specrev	xv6-sp20/kernel/mp.h	/^  uchar specrev;                \/\/ [14]$/;"	m	struct:mp
+spin	xv6-sp20/kernel/bootasm.S	/^spin:$/;"	l
+spin	xv6-sp20/kernel/bootother.S	/^spin:$/;"	l
+spin	xv6-sp20/kernel/multiboot.S	/^spin:$/;"	l
+spinlock	xv6-sp20/kernel/spinlock.h	/^struct spinlock {$/;"	s
+ss	xv6-sp20/include/x86.h	/^  ushort ss;$/;"	m	struct:trapframe
+ss	xv6-sp20/kernel/mmu.h	/^  ushort ss;$/;"	m	struct:taskstate
+ss0	xv6-sp20/kernel/mmu.h	/^  ushort ss0;        \/\/   after an increase in privilege level$/;"	m	struct:taskstate
+ss1	xv6-sp20/kernel/mmu.h	/^  ushort ss1;$/;"	m	struct:taskstate
+ss2	xv6-sp20/kernel/mmu.h	/^  ushort ss2;$/;"	m	struct:taskstate
+start	xv6-sp20/kernel/bootasm.S	/^start:$/;"	l
+start	xv6-sp20/kernel/bootother.S	/^start:$/;"	l
+start	xv6-sp20/kernel/initcode.S	/^start:$/;"	l
+start32	xv6-sp20/kernel/bootasm.S	/^start32:$/;"	l
+start32	xv6-sp20/kernel/bootother.S	/^start32:$/;"	l
+stat	xv6-sp20/include/stat.h	/^struct stat {$/;"	s
+stat	xv6-sp20/tools/mkfs.c	12;"	d	file:
+stat	xv6-sp20/tools/mkfs.c	17;"	d	file:
+stat	xv6-sp20/user/ulib.c	/^stat(char *n, struct stat *st)$/;"	f
+state	xv6-sp20/kernel/proc.h	/^  enum procstate state;        \/\/ Process state$/;"	m	struct:proc	typeref:enum:proc::procstate
+stati	xv6-sp20/kernel/fs.c	/^stati(struct inode *ip, struct stat *st)$/;"	f
+stdout	xv6-sp20/user/usertests.c	/^int stdout = 1;$/;"	v
+sti	xv6-sp20/include/x86.h	/^sti(void)$/;"	f
+stosb	xv6-sp20/include/x86.h	/^stosb(void *addr, int data, int cnt)$/;"	f
+strchr	xv6-sp20/user/ulib.c	/^strchr(const char *s, char c)$/;"	f
+strcmp	xv6-sp20/user/ulib.c	/^strcmp(const char *p, const char *q)$/;"	f
+strcpy	xv6-sp20/user/ulib.c	/^strcpy(char *s, char *t)$/;"	f
+strlen	xv6-sp20/kernel/string.c	/^strlen(const char *s)$/;"	f
+strlen	xv6-sp20/user/ulib.c	/^strlen(char *s)$/;"	f
+strncmp	xv6-sp20/kernel/string.c	/^strncmp(const char *p, const char *q, uint n)$/;"	f
+strncpy	xv6-sp20/kernel/string.c	/^strncpy(char *s, const char *t, int n)$/;"	f
+subdir	xv6-sp20/user/usertests.c	/^subdir(void)$/;"	f
+sum	xv6-sp20/kernel/mp.c	/^sum(uchar *addr, int len)$/;"	f	file:
+superblock	xv6-sp20/include/fs.h	/^struct superblock {$/;"	s
+switchkvm	xv6-sp20/kernel/vm.c	/^switchkvm(void)$/;"	f
+switchuvm	xv6-sp20/kernel/vm.c	/^switchuvm(struct proc *p)$/;"	f
+swtch	xv6-sp20/kernel/swtch.S	/^swtch:$/;"	l
+symbols	xv6-sp20/user/sh.c	/^char symbols[] = "<|>&;()";$/;"	v
+sys_chdir	xv6-sp20/kernel/sysfile.c	/^sys_chdir(void)$/;"	f
+sys_close	xv6-sp20/kernel/sysfile.c	/^sys_close(void)$/;"	f
+sys_dump_allocated	xv6-sp20/kernel/sysfile.c	/^int sys_dump_allocated(void)$/;"	f
+sys_dup	xv6-sp20/kernel/sysfile.c	/^sys_dup(void)$/;"	f
+sys_exec	xv6-sp20/kernel/sysfile.c	/^sys_exec(void)$/;"	f
+sys_exit	xv6-sp20/kernel/sysproc.c	/^sys_exit(void)$/;"	f
+sys_fork	xv6-sp20/kernel/sysproc.c	/^sys_fork(void)$/;"	f
+sys_fstat	xv6-sp20/kernel/sysfile.c	/^sys_fstat(void)$/;"	f
+sys_getpid	xv6-sp20/kernel/sysproc.c	/^sys_getpid(void)$/;"	f
+sys_kill	xv6-sp20/kernel/sysproc.c	/^sys_kill(void)$/;"	f
+sys_link	xv6-sp20/kernel/sysfile.c	/^sys_link(void)$/;"	f
+sys_mkdir	xv6-sp20/kernel/sysfile.c	/^sys_mkdir(void)$/;"	f
+sys_mknod	xv6-sp20/kernel/sysfile.c	/^sys_mknod(void)$/;"	f
+sys_mprotect	xv6-sp20/kernel/sysfile.c	/^int sys_mprotect(void)$/;"	f
+sys_munprotect	xv6-sp20/kernel/sysfile.c	/^int sys_munprotect(void)$/;"	f
+sys_open	xv6-sp20/kernel/sysfile.c	/^sys_open(void)$/;"	f
+sys_pipe	xv6-sp20/kernel/sysfile.c	/^sys_pipe(void)$/;"	f
+sys_read	xv6-sp20/kernel/sysfile.c	/^sys_read(void)$/;"	f
+sys_sbrk	xv6-sp20/kernel/sysproc.c	/^sys_sbrk(void)$/;"	f
+sys_sleep	xv6-sp20/kernel/sysproc.c	/^sys_sleep(void)$/;"	f
+sys_unlink	xv6-sp20/kernel/sysfile.c	/^sys_unlink(void)$/;"	f
+sys_uptime	xv6-sp20/kernel/sysproc.c	/^sys_uptime(void)$/;"	f
+sys_wait	xv6-sp20/kernel/sysproc.c	/^sys_wait(void)$/;"	f
+sys_write	xv6-sp20/kernel/sysfile.c	/^sys_write(void)$/;"	f
+syscall	xv6-sp20/kernel/syscall.c	/^syscall(void)$/;"	f
+syscalls	xv6-sp20/kernel/syscall.c	/^static int (*syscalls[])(void) = {$/;"	v	file:
+sz	xv6-sp20/kernel/proc.h	/^  uint sz;                     \/\/ Size of process memory (bytes)$/;"	m	struct:proc
+t	xv6-sp20/kernel/mmu.h	/^  ushort t;          \/\/ Trap on task switch$/;"	m	struct:taskstate
+taskstate	xv6-sp20/kernel/mmu.h	/^struct taskstate {$/;"	s
+tf	xv6-sp20/kernel/proc.h	/^  struct trapframe *tf;        \/\/ Trap frame for current syscall$/;"	m	struct:proc	typeref:struct:proc::trapframe
+ticks	xv6-sp20/kernel/trap.c	/^uint ticks;$/;"	v
+tickslock	xv6-sp20/kernel/trap.c	/^struct spinlock tickslock;$/;"	v	typeref:struct:spinlock
+timerinit	xv6-sp20/kernel/timer.c	/^timerinit(void)$/;"	f
+togglecode	xv6-sp20/kernel/kbd.h	/^static uchar togglecode[256] =$/;"	v
+trap	xv6-sp20/kernel/trap.c	/^trap(struct trapframe *tf)$/;"	f
+trapframe	xv6-sp20/include/x86.h	/^struct trapframe {$/;"	s
+trapno	xv6-sp20/include/x86.h	/^  uint trapno;$/;"	m	struct:trapframe
+trapret	xv6-sp20/kernel/trapasm.S	/^trapret:$/;"	l
+ts	xv6-sp20/kernel/proc.h	/^  struct taskstate ts;         \/\/ Used by x86 to find stack for interrupt$/;"	m	struct:cpu	typeref:struct:cpu::taskstate
+tvinit	xv6-sp20/kernel/trap.c	/^tvinit(void)$/;"	f
+twofiles	xv6-sp20/user/usertests.c	/^twofiles(void)$/;"	f
+type	xv6-sp20/include/fs.h	/^  short type;           \/\/ File type$/;"	m	struct:dinode
+type	xv6-sp20/include/stat.h	/^  short type;  \/\/ Type of file$/;"	m	struct:stat
+type	xv6-sp20/kernel/elf.h	/^  uint type;$/;"	m	struct:proghdr
+type	xv6-sp20/kernel/elf.h	/^  ushort type;$/;"	m	struct:elfhdr
+type	xv6-sp20/kernel/file.h	/^  enum { FD_NONE, FD_PIPE, FD_INODE } type;$/;"	m	struct:file	typeref:enum:file::__anon5
+type	xv6-sp20/kernel/file.h	/^  short type;         \/\/ copy of disk inode$/;"	m	struct:inode
+type	xv6-sp20/kernel/mmu.h	/^  uint type : 4;        \/\/ type(STS_{TG,IG32,TG32})$/;"	m	struct:gatedesc
+type	xv6-sp20/kernel/mmu.h	/^  uint type : 4;       \/\/ Segment type (see STS_ constants)$/;"	m	struct:segdesc
+type	xv6-sp20/kernel/mp.h	/^  uchar type;                   \/\/ MP system config type$/;"	m	struct:mp
+type	xv6-sp20/kernel/mp.h	/^  uchar type;                   \/\/ entry type (0)$/;"	m	struct:mpproc
+type	xv6-sp20/kernel/mp.h	/^  uchar type;                   \/\/ entry type (2)$/;"	m	struct:mpioapic
+type	xv6-sp20/user/sh.c	/^  int type;$/;"	m	struct:backcmd	file:
+type	xv6-sp20/user/sh.c	/^  int type;$/;"	m	struct:cmd	file:
+type	xv6-sp20/user/sh.c	/^  int type;$/;"	m	struct:execcmd	file:
+type	xv6-sp20/user/sh.c	/^  int type;$/;"	m	struct:listcmd	file:
+type	xv6-sp20/user/sh.c	/^  int type;$/;"	m	struct:pipecmd	file:
+type	xv6-sp20/user/sh.c	/^  int type;$/;"	m	struct:redircmd	file:
+uart	xv6-sp20/kernel/uart.c	/^static int uart;    \/\/ is there a uart?$/;"	v	file:
+uartgetc	xv6-sp20/kernel/uart.c	/^uartgetc(void)$/;"	f	file:
+uartinit	xv6-sp20/kernel/uart.c	/^uartinit(void)$/;"	f
+uartintr	xv6-sp20/kernel/uart.c	/^uartintr(void)$/;"	f
+uartputc	xv6-sp20/kernel/uart.c	/^uartputc(int c)$/;"	f
+uchar	xv6-sp20/include/types.h	/^typedef unsigned char  uchar;$/;"	t
+uint	xv6-sp20/include/types.h	/^typedef unsigned int   uint;$/;"	t
+uninit	xv6-sp20/user/usertests.c	/^char uninit[10000];$/;"	v
+unlinkread	xv6-sp20/user/usertests.c	/^unlinkread(void)$/;"	f
+usedblocks	xv6-sp20/tools/mkfs.c	/^uint usedblocks;$/;"	v
+userinit	xv6-sp20/kernel/proc.c	/^userinit(void)$/;"	f
+ushort	xv6-sp20/include/types.h	/^typedef unsigned short ushort;$/;"	t
+uva2ka	xv6-sp20/kernel/vm.c	/^uva2ka(pde_t *pgdir, char *uva)$/;"	f
+va	xv6-sp20/kernel/elf.h	/^  uint va;$/;"	m	struct:proghdr
+validateint	xv6-sp20/user/usertests.c	/^validateint(int *p)$/;"	f
+validatetest	xv6-sp20/user/usertests.c	/^validatetest(void)$/;"	f
+version	xv6-sp20/kernel/elf.h	/^  uint version;$/;"	m	struct:elfhdr
+version	xv6-sp20/kernel/mp.h	/^  uchar version;                \/\/ I\/O APIC version$/;"	m	struct:mpioapic
+version	xv6-sp20/kernel/mp.h	/^  uchar version;                \/\/ [14]$/;"	m	struct:mpconf
+version	xv6-sp20/kernel/mp.h	/^  uchar version;                \/\/ local APIC verison$/;"	m	struct:mpproc
+vm_set_clear_readonly	xv6-sp20/kernel/vm.c	/^int vm_set_clear_readonly(pde_t* pgdir, char* addr, int len, int set)$/;"	f
+vmenable	xv6-sp20/kernel/vm.c	/^vmenable(void)$/;"	f
+w	xv6-sp20/kernel/console.c	/^  uint w;  \/\/ Write index$/;"	m	struct:__anon3	file:
+wait	xv6-sp20/kernel/proc.c	/^wait(void)$/;"	f
+waitdisk	xv6-sp20/kernel/bootmain.c	/^waitdisk(void)$/;"	f
+wakeup	xv6-sp20/kernel/proc.c	/^wakeup(void *chan)$/;"	f
+wakeup1	xv6-sp20/kernel/proc.c	/^wakeup1(void *chan)$/;"	f	file:
+walkpgdir	xv6-sp20/kernel/vm.c	/^walkpgdir(pde_t *pgdir, const void *va, int create)$/;"	f	file:
+wc	xv6-sp20/user/wc.c	/^wc(int fd, char *name)$/;"	f
+whitespace	xv6-sp20/user/sh.c	/^char whitespace[] = " \\t\\r\\n\\v";$/;"	v
+winode	xv6-sp20/tools/mkfs.c	/^winode(uint inum, struct dinode *ip)$/;"	f
+writable	xv6-sp20/kernel/file.h	/^  char writable;$/;"	m	struct:file
+write	xv6-sp20/kernel/file.h	/^  int (*write)(struct inode*, char*, int);$/;"	m	struct:devsw
+writei	xv6-sp20/kernel/fs.c	/^writei(struct inode *ip, char *src, uint off, uint n)$/;"	f
+writeopen	xv6-sp20/kernel/pipe.c	/^  int writeopen;  \/\/ write fd is still open$/;"	m	struct:pipe	file:
+writetest	xv6-sp20/user/usertests.c	/^writetest(void)$/;"	f
+writetest1	xv6-sp20/user/usertests.c	/^writetest1(void)$/;"	f
+wsect	xv6-sp20/tools/mkfs.c	/^wsect(uint sec, void *buf)$/;"	f
+x	xv6-sp20/user/umalloc.c	/^  Align x;$/;"	m	union:header	file:
+xchecksum	xv6-sp20/kernel/mp.h	/^  uchar xchecksum;              \/\/ extended table checksum$/;"	m	struct:mpconf
+xchg	xv6-sp20/include/x86.h	/^xchg(volatile uint *addr, uint newval)$/;"	f
+xint	xv6-sp20/tools/mkfs.c	/^xint(uint x)$/;"	f
+xlength	xv6-sp20/kernel/mp.h	/^  ushort xlength;               \/\/ extended table length$/;"	m	struct:mpconf
+xshort	xv6-sp20/tools/mkfs.c	/^xshort(ushort x)$/;"	f
+yield	xv6-sp20/kernel/proc.c	/^yield(void)$/;"	f
+zeroes	xv6-sp20/tools/mkfs.c	/^char zeroes[512];$/;"	v
