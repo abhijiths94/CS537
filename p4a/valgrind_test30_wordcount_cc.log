@@ -1,0 +1,105 @@
+==13510== Memcheck, a memory error detector
+==13510== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==13510== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==13510== Command: ./wordcount_cc_m1r1 /u/c/s/cs537-1/tests/p4a/simple/inputs/file1m.in
+==13510== Parent PID: 13509
+==13510== 
+==13510== Thread 2:
+==13510== Conditional jump or move depends on uninitialised value(s)
+==13510==    at 0x1096E7: MR_EmitToCombiner (mapreduce.c:297)
+==13510==    by 0x108EAE: Map (wordcount_cc.c:35)
+==13510==    by 0x109375: mapper_thread (mapreduce.c:150)
+==13510==    by 0x4E436DA: start_thread (pthread_create.c:463)
+==13510==    by 0x517C88E: clone (clone.S:95)
+==13510== 
+==13510== Conditional jump or move depends on uninitialised value(s)
+==13510==    at 0x1092E3: combine_get_next (mapreduce.c:127)
+==13510==    by 0x108F2A: Combine (wordcount_cc.c:45)
+==13510==    by 0x1093CA: mapper_thread (mapreduce.c:170)
+==13510==    by 0x4E436DA: start_thread (pthread_create.c:463)
+==13510==    by 0x517C88E: clone (clone.S:95)
+==13510== 
+==13510== Conditional jump or move depends on uninitialised value(s)
+==13510==    at 0x4E45FAF: pthread_mutex_lock (pthread_mutex_lock.c:69)
+==13510==    by 0x10955A: MR_EmitToReducer (mapreduce.c:226)
+==13510==    by 0x108F68: Combine (wordcount_cc.c:52)
+==13510==    by 0x1093CA: mapper_thread (mapreduce.c:170)
+==13510==    by 0x4E436DA: start_thread (pthread_create.c:463)
+==13510==    by 0x517C88E: clone (clone.S:95)
+==13510== 
+==13510== Conditional jump or move depends on uninitialised value(s)
+==13510==    at 0x4E45FC1: pthread_mutex_lock (pthread_mutex_lock.c:73)
+==13510==    by 0x10955A: MR_EmitToReducer (mapreduce.c:226)
+==13510==    by 0x108F68: Combine (wordcount_cc.c:52)
+==13510==    by 0x1093CA: mapper_thread (mapreduce.c:170)
+==13510==    by 0x4E436DA: start_thread (pthread_create.c:463)
+==13510==    by 0x517C88E: clone (clone.S:95)
+==13510== 
+==13510== Conditional jump or move depends on uninitialised value(s)
+==13510==    at 0x4E46012: pthread_mutex_lock (pthread_mutex_lock.c:78)
+==13510==    by 0x10955A: MR_EmitToReducer (mapreduce.c:226)
+==13510==    by 0x108F68: Combine (wordcount_cc.c:52)
+==13510==    by 0x1093CA: mapper_thread (mapreduce.c:170)
+==13510==    by 0x4E436DA: start_thread (pthread_create.c:463)
+==13510==    by 0x517C88E: clone (clone.S:95)
+==13510== 
+==13510== Conditional jump or move depends on uninitialised value(s)
+==13510==    at 0x4E46030: pthread_mutex_lock (pthread_mutex_lock.c:79)
+==13510==    by 0x10955A: MR_EmitToReducer (mapreduce.c:226)
+==13510==    by 0x108F68: Combine (wordcount_cc.c:52)
+==13510==    by 0x1093CA: mapper_thread (mapreduce.c:170)
+==13510==    by 0x4E436DA: start_thread (pthread_create.c:463)
+==13510==    by 0x517C88E: clone (clone.S:95)
+==13510== 
+==13510== Conditional jump or move depends on uninitialised value(s)
+==13510==    at 0x109572: MR_EmitToReducer (mapreduce.c:228)
+==13510==    by 0x108F68: Combine (wordcount_cc.c:52)
+==13510==    by 0x1093CA: mapper_thread (mapreduce.c:170)
+==13510==    by 0x4E436DA: start_thread (pthread_create.c:463)
+==13510==    by 0x517C88E: clone (clone.S:95)
+==13510== 
+==13510== Conditional jump or move depends on uninitialised value(s)
+==13510==    at 0x4E477B4: __pthread_mutex_unlock_usercnt (pthread_mutex_unlock.c:39)
+==13510==    by 0x4E477B4: pthread_mutex_unlock (pthread_mutex_unlock.c:345)
+==13510==    by 0x10964B: MR_EmitToReducer (mapreduce.c:284)
+==13510==    by 0x108F68: Combine (wordcount_cc.c:52)
+==13510==    by 0x1093CA: mapper_thread (mapreduce.c:170)
+==13510==    by 0x4E436DA: start_thread (pthread_create.c:463)
+==13510==    by 0x517C88E: clone (clone.S:95)
+==13510== 
+==13510== Conditional jump or move depends on uninitialised value(s)
+==13510==    at 0x4E477B8: __pthread_mutex_unlock_usercnt (pthread_mutex_unlock.c:43)
+==13510==    by 0x4E477B8: pthread_mutex_unlock (pthread_mutex_unlock.c:345)
+==13510==    by 0x10964B: MR_EmitToReducer (mapreduce.c:284)
+==13510==    by 0x108F68: Combine (wordcount_cc.c:52)
+==13510==    by 0x1093CA: mapper_thread (mapreduce.c:170)
+==13510==    by 0x4E436DA: start_thread (pthread_create.c:463)
+==13510==    by 0x517C88E: clone (clone.S:95)
+==13510== 
+==13510== Conditional jump or move depends on uninitialised value(s)
+==13510==    at 0x10940E: mapper_thread (mapreduce.c:172)
+==13510==    by 0x4E436DA: start_thread (pthread_create.c:463)
+==13510==    by 0x517C88E: clone (clone.S:95)
+==13510== 
+==13510== Conditional jump or move depends on uninitialised value(s)
+==13510==    at 0x109227: reducer_get_next (mapreduce.c:103)
+==13510==    by 0x108FCE: Reduce (wordcount_cc.c:62)
+==13510==    by 0x10949F: reducer_thread (mapreduce.c:199)
+==13510==    by 0x4E436DA: start_thread (pthread_create.c:463)
+==13510==    by 0x517C88E: clone (clone.S:95)
+==13510== 
+==13510== Conditional jump or move depends on uninitialised value(s)
+==13510==    at 0x1094E3: reducer_thread (mapreduce.c:201)
+==13510==    by 0x4E436DA: start_thread (pthread_create.c:463)
+==13510==    by 0x517C88E: clone (clone.S:95)
+==13510== 
+==13510== 
+==13510== HEAP SUMMARY:
+==13510==     in use at exit: 0 bytes in 0 blocks
+==13510==   total heap usage: 376,657 allocs, 376,657 frees, 4,230,989 bytes allocated
+==13510== 
+==13510== All heap blocks were freed -- no leaks are possible
+==13510== 
+==13510== For counts of detected and suppressed errors, rerun with: -v
+==13510== Use --track-origins=yes to see where uninitialised values come from
+==13510== ERROR SUMMARY: 1610 errors from 12 contexts (suppressed: 0 from 0)

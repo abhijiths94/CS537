@@ -23,18 +23,20 @@ void Map(char *file_name) {
 void Combine(char *key, CombineGetter get_next) {
     int count = 0;
     char *value;
+
     while ((value = get_next(key)) != NULL) {
         count ++; // Emmited Map values are "1"s
     }
     // Convert integer (count) to string (value)
     value = (char*)malloc(10 * sizeof(char));
-    printf("Test : key : %s : value : %d\n", key, count);
+    printf("Test in combine after: key : %s : value : %d\n", key, count);
     sprintf(value, "%d", count);
     
     MR_EmitToReducer(key, value);
     free(value);
 }
 
+#if 1
 void Reduce(char *key, ReduceStateGetter get_state,
             ReduceGetter get_next, int partition_number) {
     // `get_state` is only being used for "eager mode" (explained later)
@@ -43,6 +45,8 @@ void Reduce(char *key, ReduceStateGetter get_state,
     int count = 0;
 
     char *value;
+    
+
     while ((value = get_next(key, partition_number)) != NULL) {
         count += atoi(value);
     }
@@ -54,8 +58,14 @@ void Reduce(char *key, ReduceStateGetter get_state,
     printf(" %s %s\n", key, value);
     free(value);
 }
+#endif
 
 int main(int argc, char *argv[]) {
-    MR_Run(argc, argv, Map, 1,
-        Reduce, 1, Combine, MR_DefaultHashPartition);
+    MR_Run(argc, argv, 
+    Map, 
+    3,
+    Reduce, 
+    3, 
+    Combine, 
+    MR_DefaultHashPartition);
 }

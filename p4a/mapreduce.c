@@ -1,65 +1,61 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <pthread.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <semaphore.h>
-#include <assert.h>
-
 #include "mapreduce.h"
+#include <assert.h>
 
 #define DEBUG_PRINT 0u
 
+#if DEBUG_PRINT
 #define DPRINTF(...) if (DEBUG_PRINT) { printf(__VA_ARGS__);}
-
-
-/*********************************** DATA STRUCTS *****************************/
+#else
+#define DPRINTF(...) 
+#endif
 
 typedef struct  
 {    
    pthread_t thread_id;        /* ID returned by pthread_create() */
    int       thread_num;       /* Application-defined thread # */
-}thread_info_t;
+} thread_info_t;
 
-typedef struct node
-{
-    char * key;
-    char * value;
-    struct node* next;
-}node_t;
+typedef struct vnode {
+    char *value;
+    struct vnode *next;
+} vnode_t;
 
-typedef struct table
-{
-    int size;
-    struct node **list;
-}table_t;
+typedef struct kvpair {
+    char *key;
+    struct vnode *vn;
+    struct vnode *current;
+    struct kvpair *next;
+} kvpair_t;
 
-/*********************************** GL VARS  *****************************/
+Mapper fp_map;
+Reducer fp_reduce;
+Partitioner fp_part;
+
+struct kvpair **map_to_combine;
+struct kvpair **combine_to_reducer;
 
 /* Store filenames passed */
 char** filenames;
 /* Number of filenames passed */
+int next_file = 0;
 int num_files = 0;
 int count_files = 0;
 int gl_num_mappers = 0;
 int gl_num_reducers = 0;
 
-/* Mutex lock */
-pthread_mutex_t lock;
+
+pthread_mutex_t file_lock;
+pthread_mutex_t* m2c_arr_lock;
+pthread_mutex_t* c2r_arr_lock;
 
 /* Thread info structure */
 thread_info_t *th_info;
-
-char** combiner_cur_key;
-node_t** map_to_combine;
-node_t** combine_getter_ptr;
-
-node_t** combine_to_reducer;
-char** reducer_cur_key;
-node_t** reduce_getter_ptr;
-
-/*********************************** FUNCTIONS *****************************/
-
 /* Global map function */
 Mapper map_fn;
 /* Global Combine function */
@@ -68,62 +64,6 @@ Combiner combine_fn;
 Reducer reduce_fn;
 /* Global Partition fn */
 Partitioner partition_fn;
-
-/*********************************** FN DEFN *****************************/
-
-struct table *createTable(int size){
-    struct table *t = (struct table*)malloc(sizeof(struct table));
-    t->size = size;
-    t->list = (struct node**)malloc(sizeof(struct node*)*size);
-    int i;
-    for(i=0;i<size;i++)
-        t->list[i] = NULL;
-    return t;
-};
-
-int get_thread_num(pthread_t thrd)
-{
-    int i;
-    for(i = 0; i < gl_num_mappers; i++)
-    {
-        if(th_info[i].thread_id == thrd)
-        {
-            return th_info[i].thread_num;
-        }
-    }
-    assert(0);
-    return -1;
-}
-
-int red_get_thread_num(pthread_t thrd)
-{
-    int i;
-    for(i = 0; i < gl_num_reducers; i++)
-    {
-        if(th_info[i].thread_id == thrd)
-        {
-            return th_info[i].thread_num;
-        }
-    }
-    assert(0);
-    return -1;
-}
-
-void delete_list(node_t ** head_ref)
-{
-   node_t* current = *head_ref;
-   node_t* next;
-
-   while (current != NULL)
-   {
-       next = current->next;
-       free(current->key);
-       free(current->value);
-       free(current);
-       current = next;
-   }
-   *head_ref = NULL;
-}
 
 unsigned long MR_DefaultHashPartition(char *key, int num_partitions) 
 {
@@ -134,194 +74,281 @@ unsigned long MR_DefaultHashPartition(char *key, int num_partitions)
     return hash % num_partitions;
 }
 
-char* reduce_get_next(char * key, int part_no)
+int get_thread_num(pthread_t thrd, int num)
 {
-    char * ret;
-    
-    if(reduce_getter_ptr[part_no] == NULL)
+    int i;
+    for(i = 0; i < num; i++)
     {
-        /* End of list */
-        ret = NULL;
-        reducer_cur_key[part_no] = NULL;
-    }
-    else
-    {
-        if(strcmp(key, reduce_getter_ptr[part_no]->key) == 0)
+        if(th_info[i].thread_id == thrd)
         {
-            ret = reduce_getter_ptr[part_no]->value; 
-            reduce_getter_ptr[part_no] = reduce_getter_ptr[part_no]->next;
-        }
-        else
-        {
-            ret = NULL;
-            reducer_cur_key[part_no] = reduce_getter_ptr[part_no]->key;
+            return th_info[i].thread_num;
         }
     }
-    return ret;
+    assert(0);
+    return -1;
 }
 
-
-char* combine_get_next(char * key)
+char* reducer_get_next(char *key, int partition_number) 
 {
-    int t_no = get_thread_num(pthread_self());
-    char * ret;
+    struct kvpair *ptr;
+    char *temp;
 
-    if(combine_getter_ptr[t_no] == NULL)
-    {
-        /* End of list */
-        ret = NULL;
-        combiner_cur_key[t_no] = NULL;
-    }
-    else
-    {
-        if(strcmp(key, combine_getter_ptr[t_no]->key) == 0)
-        {
-            ret = combine_getter_ptr[t_no]->value; 
-            combine_getter_ptr[t_no] = combine_getter_ptr[t_no]->next;
+    ptr = combine_to_reducer[partition_number];
+    if (ptr == NULL)
+        return NULL;
+
+    while (ptr != NULL) {
+        //if (ptr->key == key) {
+        if(strcmp(ptr->key, key)==0) {
+            if (ptr->current == NULL)
+                return NULL;
+            temp = ptr->current->value;
+            ptr->current = ptr->current->next;
+            return temp;
         }
-        else
-        {
-            ret = NULL;
-            combiner_cur_key[t_no] = combine_getter_ptr[t_no]->key;
-        }
+        ptr = ptr->next;
     }
-    return ret;
-}
 
-void sortedInsert(node_t** head_ref, node_t* new_node)
-{
-    node_t* current;
-
-    
-    /* Special case for the head end */
-    if (*head_ref == NULL || strcmp((*head_ref)->key, new_node->key)>0)
-    {
-        new_node->next = *head_ref;
-        *head_ref = new_node;
-    }
-    else
-    {
-        /* Locate the node before the point of insertion */
-        current = *head_ref;
-        while (current->next!=NULL &&
-            strcmp(current->next->key ,new_node->key)<0)
-        {
-            current = current->next;
-        }
-        new_node->next = current->next;
-        current->next = new_node;
-    }
-}
-
-void MR_EmitToCombiner(char *key, char *value)
-{
-    int thread_num = get_thread_num(pthread_self());
-    
-    char* key_p = strdup(key);
-    char* val_p = strdup(value);
-
-    node_t* node = (node_t*)calloc(1, sizeof(node_t));
-    node->key = key_p;
-    node->value = val_p;
-    node->next = NULL;
-
-    DPRINTF("Appending key : %s , val : %s\n", key, value);
-    sortedInsert(&map_to_combine[thread_num], node);
-}
-
-void MR_EmitToReducer(char *key, char *value)
-{
-    unsigned long part_no ;
-
-    char* key_p = strdup(key);
-    char* val_p = strdup(value);
-
-    part_no = (*partition_fn)(key_p, gl_num_reducers);
-
-    node_t* node = (node_t*)calloc(1, sizeof(node_t));
-    node->key = key_p;
-    node->value = val_p;
-    node->next = NULL;
-
-    DPRINTF("ER : Appending key : %s , val : %s\n", key, value);
-    sortedInsert(&combine_to_reducer[part_no], node);
-
-}
-
-
-void* mapper_thread(void* args)
-{ 
-    char* thread_filename;
-    thread_info_t * tinfo = args;
-
-    map_to_combine[tinfo->thread_num] = NULL;
-    
-    pthread_mutex_lock(&lock); 
-    while(count_files < num_files)
-    {
-        thread_filename = filenames[count_files++];
-        pthread_mutex_unlock(&lock);
-        
-        /* Call map */
-        DPRINTF("tid : %d: %s\n",get_thread_num(tinfo->thread_id), thread_filename);
-        (*map_fn)(thread_filename);
-        
-        node_t* n = map_to_combine[tinfo->thread_num];
-        while(n != NULL)
-        {
-            DPRINTF("%s : %s\n", n->key, n->value);
-            n = n->next;
-        }
-                /* TODO : Delete all structures */
-    }
-    pthread_mutex_unlock(&lock);
-    
-    /* Start combine */
-
-    DPRINTF("Thread %d : Calling combine \n", tinfo->thread_num);
-  
-    if(combine_fn != NULL && map_to_combine[tinfo->thread_num] != NULL)
-    {
-        combiner_cur_key[tinfo->thread_num] = map_to_combine[tinfo->thread_num]->key;
-        combine_getter_ptr[tinfo->thread_num] = map_to_combine[tinfo->thread_num];
-
-
-        while(combiner_cur_key[tinfo->thread_num] != NULL)
-        {
-            (*combine_fn)(combiner_cur_key[tinfo->thread_num], combine_get_next);
-        }
-    }
-    DPRINTF("Thread %d : Finished combine\n", tinfo->thread_num);
-
-    /* Free all memory used between map and combine */
-    delete_list(&map_to_combine[tinfo->thread_num]);
     return NULL;
 }
 
-void* reducer_thread(void* args)
+char* combine_get_next(char *key)
 {
-    int t_no = red_get_thread_num(pthread_self());
+    struct kvpair *ptr;
+    char *temp;
+    int p = get_thread_num(pthread_self(), gl_num_mappers);
 
-    /* call reducer fn */
-    DPRINTF("Thread %d : Starting reduction\n", t_no);
+    ptr = map_to_combine[p];
+    if (ptr == NULL)
+        return NULL;
 
-    /*loop across all keys in each partition */
-    if(combine_to_reducer[t_no] != NULL)
-    {
-        reducer_cur_key[t_no] = combine_to_reducer[t_no]->key;
-        reduce_getter_ptr[t_no] = combine_to_reducer[t_no];
-
-        while(reducer_cur_key[t_no] != NULL)
-        {
-            (*reduce_fn)(reducer_cur_key[t_no], NULL, reduce_get_next, t_no);
+    while (ptr != NULL) {
+        if (ptr->key == key) {
+            if (ptr->current == NULL)
+                return NULL;
+            temp = ptr->current->value;
+            ptr->current = ptr->current->next;
+            return temp;
         }
+        ptr = ptr->next;
     }
-    DPRINTF("Thread %d : Finished reducing ....\n", t_no);
 
-    /* Delete all combine to reduce entries */
-    delete_list(&combine_to_reducer[t_no]);
     return NULL;
 }
+
+
+
+void* mapper_thread(void* args) 
+{
+    char *file;
+    while (filenames[next_file] != NULL) 
+    {
+        pthread_mutex_lock(&file_lock);
+        if (filenames[next_file]) {
+            file = filenames[next_file++];
+            pthread_mutex_unlock(&file_lock);
+            map_fn(file);
+        } 
+        else 
+        {
+            pthread_mutex_unlock(&file_lock);
+        }
+    }
+
+    /* Start combine here */
+    if(combine_fn != NULL)
+    {
+
+        kvpair_t *ptr;
+        vnode_t *temp;
+        int p = get_thread_num(pthread_self(), gl_num_mappers);
+
+
+        ptr = map_to_combine[p];
+        while (ptr != NULL) 
+        {
+            combine_fn(ptr->key, combine_get_next);
+            ptr = ptr->next;
+            while (map_to_combine[p]->vn) 
+            {
+                temp = map_to_combine[p]->vn;
+                map_to_combine[p]->vn = map_to_combine[p]->vn->next;
+                free(temp->value);
+                free(temp);
+            }
+            free(map_to_combine[p]->key);
+            free(map_to_combine[p]);
+            map_to_combine[p] = ptr;
+        }
+    }
+    return NULL;
+}
+
+
+void* reducer_thread(void* args) 
+{
+    kvpair_t *ptr;
+    vnode_t *temp;
+    int p = get_thread_num(pthread_self(), gl_num_reducers);
+
+
+    ptr = combine_to_reducer[p];
+    while (ptr != NULL) 
+    {
+        DPRINTF("Calling reducer : key %s and part %d\n", ptr->key, p);
+        reduce_fn(ptr->key, NULL, reducer_get_next, p);
+        ptr = ptr->next;
+        while (combine_to_reducer[p]->vn) 
+        {
+            temp = combine_to_reducer[p]->vn;
+            combine_to_reducer[p]->vn = combine_to_reducer[p]->vn->next;
+            free(temp->value);
+            free(temp);
+        }
+        free(combine_to_reducer[p]->key);
+        free(combine_to_reducer[p]);
+        combine_to_reducer[p] = ptr;
+    }
+    return NULL;
+}
+
+
+void MR_EmitToReducer(char *key, char *value) 
+{
+    struct kvpair *ptr;
+    struct kvpair *prev = NULL, *new;
+    int p;
+
+    p = partition_fn(key, gl_num_reducers);
+
+    DPRINTF("ER : ");
+
+    pthread_mutex_lock(&c2r_arr_lock[p]);
+    ptr = combine_to_reducer[p];
+    if (ptr == NULL) 
+    {
+        DPRINTF("Adding to head : key %s : val %s\n", key, value);
+        new = malloc(sizeof(struct kvpair));
+        new->key = strdup(key);
+        new->next = NULL;
+
+        struct vnode *newv = malloc(sizeof(struct vnode));
+        newv->value = strdup(value);
+        newv->next = NULL;
+        new->vn = newv;
+        new->current = newv;
+
+        combine_to_reducer[p] = new;
+        goto end;
+    }
+
+    while (ptr != NULL) 
+    {
+        int cmp = strcmp(ptr->key, key);
+        if (cmp == 0) 
+        {
+
+            DPRINTF("Adding to existing : key %s : val %s\n", key, value);
+            struct vnode *newv = malloc(sizeof(struct vnode));
+            newv->value = strdup(value);
+            newv->next = ptr->vn;
+            ptr->vn = newv;
+            ptr->current = newv;
+            goto end;
+        }
+        else if (cmp > 0) 
+        {
+            break;
+        }
+        prev = ptr;
+        ptr = ptr->next;
+    }
+
+
+    DPRINTF("Adding new key : key %s : val %s\n", key, value);
+    new = malloc(sizeof(struct kvpair));
+    new->key = strdup(key);
+    new->next = ptr;
+    if (prev != NULL)
+        prev->next = new;
+    else
+        combine_to_reducer[p] = new;
+
+    struct vnode *newv = malloc(sizeof(struct vnode));
+    newv->value = strdup(value);
+    newv->next = new->vn;
+    new->vn = newv;
+    new->current = newv;
+
+end:
+    pthread_mutex_unlock(&c2r_arr_lock[p]);
+}
+
+void MR_EmitToCombiner(char *key, char *value) 
+{
+    struct kvpair *ptr;
+    struct kvpair *prev = NULL, *new;
+    int p;
+
+    p = get_thread_num(pthread_self(), gl_num_mappers);
+
+    pthread_mutex_lock(&m2c_arr_lock[p]);
+    ptr = map_to_combine[p];
+    if (ptr == NULL) 
+    {
+        new = malloc(sizeof(struct kvpair));
+        new->key = strdup(key);
+        new->next = NULL;
+
+        struct vnode *newv = malloc(sizeof(struct vnode));
+        newv->value = strdup(value);
+        newv->next = new->vn;
+        new->vn = newv;
+        new->current = newv;
+
+        map_to_combine[p] = new;
+        goto end;
+    }
+
+    while (ptr != NULL) 
+    {
+        int cmp = strcmp(ptr->key, key);
+        if (cmp == 0) 
+        {
+            struct vnode *newv = malloc(sizeof(struct vnode));
+            newv->value = strdup(value);
+            newv->next = ptr->vn;
+            ptr->vn = newv;
+            ptr->current = newv;
+            goto end;
+        }
+        else if (cmp > 0) 
+        {
+            break;
+        }
+        prev = ptr;
+        ptr = ptr->next;
+    }
+
+    new = malloc(sizeof(struct kvpair));
+    new->key = strdup(key);
+    new->next = ptr;
+    if (prev != NULL)
+        prev->next = new;
+    else
+        map_to_combine[p] = new;
+
+    struct vnode *newv = malloc(sizeof(struct vnode));
+    newv->value = strdup(value);
+    newv->next = new->vn;
+    new->vn = newv;
+    new->current = newv;
+
+end:
+    pthread_mutex_unlock(&m2c_arr_lock[p]);
+}
+
+
 
 void MR_Run(int argc, char *argv[],
         Mapper map, int num_mappers,
@@ -333,10 +360,10 @@ void MR_Run(int argc, char *argv[],
     int i;
 
     /* Initial condition checks */
-    if(num_mappers < 1)
+    if(num_mappers < 1 || num_reducers < 1 || map == NULL || reduce == NULL || argc <2)
         exit(1);
 
-    if (pthread_mutex_init(&lock, NULL) != 0)
+    if (pthread_mutex_init(&file_lock, NULL) != 0)
         exit(1);
 
     /* Initialize global variables */
@@ -345,26 +372,31 @@ void MR_Run(int argc, char *argv[],
     count_files = 0;
     gl_num_mappers = num_mappers;
     gl_num_reducers = num_reducers;
+
     map_fn = map;
     combine_fn = combine;
     reduce_fn = reduce;
-    partition_fn = partition;
+    if(partition != NULL)
+        partition_fn = partition;
+    else
+        partition_fn = MR_DefaultHashPartition;
+
 
     DPRINTF("num files : %d\n", num_files);
 
+    /* Hold mapper threads info */
+    th_info = (thread_info_t*)malloc(num_mappers* sizeof(thread_info_t));
+    map_to_combine = (kvpair_t**)malloc(num_mappers* sizeof(kvpair_t*));
+    combine_to_reducer = (kvpair_t**)malloc(num_reducers* sizeof(kvpair_t*));
 
-    th_info = (thread_info_t*)calloc(num_mappers, sizeof(thread_info_t));
-    map_to_combine = (node_t**)calloc(num_mappers, sizeof(node_t*));
-    combiner_cur_key = (char**)calloc(num_mappers, sizeof(char*));
-    combine_getter_ptr = (node_t**)calloc(num_mappers, sizeof(node_t*));
-    combine_to_reducer = (node_t**)calloc(num_reducers, sizeof(node_t*));
-    reducer_cur_key = (char**)calloc(num_reducers, sizeof(char*));
-    reduce_getter_ptr = (node_t**)calloc(num_reducers, sizeof(node_t*));
-
+    m2c_arr_lock = (pthread_mutex_t*)malloc(num_mappers* sizeof(pthread_mutex_t));
+    c2r_arr_lock = (pthread_mutex_t*)malloc(num_reducers* sizeof(pthread_mutex_t));
+    
     for(i= 0; i < num_mappers; i++)
     {
         th_info[i].thread_num = i;
-        pthread_create(&th_info[i].thread_id, NULL, mapper_thread, &th_info[i]);
+        pthread_mutex_init(&m2c_arr_lock[i], NULL);
+        pthread_create(&th_info[i].thread_id, NULL, mapper_thread, NULL);
     }
 
     /* Wait for threads to finish and join */
@@ -377,13 +409,14 @@ void MR_Run(int argc, char *argv[],
     free(th_info);
     
     DPRINTF("--------------------------------------------------------------------\n");
-    th_info = (thread_info_t*)calloc(num_reducers, sizeof(thread_info_t));
-
+    
+    th_info = (thread_info_t*)malloc(num_reducers*sizeof(thread_info_t));
 
     for(i= 0; i < num_reducers; i++)
     {
         th_info[i].thread_num = i;
-        pthread_create(&th_info[i].thread_id, NULL, reducer_thread, &th_info[i]);
+        pthread_mutex_init(&c2r_arr_lock[i], NULL);
+        pthread_create(&th_info[i].thread_id, NULL, reducer_thread, NULL);
     }
 
      /* Wait for threads to finish and join */
@@ -392,15 +425,11 @@ void MR_Run(int argc, char *argv[],
         pthread_join(th_info[i].thread_id, NULL);
     }
 
-
     free(map_to_combine);
-    free(combiner_cur_key); /*TODO free the individual elems */
-    free(combine_getter_ptr);
-    
-    free(reducer_cur_key); /*TODO free the individual elems */
-    free(reduce_getter_ptr);
-    
     free(combine_to_reducer);
     free(th_info);
-
+    free(m2c_arr_lock);
+    free(c2r_arr_lock);
 }
+
+

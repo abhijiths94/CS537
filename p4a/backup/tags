@@ -1,0 +1,44 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Combine	test.c	/^void Combine(char *key, CombineGetter get_next) {$/;"	f
+CombineGetter	mapreduce.h	/^typedef char *(*CombineGetter)(char *key);$/;"	t
+Combiner	mapreduce.h	/^typedef void (*Combiner)(char *key, CombineGetter get_next);$/;"	t
+DEBUG_PRINT	mapreduce.c	11;"	d	file:
+DPRINTF	mapreduce.c	13;"	d	file:
+MR_DefaultHashPartition	mapreduce.c	/^unsigned long MR_DefaultHashPartition(char *key, int num_partitions) $/;"	f
+MR_EmitToCombiner	mapreduce.c	/^void MR_EmitToCombiner(char *key, char *value)$/;"	f
+MR_Run	mapreduce.c	/^void MR_Run(int argc, char *argv[],$/;"	f
+Map	test.c	/^void Map(char *file_name) {$/;"	f
+Mapper	mapreduce.h	/^typedef void (*Mapper)(char *file_name);$/;"	t
+Partitioner	mapreduce.h	/^typedef unsigned long (*Partitioner)(char *key, int num_partitions);$/;"	t
+ReduceGetter	mapreduce.h	/^typedef char *(*ReduceGetter)(char *key, int partition_number);$/;"	t
+ReduceStateGetter	mapreduce.h	/^typedef char *(*ReduceStateGetter)(char* key, int partition_number);$/;"	t
+Reducer	mapreduce.h	/^typedef void (*Reducer)(char *key, ReduceStateGetter get_state, ReduceGetter get_next, int partition_number);$/;"	t
+__mapreduce_h__	mapreduce.h	2;"	d
+combine_fn	mapreduce.c	/^Combiner combine_fn;$/;"	v
+count_files	mapreduce.c	/^int count_files = 0;$/;"	v
+filenames	mapreduce.c	/^char** filenames;$/;"	v
+get_next	mapreduce.c	/^int get_next(char * key)$/;"	f
+get_thread_num	mapreduce.c	/^int get_thread_num(pthread_t thrd)$/;"	f
+gl_num_mappers	mapreduce.c	/^int gl_num_mappers = 0;$/;"	v
+gl_num_reducers	mapreduce.c	/^int gl_num_reducers = 0;$/;"	v
+key	mapreduce.c	/^    char * key;$/;"	m	struct:node	file:
+lock	mapreduce.c	/^pthread_mutex_t lock;$/;"	v
+main	test.c	/^int main(int argc, char *argv[]) {$/;"	f
+map_fn	mapreduce.c	/^Mapper map_fn;$/;"	v
+map_to_combine	mapreduce.c	/^node_t** map_to_combine;$/;"	v
+mapper_thread	mapreduce.c	/^void* mapper_thread(void* args)$/;"	f
+next	mapreduce.c	/^    struct node* next;$/;"	m	struct:node	typeref:struct:node::node	file:
+node	mapreduce.c	/^typedef struct node$/;"	s	file:
+node_t	mapreduce.c	/^}node_t;$/;"	t	typeref:struct:node	file:
+num_files	mapreduce.c	/^int num_files = 0;$/;"	v
+reduce_fn	mapreduce.c	/^Reducer reduce_fn;$/;"	v
+th_info	mapreduce.c	/^thread_info_t *th_info;$/;"	v
+thread_id	mapreduce.c	/^   pthread_t thread_id;        \/* ID returned by pthread_create() *\/$/;"	m	struct:__anon1	file:
+thread_info_t	mapreduce.c	/^}thread_info_t;$/;"	t	typeref:struct:__anon1	file:
+thread_num	mapreduce.c	/^   int       thread_num;       \/* Application-defined thread # *\/$/;"	m	struct:__anon1	file:
+value	mapreduce.c	/^    char * value;$/;"	m	struct:node	file:
