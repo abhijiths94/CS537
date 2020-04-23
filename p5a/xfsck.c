@@ -378,14 +378,17 @@ int main(int argc, char* argv[])
                                //if(din_tmp->type == T_DIR)
                                     //printf(" p : %d , cur : %d  = %d\n", parent, current,(de+l)->inum);
                                //if not current dir or parent direct entry
-                               dir_cnt[(de+l)->inum].is_dir = 1;
-                               if(dir_cnt[(de+l)->inum].count == 1)
+                               if(din_tmp->type == T_DIR)
                                {
-                                   perr("ERROR: directory appears more than once in file system.");
-                               }
-                               else
-                               {
-                                    dir_cnt[(de+l)->inum].count = 1;
+                                   dir_cnt[(de+l)->inum].is_dir = 1;
+                                   if(dir_cnt[(de+l)->inum].count == 1)
+                                   {
+                                       perr("ERROR: directory appears more than once in file system.");
+                                   }
+                                   else
+                                   {
+                                        dir_cnt[(de+l)->inum].count = 1;
+                                   }
                                }
 
                            }
