@@ -16,11 +16,11 @@
 #include "stat.h"
 #undef stat
 
-int size;
-int num_data_blocks;
-int num_inodes;
-int num_bitblocks;
-int data_start;
+uint size;
+uint num_data_blocks;
+uint num_inodes;
+uint num_bitblocks;
+uint data_start;
 
 typedef struct
 {
@@ -78,11 +78,11 @@ int main(int argc, char* argv[])
     
     // read superblock info
     sb = (struct superblock *)(img_ptr + BSIZE);
-    /*
-    printf("Superblock size   : %d\n", sb->size); 
-    printf("Superblock blocks : %d\n", sb->nblocks); 
-    printf("Superblock inodes : %d\n", sb->ninodes);
-*/
+
+    //printf("Superblock size   : %d\n", sb->size); 
+    //printf("Superblock blocks : %d\n", sb->nblocks); 
+    //printf("Superblock inodes : %d\n", sb->ninodes);
+
     size = sb->size;
     num_data_blocks = sb->nblocks;
     num_inodes = sb->ninodes;
@@ -119,9 +119,14 @@ int main(int argc, char* argv[])
     {
         //int size_in_node = 0;
         int num_blocks_node = 0;
-
         din = (struct dinode*)(img_ptr + BSIZE*(IBLOCK(i)) + (i % IPB)*(sizeof(struct dinode)));
         
+        /*
+        printf("Inode : %d\n",i);
+        printf("Inode size : %d\n",din->size);
+        printf("------------------\n");
+        */
+
         //check #2 : Inode valid ?
         if(din->type != 0 && din->type != T_FILE && din->type != T_DIR && din->type != T_DEV)
         {    
@@ -194,29 +199,15 @@ int main(int argc, char* argv[])
                             {
 
                                 num_blocks_node ++;
+
+                                if((uint)(*(ind_addr+k)) < (uint)(num_inodes/IPB + num_bitblocks + 3) ||(uint)(*(ind_addr+k)) >(uint)(sb->size))
+                                {
+                                    perr("ERROR: bad indirect address in inode.");
+                                }
                                 
                                 //check #5 : 
                                 if(!check_bit_map(img_ptr, *(ind_addr + k)))
                                 {
-                                    printf("Inode : %d\n",i);
-                                    printf("Inode size : %d\n",din->size);
-                                    printf("dinode type  : %d\n", din->type);
-                                    printf("dinode nlink : %d\n", din->nlink);
-                                    printf("dinode size  : %d\n", din->size);
-                                    printf("dinode direct  : %d\n", din->addrs[0]);
-                                    printf("dinode direct  : %d\n", din->addrs[1]);
-                                    printf("dinode direct  : %d\n", din->addrs[2]);
-                                    printf("dinode direct  : %d\n", din->addrs[3]);
-                                    printf("dinode direct  : %d\n", din->addrs[4]);
-                                    printf("dinode direct  : %d\n", din->addrs[5]);
-                                    printf("dinode direct  : %d\n", din->addrs[6]);
-                                    printf("dinode direct  : %d\n", din->addrs[7]);
-                                    printf("dinode direct  : %d\n", din->addrs[8]);
-                                    printf("dinode direct  : %d\n", din->addrs[9]);
-                                    printf("dinode direct  : %d\n", din->addrs[10]);
-                                    printf("dinode direct  : %d\n", din->addrs[11]);
-                                    printf("dinode indirect head  : %d\n", din->addrs[j]);
-
                                     perr("ERROR: address used by inode but marked free in bitmap.");
                                 }
 
