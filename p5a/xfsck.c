@@ -198,6 +198,25 @@ int main(int argc, char* argv[])
                                 //check #5 : 
                                 if(!check_bit_map(img_ptr, *(ind_addr + k)))
                                 {
+                                    printf("Inode : %d\n",i);
+                                    printf("Inode size : %d\n",din->size);
+                                    printf("dinode type  : %d\n", din->type);
+                                    printf("dinode nlink : %d\n", din->nlink);
+                                    printf("dinode size  : %d\n", din->size);
+                                    printf("dinode direct  : %d\n", din->addrs[0]);
+                                    printf("dinode direct  : %d\n", din->addrs[1]);
+                                    printf("dinode direct  : %d\n", din->addrs[2]);
+                                    printf("dinode direct  : %d\n", din->addrs[3]);
+                                    printf("dinode direct  : %d\n", din->addrs[4]);
+                                    printf("dinode direct  : %d\n", din->addrs[5]);
+                                    printf("dinode direct  : %d\n", din->addrs[6]);
+                                    printf("dinode direct  : %d\n", din->addrs[7]);
+                                    printf("dinode direct  : %d\n", din->addrs[8]);
+                                    printf("dinode direct  : %d\n", din->addrs[9]);
+                                    printf("dinode direct  : %d\n", din->addrs[10]);
+                                    printf("dinode direct  : %d\n", din->addrs[11]);
+                                    printf("dinode indirect head  : %d\n", din->addrs[j]);
+
                                     perr("ERROR: address used by inode but marked free in bitmap.");
                                 }
 
