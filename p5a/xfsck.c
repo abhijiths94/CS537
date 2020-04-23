@@ -116,6 +116,9 @@ int main(int argc, char* argv[])
 */
     for(i = 0 ; i < sb->ninodes; i++)
     {
+        int size_in_node = 0;
+        int num_blocks_node = 0;
+
         din = (struct dinode*)(img_ptr + BSIZE*(IBLOCK(i)) + (i % IPB)*(sizeof(struct dinode)));
         
         //check #2 : Inode valid ?
@@ -130,7 +133,7 @@ int main(int argc, char* argv[])
             {
                 if(din->addrs[j] != 0)
                 {
-                     
+                    
                                                   
                     //check #3 : bad address ?
                     if(din->addrs[j] < ((sb->ninodes/IPB) + 3) || din->addrs[j] > sb->size)
@@ -145,7 +148,7 @@ int main(int argc, char* argv[])
                     if(j == NDIRECT)
                     {
                         //handle indirect pointers 
-                        if(din->addrs[j] != 0)
+                        if(din->addrs[NDIRECT] != 0)
                         {
                              //TODO
                              //perr("ERROR: bad indirect address in inode.");
@@ -172,9 +175,10 @@ int main(int argc, char* argv[])
                         for(k = 0; k < BSIZE/4; k++)
                         {
                             if(*(ind_addr + k) == 0)
-                                continue;
+                                continue; //TODO : change to break ??
                             else
                             {
+                                num_blocks_node ++;
                                 //printf("dinode indirect  : %d : %p\n", *(ind_addr + k), ind_addr+k);
                                 if(db_hash[*(ind_addr + k)].count == 0)
                                     db_hash[*(ind_addr + k)].count = 1;
@@ -205,7 +209,12 @@ int main(int argc, char* argv[])
                             }
                         }
                     }
-                }
+                    else
+                    {
+                        num_blocks_node ++;
+                    }
+
+                                   }
             }
             
             //check #4 : directory contains . and .. entries
@@ -250,12 +259,20 @@ int main(int argc, char* argv[])
                 }*/
                 
             }
-
+            
+            //check #8: file size stored must be within the actual number of blocks 
+            if(!( (num_blocks_node - 1)*BSIZE < (int)din->size && din->size <= num_blocks_node*BSIZE))
+            {
+                //printf("Inode no : %d\n",i);
+                //printf("size = %d\n", din->size);
+                //printf(" b = %d\n", num_blocks_node);
+                perr("ERROR: incorrect file size in inode.");
+            }
 
             
         }
-
-
+        
+        
     }
 
     
