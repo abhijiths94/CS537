@@ -28,6 +28,12 @@ typedef struct
     uint count;
 } hash_t;
 
+typedef struct
+{
+    uint is_dir;
+    uint count;
+}dir_count_t;
+
 void* get_block(void* img , uint block)
 {
     return (img + BSIZE*block);
@@ -73,8 +79,6 @@ int main(int argc, char* argv[])
     // map image to virtual memory
     void* img_ptr = mmap(NULL, fs_stat.st_size, PROT_READ, MAP_PRIVATE, fsfd, 0);
     
- //   printf("Size of image is : %ld\n",fs_stat.st_size);
-    
     
     // read superblock info
     sb = (struct superblock *)(img_ptr + BSIZE);
@@ -91,6 +95,7 @@ int main(int argc, char* argv[])
 
     hash_t* db_hash =(hash_t*) malloc(sizeof(hash_t)*size);
     uint * link_cnt = (uint*) malloc(sizeof(uint)*num_inodes);
+    dir_count_t* dir_cnt = (dir_count_t*)(malloc(sizeof(dir_count_t)*num_inodes));
 
     //check #1 : Superblock corrupted ?
     if(sb->size < sb->nblocks + (sb->ninodes/IPB) + 1 + 1)
@@ -121,11 +126,10 @@ int main(int argc, char* argv[])
         int num_blocks_node = 0;
         din = (struct dinode*)(img_ptr + BSIZE*(IBLOCK(i)) + (i % IPB)*(sizeof(struct dinode)));
         
-        /*
-        printf("Inode : %d\n",i);
-        printf("Inode size : %d\n",din->size);
-        printf("------------------\n");
-        */
+        //printf("Inode : %d\n",i);
+        //printf("Inode size : %d\n",din->size);
+        //printf("Inode type : %d\n",din->type);
+        //printf("------------------\n");
 
         //check #2 : Inode valid ?
         if(din->type != 0 && din->type != T_FILE && din->type != T_DIR && din->type != T_DEV)
@@ -253,11 +257,13 @@ int main(int argc, char* argv[])
             if(din->type == T_DIR)
             {
                 /*
+                
+                printf("---------------------------\n");
                 printf("dinode : %d\n", i);
                 printf("dinode type  : %d\n", din->type);
                 printf("dinode nlink : %d\n", din->nlink);
                 printf("dinode size  : %d\n", din->size);
-                */
+               */
                 if(din->addrs[0] != 0)
                 {
                     de = (struct dirent*)get_block(img_ptr, din->addrs[0]);
@@ -298,6 +304,8 @@ int main(int argc, char* argv[])
                         uint* ind_de = (uint*)(get_block(img_ptr, din->addrs[NDIRECT]));
                         while(*(ind_de+l) != 0)
                         {
+                            
+                            //int parent = 0, current = 0;
                             uint m;
                             de = (struct dirent*)get_block(img_ptr, *(ind_de+l));
                             for(m=0; m < BSIZE/sizeof(struct dirent); m++ )
@@ -313,6 +321,22 @@ int main(int argc, char* argv[])
                                     perr("ERROR: inode referred to in directory but marked free.");
                                 }
                                 link_cnt[(de+m)->inum]++;
+                                
+                                if(!(strcmp((de+m)->name, ".") == 0 || strcmp((de+m)->name, "..") == 0))
+                                {
+                                    //if not current dir or parent direct entry
+                                    dir_cnt[(de+m)->inum].is_dir = 1;
+                                    if(dir_cnt[(de+m)->inum].count > 0)
+                                    {
+                                        perr("ERROR: directory appears more than once in file system.");
+                                    }
+                                    else
+                                    {
+                                         dir_cnt[(de+m)->inum].count = 1;
+                                    }
+
+                                }
+
                             }
                             l++;
                         }
@@ -320,9 +344,12 @@ int main(int argc, char* argv[])
                     }
                     else
                     {
+
+                        //int parent = 0, current = 0;
                         de = (struct dirent*)get_block(img_ptr, din->addrs[k]);
                         for(l = 0; l < BSIZE/sizeof(struct dirent); l++)
                         {
+                           //printf("l : %d\n",l);
                            struct dinode* din_tmp = (struct dinode*)(img_ptr + BSIZE*(IBLOCK((de+l)->inum)) + ((de+l)->inum % IPB)*(sizeof(struct dinode)));
                            if((de+l)->inum == 0)
                                continue;
@@ -335,6 +362,33 @@ int main(int argc, char* argv[])
                            }
                            //add to link_cnt
                            link_cnt[(de+l)->inum]++;
+
+                           if(strcmp((de+l)->name, ".") == 0)
+                           {
+                               //current = (de+l)->inum;
+                               //printf("curr set to %d\n", (de+l)->inum);
+                           }
+                           else if(strcmp((de+l)->name, "..") == 0)
+                           {
+                               //parent = (de+l)->inum;
+                               //printf("parent set to %d\n", (de+l)->inum);
+                           }
+                           else
+                           {
+                               //if(din_tmp->type == T_DIR)
+                                    //printf(" p : %d , cur : %d  = %d\n", parent, current,(de+l)->inum);
+                               //if not current dir or parent direct entry
+                               dir_cnt[(de+l)->inum].is_dir = 1;
+                               if(dir_cnt[(de+l)->inum].count == 1)
+                               {
+                                   perr("ERROR: directory appears more than once in file system.");
+                               }
+                               else
+                               {
+                                    dir_cnt[(de+l)->inum].count = 1;
+                               }
+
+                           }
                         }
                     }
                     k++;
@@ -357,7 +411,7 @@ int main(int argc, char* argv[])
         
     }
 
-    
+     
     for(i = data_start; i < size; i++)
     {
         if(check_bit_map(img_ptr, i))
