@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
     struct stat fs_stat;
     struct superblock *sb;
     struct dinode *din;
-    int i,j, k;
+    int i,j, k,l;
     struct dirent *de;
 
     if (argc == 1)
@@ -90,6 +90,7 @@ int main(int argc, char* argv[])
     data_start = 2 + num_inodes/IPB + num_bitblocks + 1;
 
     hash_t* db_hash =(hash_t*) malloc(sizeof(hash_t)*size);
+    uint * link_cnt = (uint*) malloc(sizeof(uint)*num_inodes);
 
     //check #1 : Superblock corrupted ?
     if(sb->size < sb->nblocks + (sb->ninodes/IPB) + 1 + 1)
@@ -116,7 +117,7 @@ int main(int argc, char* argv[])
 */
     for(i = 0 ; i < sb->ninodes; i++)
     {
-        int size_in_node = 0;
+        //int size_in_node = 0;
         int num_blocks_node = 0;
 
         din = (struct dinode*)(img_ptr + BSIZE*(IBLOCK(i)) + (i % IPB)*(sizeof(struct dinode)));
@@ -129,11 +130,24 @@ int main(int argc, char* argv[])
         
         if(din->type != 0)
         {
+            /* Valid Indode */
+
+
+            //printf("indoe num %d\n", i);
+            //printf("dinode type  : %d\n", din->type);
+            //printf("dinode nlink : %d\n", din->nlink);
+            //printf("dinode size  : %d\n\n", din->size);
+
+            if(din->nlink == 0)
+            {
+                perr("ERROR: inode marked used but not found in a directory.");
+            }
+
             for(j = 0; j <= NDIRECT; j++)
             {
                 if(din->addrs[j] != 0)
                 {
-                    
+                                        
                                                   
                     //check #3 : bad address ?
                     if(din->addrs[j] < ((sb->ninodes/IPB) + 3) || din->addrs[j] > sb->size)
@@ -178,7 +192,15 @@ int main(int argc, char* argv[])
                                 continue; //TODO : change to break ??
                             else
                             {
+
                                 num_blocks_node ++;
+                                
+                                //check #5 : 
+                                if(!check_bit_map(img_ptr, *(ind_addr + k)))
+                                {
+                                    perr("ERROR: address used by inode but marked free in bitmap.");
+                                }
+
                                 //printf("dinode indirect  : %d : %p\n", *(ind_addr + k), ind_addr+k);
                                 if(db_hash[*(ind_addr + k)].count == 0)
                                     db_hash[*(ind_addr + k)].count = 1;
@@ -221,12 +243,11 @@ int main(int argc, char* argv[])
             if(din->type == T_DIR)
             {
                 /*
-                printf("dinode addr  : %p\n", din);
+                printf("dinode : %d\n", i);
                 printf("dinode type  : %d\n", din->type);
                 printf("dinode nlink : %d\n", din->nlink);
                 printf("dinode size  : %d\n", din->size);
                 */
-
                 if(din->addrs[0] != 0)
                 {
                     de = (struct dirent*)get_block(img_ptr, din->addrs[0]);
@@ -257,6 +278,57 @@ int main(int argc, char* argv[])
                     printf(" Dir name : %s\n", de->name );
                     printf("------------------\n");
                 }*/
+                k = 0;
+                while(din->addrs[k] != 0)
+                {
+                    if(k==NDIRECT)
+                    {
+                        //TODO : traverse indirect nodes to get directories
+                        l = 0;
+                        uint* ind_de = (uint*)(get_block(img_ptr, din->addrs[NDIRECT]));
+                        while(*(ind_de+l) != 0)
+                        {
+                            uint m;
+                            de = (struct dirent*)get_block(img_ptr, *(ind_de+l));
+                            for(m=0; m < BSIZE/sizeof(struct dirent); m++ )
+                            {
+                                struct dinode* din_tmp = (struct dinode*)(img_ptr + BSIZE*(IBLOCK((de+m)->inum)) + ((de+m)->inum % IPB)*(sizeof(struct dinode)));
+                                if((de+m)->inum == 0)
+                                    continue;
+                                if(din_tmp->type == 0)
+                                {
+                                    //printf("k : %d , l : %d\n", k,l);
+                                    //printf("de->name : %s\n", (de+l)->name);
+                                    //printf("de->inum : %d\n", (de+l)->inum);
+                                    perr("ERROR: inode referred to in directory but marked free.");
+                                }
+                                link_cnt[(de+m)->inum]++;
+                            }
+                            l++;
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        de = (struct dirent*)get_block(img_ptr, din->addrs[k]);
+                        for(l = 0; l < BSIZE/sizeof(struct dirent); l++)
+                        {
+                           struct dinode* din_tmp = (struct dinode*)(img_ptr + BSIZE*(IBLOCK((de+l)->inum)) + ((de+l)->inum % IPB)*(sizeof(struct dinode)));
+                           if((de+l)->inum == 0)
+                               continue;
+                           if(din_tmp->type == 0)
+                           {
+                               //printf("k : %d , l : %d\n", k,l);
+                               //printf("de->name : %s\n", (de+l)->name);
+                               //printf("de->inum : %d\n", (de+l)->inum);
+                               perr("ERROR: inode referred to in directory but marked free.");
+                           }
+                           //add to link_cnt
+                           link_cnt[(de+l)->inum]++;
+                        }
+                    }
+                    k++;
+                }
                 
             }
             
@@ -286,6 +358,22 @@ int main(int argc, char* argv[])
         
     }
     
+    //check #11: nlink tally check
+    for(i = 0; i < num_inodes; i++)
+    {
+        din = (struct dinode*)(img_ptr + BSIZE*(IBLOCK(i)) + (i % IPB)*(sizeof(struct dinode)));
+        if(din->type == T_FILE)
+        {
+            if(din->nlink != link_cnt[i])
+            {
+                //printf("Inode no : %d\n",i);
+                //printf("size = %d\n", din->size);
+                //printf("nlinks = %d\n", din->nlink);
+                //printf("link_cnt = %d\n\n", link_cnt[i]);
+                perr("ERROR: bad reference count for file.");
+            }
+        }
+    }
 
 
     return 0;

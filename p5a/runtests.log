@@ -12,7 +12,7 @@ rm -f *.o xfsck
 Trying to build project using make
 make
 rm -f *.o xfsck
-cc     xfsck.c   -o xfsck
+gcc -o xfsck xfsck.c -Wall -Werror
 
 
 test build PASSED
@@ -26,7 +26,7 @@ Test Good
 run on a good filesystem
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Good
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Good
 
 
 test Good PASSED (2 of 2)
@@ -40,7 +40,7 @@ Test Goodrefcnt
 run on fs with only good reference counts
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Goodrefcnt
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Goodrefcnt
 
 
 test Goodrefcnt PASSED (2 of 2)
@@ -54,7 +54,7 @@ Test Nonexistant
 run on a nonexistant filesystem
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Nonexistant
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Nonexistant
 
 
 test Nonexistant PASSED (2 of 2)
@@ -68,7 +68,7 @@ Test Superblock
 run on a filesystem with corrupted superblock
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Superblock
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Superblock
 
 
 test Superblock PASSED (2 of 2)
@@ -82,7 +82,7 @@ Test Badsize
 run on a filesystem with a bad file size in an inode
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badsize
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badsize
 
 
 test Badsize PASSED (5 of 5)
@@ -96,7 +96,7 @@ Test Badinode
 run on a filesystem with a bad type in an inode
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badinode
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badinode
 
 
 test Badinode PASSED (5 of 5)
@@ -110,7 +110,7 @@ Test Badaddr
 run on a filesystem with a bad direct address in an inode
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badaddr
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badaddr
 
 
 test Badaddr PASSED (5 of 5)
@@ -124,7 +124,7 @@ Test Badindir1
 run on a filesystem with a bad indirect address in an inode
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badindir1
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badindir1
 
 
 test Badindir1 PASSED (5 of 5)
@@ -138,7 +138,7 @@ Test Badfmt
 run on a filesystem without . or .. directories
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badfmt
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badfmt
 
 
 test Badfmt PASSED (5 of 5)
@@ -152,7 +152,7 @@ Test Mrkfree
 run on a filesystem with an inuse direct block marked free
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Mrkfree
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Mrkfree
 
 
 test Mrkfree PASSED (5 of 5)
@@ -166,13 +166,11 @@ Test Indirfree
 run on a filesystem with an inuse indirect block marked free
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Indirfree
-Failure: ./xfsck returned incorrect status code. Expected 1 got 0
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Indirfree
 
 
-test Indirfree FAILED (0 of 5)
+test Indirfree PASSED (5 of 5)
  (run on a filesystem with an inuse indirect block marked free)
- ./xfsck returned incorrect status code. Expected 1 got 0
 
 starting Mrkused
 
@@ -182,7 +180,7 @@ Test Mrkused
 run on a filesystem with a free block marked used
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Mrkused
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Mrkused
 
 
 test Mrkused PASSED (5 of 5)
@@ -196,7 +194,7 @@ Test Addronce
 run on a filesystem with an address used more than once
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Addronce
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Addronce
 
 
 test Addronce PASSED (5 of 5)
@@ -210,13 +208,11 @@ Test Imrkused
 run with inode marked used, but not referenced in a directory
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Imrkused
-Failure: ./xfsck returned incorrect status code. Expected 1 got 0
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Imrkused
 
 
-test Imrkused FAILED (0 of 5)
+test Imrkused PASSED (5 of 5)
  (run with inode marked used, but not referenced in a directory)
- ./xfsck returned incorrect status code. Expected 1 got 0
 
 starting Imrkfree
 
@@ -226,13 +222,11 @@ Test Imrkfree
 run with inode marked free, but referenced in a directory
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Imrkfree
-Failure: ./xfsck returned incorrect status code. Expected 1 got 0
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Imrkfree
 
 
-test Imrkfree FAILED (0 of 5)
+test Imrkfree PASSED (5 of 5)
  (run with inode marked free, but referenced in a directory)
- ./xfsck returned incorrect status code. Expected 1 got 0
 
 starting Badrefcnt
 
@@ -242,13 +236,11 @@ Test Badrefcnt
 run on fs which has an inode with a bad reference count
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badrefcnt
-Failure: ./xfsck returned incorrect status code. Expected 1 got 0
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badrefcnt
 
 
-test Badrefcnt FAILED (0 of 5)
+test Badrefcnt PASSED (5 of 5)
  (run on fs which has an inode with a bad reference count)
- ./xfsck returned incorrect status code. Expected 1 got 0
 
 starting Badindir2
 
@@ -258,13 +250,15 @@ Test Badindir2
 run on a filesystem with a bad indirect address in an inode
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badindir2
-Failure: ./xfsck returned incorrect status code. Expected 1 got -11
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Badindir2
+Failure: ./xfsck gave incorrect standard error.
+Expected: "ERROR: bad indirect address in inode."
+Got:      "ERROR: address used by inode but marked free in bitmap."
 
 
 test Badindir2 FAILED (0 of 5)
  (run on a filesystem with a bad indirect address in an inode)
- ./xfsck returned incorrect status code. Expected 1 got -11
+ ./xfsck gave incorrect standard error.
 
 starting Dironce
 
@@ -274,7 +268,7 @@ Test Dironce
 run on fs with a directory appearing more than once
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Dironce
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Dironce
 Failure: ./xfsck returned incorrect status code. Expected 1 got 0
 
 
@@ -290,7 +284,7 @@ Test Goodrm
 run on good fs with a file removed and a new directory created
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Goodrm
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Goodrm
 
 
 test Goodrm PASSED (3 of 3)
@@ -304,7 +298,7 @@ Test Goodrm2
 run on good fs with a new directory created and then a file removed
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Goodrm2
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Goodrm2
 
 
 test Goodrm2 PASSED (3 of 3)
@@ -318,7 +312,7 @@ Test Goodlink
 run on good fs with some hard links and a linked file removed
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Goodlink
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Goodlink
 
 
 test Goodlink PASSED (3 of 3)
@@ -332,7 +326,7 @@ Test Goodlarge
 run on large good fs
 
 **********************************************************************
-/tmp/tmpryn4Wa/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Goodlarge
+/tmp/tmpPOUKGB/p/./xfsck /u/c/s/cs537-1/tests/p5/images/Goodlarge
 
 
 test Goodlarge PASSED (3 of 3)
@@ -373,9 +367,8 @@ test Badfmt PASSED (5 of 5)
 test Mrkfree PASSED (5 of 5)
  (run on a filesystem with an inuse direct block marked free)
 
-test Indirfree FAILED (0 of 5)
+test Indirfree PASSED (5 of 5)
  (run on a filesystem with an inuse indirect block marked free)
- ./xfsck returned incorrect status code. Expected 1 got 0
 
 test Mrkused PASSED (5 of 5)
  (run on a filesystem with a free block marked used)
@@ -383,21 +376,18 @@ test Mrkused PASSED (5 of 5)
 test Addronce PASSED (5 of 5)
  (run on a filesystem with an address used more than once)
 
-test Imrkused FAILED (0 of 5)
+test Imrkused PASSED (5 of 5)
  (run with inode marked used, but not referenced in a directory)
- ./xfsck returned incorrect status code. Expected 1 got 0
 
-test Imrkfree FAILED (0 of 5)
+test Imrkfree PASSED (5 of 5)
  (run with inode marked free, but referenced in a directory)
- ./xfsck returned incorrect status code. Expected 1 got 0
 
-test Badrefcnt FAILED (0 of 5)
+test Badrefcnt PASSED (5 of 5)
  (run on fs which has an inode with a bad reference count)
- ./xfsck returned incorrect status code. Expected 1 got 0
 
 test Badindir2 FAILED (0 of 5)
  (run on a filesystem with a bad indirect address in an inode)
- ./xfsck returned incorrect status code. Expected 1 got -11
+ ./xfsck gave incorrect standard error.
 
 test Dironce FAILED (0 of 5)
  (run on fs with a directory appearing more than once)
@@ -415,6 +405,6 @@ test Goodlink PASSED (3 of 3)
 test Goodlarge PASSED (3 of 3)
  (run on large good fs)
 
-Passed 17 of 23 tests.
-Overall 17 of 23
-Points 60 of 90
+Passed 21 of 23 tests.
+Overall 21 of 23
+Points 80 of 90

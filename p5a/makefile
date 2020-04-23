@@ -1,9 +1,9 @@
 all: clean xfsck
 
 dbg:
-	gcc -o mapreduce test.c mapreduce.c mapreduce.h  -g -Wall -Werror -pthread -O
-mapreduce:
-	gcc -o fsck fsck.c -Wall -Werror -O3
+	gcc -o xfsck xfsck.c -Wall -Werror -g
+xfsck:
+	gcc -o xfsck xfsck.c -Wall -Werror
 
 memchk:
 	gcc -fsanitize=address -o mapreduce test.c mapreduce.c mapreduce.h -g -Wall -Werror -pthread -O
