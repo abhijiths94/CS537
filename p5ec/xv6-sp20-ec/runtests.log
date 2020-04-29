@@ -1,0 +1,1031 @@
+starting build
+
+**********************************************************************
+
+Test build
+build xv6 using make
+
+**********************************************************************
+Trying to build project using make
+make
+Makefile:152: user/bank.d: No such file or directory
+Makefile:152: user/usertests.d: No such file or directory
+No rule to make target user/usertests.d
+No rule to make target user/bank.d
+No rule to make target fs/bank
+No rule to make target fs/usertests
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+forktest
+ln
+tester
+echo
+grep
+sh
+wc
+cat
+testcase
+kill
+stressfs
+init
+mkdir
+zombie
+rm
+README
+ls
+balloc: first 397 blocks have been allocated
+balloc: write bitmap block at sector 28
+
+
+test build PASSED
+ (build xv6 using make)
+
+starting lock_init_test
+
+**********************************************************************
+
+Test lock_init_test
+test for lock init prepoerly with correct return value
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/tests/ec/ctests/lock_init_test.c
+Trying to build project using make
+make
+Makefile:152: user/bank.d: No such file or directory
+Makefile:152: user/usertests.d: No such file or directory
+No rule to make target user/usertests.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+No rule to make target user/bank.d
+Makefile:152: user/bank.d: No such file or directory
+Makefile:152: user/usertests.d: No such file or directory
+No rule to make target user/usertests.d
+No rule to make target user/bank.d
+No rule to make target fs/bank
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+No rule to make target fs/usertests
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+forktest
+ln
+tester
+echo
+grep
+sh
+wc
+cat
+testcase
+kill
+stressfs
+init
+mkdir
+zombie
+rm
+README
+ls
+balloc: first 399 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox 
+Makefile:152: user/bank.d: No such file or directory
+Makefile:152: user/usertests.d: No such file or directory
+No rule to make target user/usertests.d
+No rule to make target user/bank.d
+No rule to make target fs/bank
+No rule to make target fs/usertests
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+forktest
+ln
+tester
+echo
+grep
+sh
+wc
+cat
+testcase
+kill
+stressfs
+init
+mkdir
+zombie
+rm
+README
+ls
+balloc: first 399 blocks have been allocated
+balloc: write bitmap block at sector 28
+Ctrl+a h for help
+timeout --foreground --preserve-status 900 /p/course/cs537-remzi/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 2 
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+lapicinit: 1 0xfee00000
+cpu1: starting
+cpu0: starting
+init: starting sh
+$ tester
+tester
+init count : 0
+got assigned sema 0
+waiting for child thread to release lock ...
+3 count -1 : -1
+3 count -1 : -1
+child
+4 count +1 : 0
+
+
+test lock_init_test FAILED (0 of 5)
+ (test for lock init prepoerly with correct return value)
+ Timelimit (15.0s) exceeded
+
+starting lock_basic
+
+**********************************************************************
+
+Test lock_basic
+basic test for lock correctness
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/tests/ec/ctests/lock_basic.c
+Trying to build project using make
+make
+Makefile:152: user/bank.d: No such file or directory
+Makefile:152: user/usertests.d: No such file or directory
+No rule to make target user/usertests.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+No rule to make target user/bank.d
+Makefile:152: user/bank.d: No such file or directory
+Makefile:152: user/usertests.d: No such file or directory
+No rule to make target user/usertests.d
+No rule to make target user/bank.d
+No rule to make target fs/bank
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+No rule to make target fs/usertests
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+forktest
+ln
+tester
+echo
+grep
+sh
+wc
+cat
+testcase
+kill
+stressfs
+init
+mkdir
+zombie
+rm
+README
+ls
+balloc: first 402 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox 
+Makefile:152: user/bank.d: No such file or directory
+Makefile:152: user/usertests.d: No such file or directory
+No rule to make target user/usertests.d
+No rule to make target user/bank.d
+No rule to make target fs/bank
+No rule to make target fs/usertests
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+forktest
+ln
+tester
+echo
+grep
+sh
+wc
+cat
+testcase
+kill
+stressfs
+init
+mkdir
+zombie
+rm
+README
+ls
+balloc: first 402 blocks have been allocated
+balloc: write bitmap block at sector 28
+Ctrl+a h for help
+timeout --foreground --preserve-status 900 /p/course/cs537-remzi/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 2 
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+lapicinit: 1 0xfee00000
+cpu1: starting
+cpu0: starting
+init: starting sh
+$ tester
+tester
+init count : 1
+Unblocking all 30 threads...
+4 count -1 : 0
+4 count +1 : 1
+4 count -1 : 0
+4 count +1 : 1
+4 count -1 : 0
+4 count +1 : 1
+4 count -1 : 0
+4 count +1 : 1
+4 count -1 : 0
+4 count +1 : 1
+6 count -1 : 0
+7 count -1 : -1
+8 count -1 : -1
+9 count -1 : -1
+9 count -1 : -1
+10 count -1 : -1
+10 count -1 : -1
+11 count -1 : -1
+11 count -1 : -1
+12 count -1 : -1
+12 count -1 : -1
+13 count -1 : -1
+13 count -1 : -1
+14 count -1 : -1
+14 count -1 : -1
+15 count -1 : -1
+16 count -1 : -1
+16 count -1 : -1
+17 count -1 : -1
+17 count -1 : -1
+18 count -1 : -1
+18 count -1 : -1
+19 count -1 : -1
+19 count -1 : -1
+20 count -1 : -1
+20 count -1 : -1
+21 count -1 : -1
+21 count -1 : -1
+22 count -1 : -1
+22 count -1 : -1
+5 count -1 : -1
+6 count -1 : -1
+7 count -1 : -1
+23 count -1 : -1
+15 count -1 : -1
+23 count -1 : -1
+25 count -1 : -1
+26 count -1 : -1
+27 count -1 : -1
+28 count -1 : -1
+29 count -1 : -1
+30 count -1 : -1
+30 count -1 : -1
+31 count -1 : -1
+31 count -1 : -1
+32 count -1 : -1
+32 count -1 : -1
+33 count -1 : -1
+33 count -1 : -1
+5 count -1 : -1
+8 count -1 : -1
+25 count -1 : -1
+26 count -1 : -1
+27 count -1 : -1
+28 count -1 : -1
+29 count -1 : -1
+24 count -1 : -1
+24 count -1 : -1
+
+
+test lock_basic FAILED (0 of 5)
+ (basic test for lock correctness)
+ Timelimit (15.0s) exceeded
+
+starting lock_file
+
+**********************************************************************
+
+Test lock_file
+test for lock correctness for writing in a file
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/tests/ec/ctests/lock_file.c
+Trying to build project using make
+make
+Makefile:152: user/bank.d: No such file or directory
+Makefile:152: user/usertests.d: No such file or directory
+No rule to make target user/usertests.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+No rule to make target user/bank.d
+Makefile:152: user/bank.d: No such file or directory
+Makefile:152: user/usertests.d: No such file or directory
+No rule to make target user/usertests.d
+No rule to make target user/bank.d
+No rule to make target fs/bank
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+No rule to make target fs/usertests
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+forktest
+ln
+tester
+echo
+grep
+sh
+wc
+cat
+testcase
+kill
+stressfs
+init
+mkdir
+zombie
+rm
+README
+ls
+balloc: first 402 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox 
+Makefile:152: user/bank.d: No such file or directory
+Makefile:152: user/usertests.d: No such file or directory
+No rule to make target user/usertests.d
+No rule to make target user/bank.d
+No rule to make target fs/bank
+No rule to make target fs/usertests
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+forktest
+ln
+tester
+echo
+grep
+sh
+wc
+cat
+testcase
+kill
+stressfs
+init
+mkdir
+zombie
+rm
+README
+ls
+balloc: first 402 blocks have been allocated
+balloc: write bitmap block at sector 28
+Ctrl+a h for help
+timeout --foreground --preserve-status 900 /p/course/cs537-remzi/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 2 
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+lapicinit: 1 0xfee00000
+cpu1: starting
+cpu0: starting
+init: starting sh
+$ tester
+tester
+init count : 1
+main: initialized semaphore 0 to 1
+Running with 20 processes...
+Process 5 started...
+Process 6 started...
+Process 7 started...
+Process Process 9 started...
+Process 10 started...
+Process 4 started...
+8 started...
+5 count -1 : 0
+6 count -1 : -1
+6 count -1 : -1
+7 count -1 : -1
+7 count -1 : -1
+Process 11 started...
+Process 12 started...
+Process 13 started...
+Process 14 started...
+Process 15 started...
+4 count -1 : -1
+8 count -1 : -1
+9 count -1 : -1
+10 count -1 : -1
+Process 16 started...
+Process 15 count +1 : 1
+PProcess 19 started...
+7 started...
+rocess 18 started...
+Process 20 started...
+Process 21 started...
+Process 23 started...
+Process 22 started...
+child 5 done for c4 count +1 : 1
+child 4 done for count 0...
+4 count -1 : 0
+o12 count -1 : -1
+12 count -1 : -1
+13 count -1 : -1
+13 count -1 : -1
+14 count -1 : -1
+14 count -1 : -1
+15 count -1 : -1
+15 count -1 : -1
+4 count +1 : 1
+child 4 done for count 1...
+4 count -1 : 0
+unt 0...
+5 count -1 : -1
+5 count -1 : -1
+11 count -1 : -1
+11 count -1 : -1
+16 count -1 : -1
+16 count -1 : -1
+4 count -1 : -1
+6 count +1 : 1
+child 6 done for count 0...
+6 count -1 : 0
+6 count +1 : 1
+child 6 done for count 1...
+6 count -1 : 0
+6 count +1 : 1
+child 6 done for count 2...
+6 count -1 : 0
+6 count +1 : 1
+child 6 done for count 3...
+6 count -1 : 0
+17 count -1 : -1
+17 count -1 : -1
+18 count -1 : -1
+18 count -1 : -1
+19 count -1 : -1
+19 count -1 : -1
+20 count -1 : -1
+20 count -1 : -1
+21 count -1 : -1
+6 count +1 : 1
+child 6 done for count 4...
+23 count -1 : 0
+22 count -1 : -1
+7 count +1 : 1
+child 7 done f23 count +1 : 1
+child 23 done for count 0...
+23 count -1 : 0
+or count 0...23 count +1 : 1
+child 23 done for count 1...
+23 count -1 : 0
+
+23 count +1 : 1
+child 23 done for count 2...
+23 count -1 : 0
+7 count -1 : -1
+7 count -1 : -1
+23 count +1 : 1
+8 count +1 : 1
+child 23 done for count 3...
+23 count -1 : 0
+child 8 done f4 count +1 : 1
+ochild 4 done for r count 0...
+8 count -1 : 0
+count 2...
+4 count -1 : -1
+4 count -1 : -1
+9 count +1 : 1
+child 9 done for count 0...
+9 count -1 : 0
+13 count +1 : 1
+child 13 do4 count +1 : 1
+child 4 done for count 3...
+4 count -1 : 0
+ne for count 0...
+13 count -1 : -1
+13 count -1 : -1
+4 count +1 : 1
+child 4 done for count 4...
+7 count +1 : 1
+child 7 done for count 1...
+7 count -1 : 0
+7 count +1 : 1
+child 7 done for count 2...
+7 count -1 : 0
+7 count +1 : 1
+child 7 done for count 3...
+7 count -1 : 0
+7 count +1 : 1
+child 7 done for count 4...
+8 count +1 : 1
+child 8 done for count 1...
+8 count -1 : 0
+8 count +1 : 1
+child 8 done for count 2...
+8 count -1 : 0
+5 count +1 : 1
+child 5 done for count 1...
+5 count -1 : 0
+5 count +1 : 1
+child 5 done for count 2...
+5 count -1 : 0
+5 count +1 : 1
+child9 count +1 : 1
+10 count +1 : 1
+ 5 donechild 9 done for count 1...
+9 count -1 : 0
+child 10 done for count 0...
+10 count -1 : -1
+10 count -1 : -1
+ for count 3...
+5 count -1 : -1
+5 count -1 : -1
+11 count +1 : 1
+child 11 done for count 0...
+11 count -1 : 0
+11 count +1 : 1
+child 11 done for count 1...
+11 count -1 : 0
+11 count +1 : 1
+child 11 done for count 2...
+11 count -1 : 0
+11 count +1 : 1
+child 114 count +1 : 1
+child 14 done for count 0...
+14 count -1 : 0
+1 done for count 3...
+11 count -1 : -1
+11 count -1 : -1
+14 count +1 : 1
+child 14 done f8 count +1 : 1
+child 8 done for count 3...
+8 count -1 : 0
+or count 1...
+14 count -1 : -1
+14 count -1 : -1
+8 count +1 : 1
+ch5 count +1 : 1
+ichild 5 done for count 4...
+ld 8 done for count 4...
+9 count +1 : 1
+child 9 d10 count +1 : 1
+child 10 done for count 1...
+10 count -1 : 0
+one for count 2...
+9 count -1 : -1
+9 count -1 : -1
+10 count +1 : 1
+child 10 done for count 2...
+10 count -1 : 0
+10 count +1 : 1
+child 10 done for count 3...
+10 count -1 : 0
+10 count +1 : 1
+child 10 done for count 4...
+14 count +1 : 1
+child 14 done for count 2...
+14 count -1 : 0
+14 count +1 : 1
+child 14 done for count 3...
+14 count -1 : 0
+14 count +1 : 1
+child 14 done for count 4...
+15 count +1 : 1
+child 15 done for count 0...
+15 count -1 : 0
+15 count +1 : 1
+child 15 done fo9 count +1 : 1
+child 9 done for count 3...
+9 count -1 : 0
+r12 count +1 : 1
+ count 1c...
+15 count -1 : 0
+16 count +1 : 1
+hild 12 done for count 0...
+12 count -1 : 0
+child 16 done for count 0...
+16 count -1 : -1
+16 count -1 : -1
+17 count +1 : 1
+child 17 done for count 0...
+17 count -1 : 0
+17 count +1 : 1
+child 17 done for count 1...
+17 count -1 : 0
+17 count +1 : 1
+child 17 done for count 2...
+17 count -1 : 0
+17 count +1 : 1
+child 17 done for count 3...
+17 count -1 : 0
+17 count +1 : 1
+child 17 done for count 4...
+18 count +1 : 1
+child 18 done for count 0...
+9 count +1 : 1
+child 9 done for count 4...
+18 count -1 : 0
+11 count +1 : 1
+child 11 done for count 4...
+12 count +1 : 1
+child 12 done for count 1...
+12 count -1 : 0
+18 count +1 : 1
+child 18 done for count 1...
+18 count -1 : 0
+12 count +1 : 1
+child 12 d13 count +1 : 1
+child 13 done for count 1...
+13 count -1 : 0
+one for co13 count +1 : 1
+child 13 done for count 2...
+13 count -1 : 0
+unt 2...
+12 count -1 : -1
+12 count -1 : -1
+13 count +1 : 1
+child 13 done for count 3...
+19 count +1 : 1
+13 count -1 : 0
+child 19 done for count 0...
+19 count -1 : -1
+19 count -1 : -1
+15 count +1 : 1
+child 15 done for count 2...
+15 count -1 : 0
+15 count +1 : 1
+child 15 done for count 3...
+21 count +1 : 1
+15 count -1 : 0
+child 21 done for count 0...
+23 count +1 : 1
+21 count -1 : 0
+c22 count +1 : 1
+child 22 done for count 0...
+22 count -1 : 0
+hild 22 count +1 : 1
+child 22 done for count 1...
+22 count -1 : 0
+2322 count +1 : 1
+ done for child 22 done for count 2...
+22 count -1 : 0
+count 4...
+12 count +1 : 1
+child 12 done for count 3...
+12 count -1 : 0
+12 count +1 : 1
+child 12 done for count 4...
+19 count +1 : 1
+child 19 do13 count +1 : 1
+child 13 done for count 4...
+n15 count +1 : 1
+e for count 1...
+child 15 done for count 4...
+16 count +1 : 1
+19 count -1 : 0
+child 16 done for count 1...
+16 count -1 : -1
+16 count -1 : -1
+18 count +1 : 1
+child 18 done for count 2...
+18 count -1 : 0
+18 count +1 : 1
+child 18 done19 count +1 : 1
+child 19 done for c16 count +1 : 1
+child 16 done for count 2...
+16 count -1 : 0
+ount 2...
+ for count 3...
+18 count -1 : -1
+18 count -1 : -1
+16 count +1 : 1
+19 count -1 : 0
+child 16 done for count 3...
+16 count -1 : -1
+16 count -1 : -1
+18 count +1 : 1
+child 18 done for count 4...
+19 count +1 : 1
+ch16 count +1 : 1
+child 16 done for count 4...
+ild 19 done for count 3...
+19 count -1 : 0
+19 count +1 : 1
+c21 count +1 : 1
+hild 19 done for count 4...
+22 count +1 : 1
+child 22 done for count 3...
+22 count -1 : 0
+child 21 done for count 1...
+22 count +1 : 1
+child 22 done for count 4...
+21 count -1 : 0
+20 count +1 : 1
+child 20 done for count 0...
+20 count -1 : 0
+21 count +1 : 1
+child 21 done for count 2...
+21 count -1 : 0
+21 count +1 : 1
+ch20 count +1 : 1
+child 20 done for count 1...
+20 count -1 : 0
+ild20 count +1 : 1
+child 20 done for count 2...
+20 count -1 : 0
+ 220 count +1 : 1
+child 20 done for count 3...
+20 count -1 : 0
+1 done for count 3...
+21 count -1 : -1
+20 count +1 : 1
+c21 count +1 : 1
+child 21 done for count 4...
+hild 20 done for count 4...
+Final counter is 75, target is 100
+user/tester.c:118 check (final_counter == final_target) failed: TEST FAILED
+
+
+test lock_file FAILED (0 of 5)
+ (test for lock correctness for writing in a file)
+ tester failed
+
+starting lock_multiple_semaphores
+
+**********************************************************************
+
+Test lock_multiple_semaphores
+test for multiple semaphores correctness
+
+**********************************************************************
+Running xv6 user progam /u/c/s/cs537-1/tests/ec/ctests/lock_multiple_semaphores.c
+Trying to build project using make
+make
+Makefile:152: user/bank.d: No such file or directory
+Makefile:152: user/usertests.d: No such file or directory
+No rule to make target user/usertests.d
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 \
+	-M -MG user/tester.c -MF user/tester.d -MT user/tester.d -MT user/tester.o
+No rule to make target user/bank.d
+Makefile:152: user/bank.d: No such file or directory
+Makefile:152: user/usertests.d: No such file or directory
+No rule to make target user/usertests.d
+No rule to make target user/bank.d
+No rule to make target fs/bank
+gcc  -I include -nostdinc -Wall -Werror -ggdb -fno-pic -fno-builtin -fno-strict-aliasing -fno-stack-protector -m32 -c -o user/tester.o user/tester.c
+ld  -m    elf_i386 -nostdlib --omagic --entry=main --section-start=.text=0x0 --output=user/bin/tester user/tester.o user/ulib.o user/usys.o user/printf.o user/umalloc.o
+cp user/bin/tester fs/tester
+No rule to make target fs/usertests
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+forktest
+ln
+tester
+echo
+grep
+sh
+wc
+cat
+testcase
+kill
+stressfs
+init
+mkdir
+zombie
+rm
+README
+ls
+balloc: first 404 blocks have been allocated
+balloc: write bitmap block at sector 28
+rm user/bin/tester
+make qemu-nox 
+Makefile:152: user/bank.d: No such file or directory
+Makefile:152: user/usertests.d: No such file or directory
+No rule to make target user/usertests.d
+No rule to make target user/bank.d
+No rule to make target fs/bank
+No rule to make target fs/usertests
+./tools/mkfs fs.img fs
+used 29 (bit 1 ninode 26) free 29 total 1024
+forktest
+ln
+tester
+echo
+grep
+sh
+wc
+cat
+testcase
+kill
+stressfs
+init
+mkdir
+zombie
+rm
+README
+ls
+balloc: first 404 blocks have been allocated
+balloc: write bitmap block at sector 28
+Ctrl+a h for help
+timeout --foreground --preserve-status 900 /p/course/cs537-remzi/ta/tools/qemu -nographic -hdb fs.img xv6.img -smp 2 
+WARNING: Image format was not specified for 'fs.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for 'xv6.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+xv6...
+lapicinit: 1 0xfee00000
+cpu1: starting
+cpu0: starting
+init: starting sh
+$ tester
+tester
+init count : 1
+Allocated first semaphore .. 0 which will be used as lock for shared updates between threads.init count : 1
+4 count -1 : 0
+Thread 0 started
+4 count -1 : -1
+4 count -1 : -1
+init count : 1
+5 count -1 : 0
+Thread 0 started
+5 count -1 : -1
+5 count -1 : -1
+init count : 1
+6 count -1 : 0
+Thread 0 started
+init count : 1
+7 count -1 : 0
+Thread 0 started
+7 count -1 : -1
+7 count -1 : -1
+init count : 1
+9 count -1 : 0
+Thread 0 started
+9 count -1 : -1
+9 count -1 : -1
+init count : 1
+10 count -1 : 0
+Thread 0 started
+init count : 1
+11 count -1 : 0
+Thread 0 started
+11 count -1 : -1
+11 count -1 : -1
+init count : 1
+12 count -1 : 0
+Thread 0 started
+12 count -1 : -1
+12 count -1 : -1
+init count : 1
+13 count -1 : 0
+Threadinit count : 1
+10 count -1 : 0
+ 0 started
+init count : 1
+15 count -1 : 0
+Thread 0 started
+15 count -1 : -1
+init count : 1
+16 count -1 : 0
+Thread 0 started
+16 count -1 : -1
+16 count -1 : -1
+init count : 1
+17 count -1 : 0
+Thread 0 started
+17 count -1 : -1
+17 count -1 : -1
+init count : 1
+18 count -1 : 0
+Thread 0 startinit count : 1
+19 count -1 : 0
+Thread 0 started
+19 count -1 : -1
+19 count -1 : -1
+init count : 1
+20 count -1 : 0
+Thread 0 started
+20 count -1 : -1
+20 count -1 : -1
+init count : 1
+21 count -1 : 0
+Thread 0 started
+init count : 1
+22 count -1 : 0
+Thread 0 started
+22 count -1 : -1
+22 count -1 : -1
+init count : 1
+23 count -1 : 0
+Thread 0 started
+23 count -1 : -1
+23 count -1 : -1
+init count : 1
+24 count -1 : 0
+Thread 0 started
+24 count -1 : -1
+init count : 1
+25 count -1 : 0
+Thread 0 started
+25 count -1 : -1
+25 count -1 : -1
+init count : 1
+26 count -1 : 0
+Thread 0 started
+26 count -1 : -1
+26 count -1 : -1
+init count : 1
+27 count -1 : 0
+Thread 0 started
+init count : 1
+28 count -1 : 0
+Thread 0 started
+28 count -1 : -1
+28 count -1 : -1
+init count : 1
+29 count -1 : 0
+Thread 0 started
+29 count -1 : -1
+29 count -1 : -1
+init count : 1
+30 count -1 : 0
+Thread 0 started
+init count : 1
+31 count -1 : 0
+Thread 0 started
+31 count -1 : -1
+31 count -1 : -1
+init count : 1
+32 count -1 : 0
+Thread 0 started
+32 count -1 : -1
+32 count -1 : -1
+init count : 1
+33 count -1 : 0
+Thread 0 started
+6 count -1 : -1
+6 count -1 : -1
+8 count -1 : -1
+8 count -1 : -1
+10 count -1 : -1
+13 count -1 : -1
+13 count -1 : -1
+15 count -1 : -1
+ed
+18 count -1 : -1
+18 count -1 : -1
+21 count -1 : -1
+21 count -1 : -1
+24 count -1 : -1
+27 count -1 : -1
+27 count -1 : -1
+30 count -1 : -1
+30 count -1 : -1
+33 count -1 : -1
+33 count -1 : -1
+init count : 1
+14 count -1 : -1
+14 count -1 : -1
+
+
+test lock_multiple_semaphores FAILED (0 of 10)
+ (test for multiple semaphores correctness)
+ Timelimit (15.0s) exceeded
+
+**********************************************************************
+Summary:
+test build PASSED
+ (build xv6 using make)
+
+test lock_init_test FAILED (0 of 5)
+ (test for lock init prepoerly with correct return value)
+ Timelimit (15.0s) exceeded
+
+test lock_basic FAILED (0 of 5)
+ (basic test for lock correctness)
+ Timelimit (15.0s) exceeded
+
+test lock_file FAILED (0 of 5)
+ (test for lock correctness for writing in a file)
+ tester failed
+
+test lock_multiple_semaphores FAILED (0 of 10)
+ (test for multiple semaphores correctness)
+ Timelimit (15.0s) exceeded
+
+Passed 1 of 5 tests.
+Overall 1 of 5
+Points 0 of 25
